@@ -3,6 +3,8 @@ import Image from 'next/image'
 import styles from '@/styles/Home.module.css'
 import { useEffect, useState } from 'react';
 
+/* eslint react/no-string-refs: 0 */
+
 export default function Home() {
 
   const [restaurants, setRestaurants] = useState([]);
