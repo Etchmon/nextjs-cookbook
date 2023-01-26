@@ -9,6 +9,7 @@ export default function Home() {
   const [restaurants, setRestaurants] = useState([]);
 
   useEffect(() => {
+    console.log('here');
     (async () => {
       const results = await fetch("/api/list").then(response => response.json());
       setRestaurants(results);
