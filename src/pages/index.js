@@ -1,21 +1,24 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { useEffect, useState } from 'react';
+import clientPromise from '../../lib/mongodb';
 
 /* eslint react/no-string-refs: 0 */
 
-export default function Home() {
+export default function Home({ isConnected }) {
 
   const [restaurants, setRestaurants] = useState([]);
 
   useEffect(() => {
     console.log('here');
     (async () => {
-      const results = await fetch("/api/list").then(response => response.json());
-      setRestaurants(results);
-      console.log(results);
+      const results = await fetch("/api/list");
+      const resultsJson = await results.json();
+      setRestaurants(resultsJson);
     })();
   }, []);
+
+  console.log(isConnected);
 
   return (
     <div className={styles.container}>
@@ -39,4 +42,18 @@ export default function Home() {
       </main>
     </div>
   )
+}
+
+export async function getServerSideProps(context) {
+  try {
+    await clientPromise
+    return {
+      props: { isConnected: true },
+    }
+  } catch (e) {
+    console.log(e)
+    return {
+      props: { isConnected: false },
+    }
+  }
 }
