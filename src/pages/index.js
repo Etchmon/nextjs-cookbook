@@ -18,7 +18,6 @@ export default function Home({ isConnected }) {
     })();
   }, []);
 
-  console.log(isConnected);
 
   return (
     <div className={styles.container}>
