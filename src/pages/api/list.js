@@ -4,8 +4,8 @@ export default async function handler(request, response) {
 
     try {
         const MongoClient = await clientPromise;
-        const db = MongoClient.db('sample_restaurants');
-        const collection = db.collection("restaurants");
+        const db = MongoClient.db('CBD');
+        const collection = db.collection("Users");
         const results = await collection.find({}).project({
             grades: 0,
             borough: 0,
