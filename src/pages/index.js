@@ -30,12 +30,6 @@ export default function Home({ isConnected }) {
         <h1 className={styles.title}> MongoDB with <a href='https://nextjs.org'>Example</a></h1>
         <br />
         <div className={styles.grid}>
-          {restaurants.map(restaurant => (
-            <div className={styles.card} key={restaurant._id}>
-              <h2>{restaurant.name}</h2>
-              <p>{restaurant.address.street}</p>
-            </div>
-          ))}
         </div>
       </main>
     </div>
