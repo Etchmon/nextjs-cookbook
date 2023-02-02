@@ -10,7 +10,6 @@ export default function Home({ isConnected }) {
   const [restaurants, setRestaurants] = useState([]);
 
   useEffect(() => {
-    console.log('here');
     (async () => {
       const results = await fetch("/api/list");
       const resultsJson = await results.json();
