@@ -4,18 +4,41 @@ import { useSession, signOut, getSession } from "next-auth/react";
 const signup = () => {
     const { data: session } = useSession();
 
-    const [value, setValue] = useState({ value: '' })
-
-    // this.handleChange = this.handleChange.bind(this);
-    // this.handleSubmit = this.handleSubmit.bind(this);
+    const [value, setValue] = useState({
+        username: '',
+        email: '',
+        password: '',
+        passwordConfirm: ''
+    })
 
     const handleChange = (event) => {
-        setValue({ value: event.target.value })
+        setValue({ [event.target.name]: event.target.value })
     }
 
-    const handleSubmit = (event) => {
-        alert('A name was submitted: ' + this.state.value);
+    const handleSubmit = async (event) => {
         event.preventDefault();
+        const username = event.target.parentElement.username.value;
+        const email = event.target.parentElement.email.value;
+        const password = event.target.parentElement.password.value;
+        const passwordConfirm = event.target.parentElement.passwordConfirm.value;
+        if (password !== passwordConfirm) {
+            alert("Password doesn't match Confirm Password");
+            return;
+        }
+        const res = await fetch('/api/user/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: username,
+                email: email,
+                password: password
+            }),
+        });
+        const result = await res.json();
+        console.log(result);
+        alert(`Username: ${result.user.username}`)
     }
 
 
@@ -35,21 +58,21 @@ const signup = () => {
                     <h1>Create an account</h1>
                     <label>
                         Email
-                        <input type="text" name="email" value={''} onChange={(event) => handleChange(event)} />
+                        <input type="text" name="email" value={value.email} onChange={handleChange} />
                     </label>
                     <label>
                         Username
-                        <input type="text" name="username" value={''} onChange={(event) => handleChange(event)} />
+                        <input type="text" name="username" value={value.username} onChange={handleChange} />
                     </label>
                     <label>
                         Password
-                        <input type="password" name="password" value={''} onChange={(event) => handleChange(event)} />
+                        <input type="password" name="password" value={value.password} onChange={handleChange} />
                     </label>
                     <label>
                         Confirm Password
-                        <input type="password" name="passwordConfirm" value={''} onChange={(event) => handleChange(event)} />
+                        <input type="password" name="passwordConfirm" value={value.passwordConfirm} onChange={handleChange} />
                     </label>
-                    <input type="submit" value="Submit" />
+                    <button onClick={handleSubmit}>Submit</button>
                 </form>
             </div>
         )
