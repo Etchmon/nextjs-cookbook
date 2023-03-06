@@ -5,9 +5,10 @@ const login = () => {
     const {data: session} = useSession();
 
     if (session) {
+        console.log(session.user);
         return (
             <div>
-                <p>Welcome, {session.user.username}</p>
+                <p>Welcome, {session.user.email}</p>
                 <button onClick={()=> signOut()}>Sign out</button>
             </div>
         )
