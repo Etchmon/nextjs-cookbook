@@ -11,28 +11,30 @@ export const authOptions = {
         }),
         // ...add more providers here
     ],
-    // callbacks: {
-    //     session: async (session) => {
-    //         if(!session) return;
+    callbacks: {
+        session: async (session) => {
+            if (!session) return;
 
-    //         const MongoClient = await clientPromise;
-    //         const userCollection = MongoClient.db('CBD').collection('Users');
+            try {
+                const MongoClient = await clientPromise;
+                const db = MongoClient.db('CBD');
+                const collection = db.collection("Users");
 
-    //         const userData = await userCollection.findOne({
-    //             email: session.user.email
-    //         });
+                const userData = await collection.findOne({ email: session.session.user.email });
 
-    //         return {
-    //             session: {
-    //                 user: {
-    //                     id: userData._id,
-    //                     username: userData.username,
-    //                     password: userData.password,
-    //                 }
-    //             }
-    //         }
-    //     }
-    // },
+                return {
+                    user: {
+                        id: userData._id,
+                        username: userData.username,
+                        password: userData.password,
+                        email: userData.email
+                    }
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        }
+    },
     secret: process.env.JWT_SECRET
 }
 export default NextAuth(authOptions)
