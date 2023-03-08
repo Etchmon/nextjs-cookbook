@@ -3,6 +3,7 @@ import { useSession, signOut, getSession } from "next-auth/react";
 
 const Signup = () => {
     const { data: session } = useSession();
+    console.log(useSession())
 
     const [value, setValue] = useState({
         username: '',
@@ -41,9 +42,8 @@ const Signup = () => {
         alert(`Username: ${result.user.username}`)
     }
 
-
     if (session) {
-        console.log(session.user);
+        console.log(session);
         return (
             <div>
                 <p>You are already signed in to an account. Sign out of your account before creating a new one</p>

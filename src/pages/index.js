@@ -27,7 +27,7 @@ export default function Home({ isConnected }) {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}> Create an account <a href='/register'>here</a></h1>
+        <h1 className={styles.title}> Create an account <a href='/signup'>here</a></h1>
         <br />
         <div className={styles.grid}>
         </div>

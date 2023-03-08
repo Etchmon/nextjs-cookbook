@@ -12,6 +12,26 @@ export const authOptions = {
         // ...add more providers here
     ],
     callbacks: {
+        async signIn({ user, account, profile, email, credentials }) {
+
+            console.log(user)
+            try {
+
+                const MongoClient = await clientPromise;
+                const db = MongoClient.db('CBD');
+                const collection = db.collection("Users");
+
+                const userData = await collection.findOne({ email: user.email });
+                if (userData === null) {
+                    return false;
+                }
+
+                return true;
+            } catch (e) {
+                console.log(e);
+
+            }
+        },
         session: async (session) => {
             if (!session) return;
 
@@ -21,6 +41,13 @@ export const authOptions = {
                 const collection = db.collection("Users");
 
                 const userData = await collection.findOne({ email: session.session.user.email });
+                if (userData === null) {
+                    return {
+                        newUser: {
+                            email: session.session.user.email
+                        }
+                    }
+                }
 
                 return {
                     user: {
@@ -32,6 +59,7 @@ export const authOptions = {
                 }
             } catch (e) {
                 console.log(e);
+
             }
         }
     },
