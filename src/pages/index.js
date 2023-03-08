@@ -2,7 +2,6 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { useEffect, useState } from 'react';
 import clientPromise from '../../lib/mongodb';
-import { Link } from "react-router-dom";
 import { useSession, signOut, getSession } from "next-auth/react";
 
 /* eslint react/no-string-refs: 0 */
