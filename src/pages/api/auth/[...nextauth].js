@@ -14,7 +14,7 @@ export const authOptions = {
     callbacks: {
         async signIn({ user, account, profile, email, credentials }) {
 
-            console.log(user)
+
             try {
 
                 const MongoClient = await clientPromise;

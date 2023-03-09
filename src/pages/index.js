@@ -10,7 +10,8 @@ export default function Home({ isConnected }) {
 
   const [restaurants, setRestaurants] = useState([]);
 
-  const { data: session, status } = useSession({ required: true });
+  const { data: session } = useSession({ required: true });
+  const { status: auth } = useSession({ required: true });
 
   useEffect(() => {
     (async () => {
@@ -20,7 +21,11 @@ export default function Home({ isConnected }) {
     })();
   }, []);
 
-
+  if (auth === 'loading') {
+    return (
+      <p>loading...</p>
+    )
+  }
   return (
     <div className={styles.container}>
       <Head>

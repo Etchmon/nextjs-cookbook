@@ -7,14 +7,14 @@ const Login = () => {
     let {status: auth} = useSession();
     console.log(auth);
 
-    // if (session) {
-    //     return (
-    //         <div>
-    //             <p>Welcome {session.user.username}</p>
-    //             <button onClick={()=> signOut()}>Sign Out</button>
-    //         </div>
-    //     )
-    // }
+    if (session) {
+        return (
+            <div>
+                <p>Welcome {session.user.username}</p>
+                <button onClick={()=> signOut()}>Sign Out</button>
+            </div>
+        )
+    }
 
     return (
         <div>
@@ -27,20 +27,20 @@ const Login = () => {
 
 export default Login;
 
-// export const getServerSideProps = async (context) => {
-//     const session = await getSession(context);
+export const getServerSideProps = async (context) => {
+    const session = await getSession(context);
     
 
-//     if(session) {
-//         return {
-//             redirect: {
-//                 destination: '/'
-//             }
-//         }
-//     }
+    if(session) {
+        return {
+            redirect: {
+                destination: '/'
+            }
+        }
+    }
 
-//     return {
-//         props: {...session}
-//     }
-// }
+    return {
+        props: {...session}
+    }
+}
 
