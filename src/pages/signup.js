@@ -3,7 +3,7 @@ import { useSession, signOut, getSession } from "next-auth/react";
 import { useRouter } from 'next/router';
 
 const Signup = () => {
-    const { data: session } = useSession();
+    const { data: session, status } = useSession();
     const router = useRouter();
 
     const [value, setValue] = useState({
@@ -14,7 +14,7 @@ const Signup = () => {
     })
 
     const handleChange = (event) => {
-        setValue({ [event.target.name]: event.target.value })
+        setValue({ ...value, [event.target.name]: event.target.value })
     }
 
     const handleSubmit = async (event) => {
@@ -44,6 +44,12 @@ const Signup = () => {
         router.push('/signup')
     }
 
+    if (status === 'loading') {
+        return (
+            <p>loading...</p>
+        )
+    }
+
     if (session) {
         console.log(session);
         return (
@@ -60,7 +66,7 @@ const Signup = () => {
                     <h1>Create an account</h1>
                     <label>
                         Email
-                        <input type="text" name="email" value={value.email || ''} onChange={handleChange} />
+                        <input type="text" name="email" value={value.email} onChange={handleChange} />
                     </label>
                     <label>
                         Username
