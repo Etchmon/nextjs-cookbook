@@ -20,7 +20,7 @@ export default async function addUser(req, res) {
             const user = new User({
                 username: req.body.username,
                 password: req.body.password,
-                email: req.body.email
+                email: req.body.email.toLowerCase()
             });
 
             const result = await collection.insertOne(user);

@@ -13,6 +13,7 @@ export const authOptions = {
     ],
     callbacks: {
         async signIn({ user, account, profile, email, credentials }) {
+            console.log(user.email);
 
 
             try {
@@ -21,7 +22,7 @@ export const authOptions = {
                 const db = MongoClient.db('CBD');
                 const collection = db.collection("Users");
 
-                const userData = await collection.findOne({ email: user.email });
+                const userData = await collection.findOne({ email: user.email.toLowerCase() });
                 if (userData === null) {
                     return false;
                 }

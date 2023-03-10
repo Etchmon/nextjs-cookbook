@@ -1,6 +1,5 @@
 import React, { useEffect } from "react"
 import { useSession, signIn, signOut, getSession } from "next-auth/react"
-import Signup from "./signup";
 
 const Login = () => {
     const {data: session} = useSession();
