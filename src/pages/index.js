@@ -2,7 +2,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { useEffect, useState } from 'react';
 import clientPromise from '../../lib/mongodb';
-import { useSession, signOut, getSession } from "next-auth/react";
+import { useSession, signIn, signOut, getSession } from "next-auth/react";
 
 /* eslint react/no-string-refs: 0 */
 
@@ -11,6 +11,7 @@ export default function Home({ isConnected }) {
   const [restaurants, setRestaurants] = useState([]);
 
   const { data: session, status } = useSession();
+  console.log(session)
 
   useEffect(() => {
     (async () => {
@@ -38,6 +39,7 @@ export default function Home({ isConnected }) {
         </Head>
 
         <main className={styles.main}>
+          <button onClick={() => signIn()}>Sign in</button>
           <h1 className={styles.title}>Welcome, new user.</h1>
           <br />
           <div className={styles.grid}>
@@ -46,7 +48,7 @@ export default function Home({ isConnected }) {
       </div>
     )
   }
-  console.log(session)
+
   return (
     <div className={styles.container}>
       <Head>
@@ -56,6 +58,7 @@ export default function Home({ isConnected }) {
       </Head>
 
       <main className={styles.main}>
+        <button onClick={() => signOut()}>Sign Out</button>
         <h1 className={styles.title}>Welcome, {session.user.username}</h1>
         <br />
         <div className={styles.grid}>

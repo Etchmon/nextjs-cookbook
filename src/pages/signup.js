@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useSession, signOut, getSession } from "next-auth/react";
+import { useRouter } from 'next/router';
 
 const Signup = () => {
     const { data: session } = useSession();
-    console.log(useSession())
+    const router = useRouter();
 
     const [value, setValue] = useState({
         username: '',
@@ -39,7 +40,8 @@ const Signup = () => {
         });
         const result = await res.json();
         console.log(result);
-        alert(`Username: ${result.user.username}`)
+        alert(`Username: ${result.user.username}`);
+        router.push('/signup')
     }
 
     if (session) {
@@ -58,7 +60,7 @@ const Signup = () => {
                     <h1>Create an account</h1>
                     <label>
                         Email
-                        <input type="text" name="email" value={value.email} onChange={handleChange} />
+                        <input type="text" name="email" value={value.email || ''} onChange={handleChange} />
                     </label>
                     <label>
                         Username
