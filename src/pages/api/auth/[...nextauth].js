@@ -55,7 +55,8 @@ export const authOptions = {
                         id: userData._id,
                         username: userData.username,
                         password: userData.password,
-                        email: userData.email
+                        email: userData.email,
+                        cookbooks: userData.cookbooks
                     }
                 }
             } catch (e) {

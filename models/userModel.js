@@ -4,7 +4,11 @@ const userSchema = new Schema({
     username: { type: String, required: true },
     password: { type: String, required: true },
     email: { type: String, required: true },
-    cookbooks: [Schema.Types.ObjectId]
+    cookbooks: [{
+        title: 'All Recipes',
+        recipes: [Schema.Types.ObjectId],
+        description: 'A collection of all the recipes in your cookbooks'
+    }, Schema.Types.ObjectId]
 });
 
 const User = models.User || model('User', userSchema);
