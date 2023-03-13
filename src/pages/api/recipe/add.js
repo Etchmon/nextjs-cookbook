@@ -18,14 +18,14 @@ export default async function addRecipe(req, res) {
             const MongoClient = await clientPromise;
             const db = await MongoClient.db("CBD");
             const userCollection = await db.collection("Users");
+            console.log(session);
             const userData = await userCollection.findOne({ email: session.user.email });
 
             // Create new recipe model
             const recipe = new Recipe({
                 title: req.body.title,
                 ingredients: req.body.ingredients,
-                instructions: req.body.instructions,
-                images: req.body.images
+                instructions: req.body.instructions
             });
 
             // Add recipe to recipe collection and recipe id to user's allRecipes
@@ -35,7 +35,7 @@ export default async function addRecipe(req, res) {
             // Update session object
             const sessionUpdate = session.user.cookbooks.allRecipes.push(recipe.id);
 
-            console.log([result, userUpdate, sessionUpdate, userData])
+            console.log([result, userUpdate, sessionUpdate])
 
             // Return success and redirect user to homepage
             return res.json({ msg: 'recipe created ', recipe });
