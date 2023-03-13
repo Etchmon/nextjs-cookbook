@@ -14,7 +14,7 @@ export default async function addRecipe(req, res) {
     if (req.method === 'POST') {
         // Process a POST request
         try {
-            // Get user from database acess their cookbooks
+            // Get user from database, access their cookbooks
             const MongoClient = await clientPromise;
             const db = await MongoClient.db("CBD");
             const userCollection = await db.collection("Users");
