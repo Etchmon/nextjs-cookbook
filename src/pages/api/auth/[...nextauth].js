@@ -38,8 +38,8 @@ export const authOptions = {
 
             try {
                 const MongoClient = await clientPromise;
-                const db = MongoClient.db('CBD');
-                const collection = db.collection("Users");
+                const db = await MongoClient.db('CBD');
+                const collection = await db.collection("Users");
 
                 const userData = await collection.findOne({ email: session.session.user.email });
                 if (userData === null) {

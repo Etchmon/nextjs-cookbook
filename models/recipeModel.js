@@ -1,7 +1,7 @@
 import { Schema, model, models } from "mongoose";
 
 const recipeSchema = new Schema({
-    recipe: { type: String, required: true },
+    title: { type: String, required: true },
     ingredients: [],
     instructions: [],
     images: [],
