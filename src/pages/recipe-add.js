@@ -1,21 +1,49 @@
 import React, { useState } from "react";
-import { useSession, signOut, getSession } from "next-auth/react";
+import { useSession, signIn, signOut, getSession } from "next-auth/react";
 import { useRouter } from 'next/router';
 
 const RecipeAdd = () => {
     const { data: session, status } = useSession();
     const router = useRouter();
 
+    const [ingredients, setIngredients] = useState([]);
+    const [instructions, setInstructions] = useState([]);
+
+    let id = 0;
+
     const [value, setValue] = useState({
         title: '',
-        ingredients: [],
-        instructions: [],
-        comments: []
+        ingredients: '',
+        instructions: ''
     });
 
     const handleChange = (event) => {
-        setValue({ ...value, [event.target.name]: event.target.value })
+        setValue({ ...value, [event.target.name]: event.target.value });
     };
+
+    const addIngredient = (event) => {
+        event.preventDefault();
+        setIngredients([...ingredients, value.ingredients]);
+        setValue({ ...value, ingredients: '' })
+    }
+
+    const addInstruction = (event) => {
+        event.preventDefault();
+        setInstructions([...instructions, value.instructions]);
+        setValue({ ...value, instructions: '' })
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(value);
+
+        const recipe = {
+            title: value.title,
+            ingredients: ingredients,
+            instructions: instructions
+        };
+        console.log(recipe);
+    }
 
     if (status === 'loading') {
         return (
@@ -35,10 +63,28 @@ const RecipeAdd = () => {
         return (
             <div>
                 <form>
-                    <h1>Create an account</h1>
-
+                    <h1>Create a Recipe</h1>
+                    <label>
+                        Recipe name:
+                        <input type="text" name="title" value={value.title} onChange={handleChange} />
+                    </label>
+                    <label>
+                        Ingredients
+                        <input type="text" name="ingredients" value={value.ingredients} onChange={handleChange} />
+                        <button onClick={addIngredient}>Add</button>
+                    </label>
+                    <label>
+                        Instructions
+                        <input type="text" name="instructions" value={value.instructions} onChange={handleChange} />
+                        <button onClick={addInstruction}>Add</button>
+                    </label>
                     <button onClick={handleSubmit}>Submit</button>
                 </form>
+                <ol>
+                    {ingredients.map(ingredients => (
+                        <li key={id++}>{ingredients}</li>
+                    ))}
+                </ol>
             </div>
         )
     }
