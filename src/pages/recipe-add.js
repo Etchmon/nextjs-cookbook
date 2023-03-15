@@ -33,16 +33,29 @@ const RecipeAdd = () => {
         setValue({ ...value, instructions: '' })
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(value);
 
         const recipe = {
             title: value.title,
             ingredients: ingredients,
             instructions: instructions
         };
-        console.log(recipe);
+
+        const res = await fetch('/api/recipe/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                title: value.title,
+                ingredients: ingredients,
+                instructions: instructions
+            }),
+        });
+        const result = await res.json();
+        console.log(result);
+        router.push('/api/list')
     }
 
     if (status === 'loading') {

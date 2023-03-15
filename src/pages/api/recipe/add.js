@@ -30,12 +30,12 @@ export default async function addRecipe(req, res) {
 
             // Add recipe to recipe collection and recipe id to user's allRecipes
             const result = await db.collection("Recipes").insertOne(recipe);
-            const userUpdate = await userData.cookbooks.allRecipes.insertOne(recipe.id);
+            const userUpdate = await userCollection.updateOne({ email: session.user.email }, { $push: { "cookbooks.allRecipes": recipe.id } })
 
             // Update session object
             const sessionUpdate = session.user.cookbooks.allRecipes.push(recipe.id);
 
-            console.log([result, userUpdate, sessionUpdate])
+            console.log([userUpdate]);
 
             // Return success and redirect user to homepage
             return res.json({ msg: 'recipe created ', recipe });
