@@ -9,15 +9,14 @@ const CookbookAdd = () => {
 
     const [recipes, setRecipes] = useState([]);
     const [myRecipes, setMyRecipes] = useState([]);
-    console.log(session.user.cookbooks.allRecipes)
 
     useEffect(() => {
         (async () => {
-            const results = await fetch('/api/recipe/my-recipes');
+            const results = await fetch('/api/recipe/getUserRecipes');
             const resultsJson = await results.json();
             setMyRecipes(resultsJson);
         })();
-    });
+    }, []);
 
     const [value, setValue] = useState({
         title: '',
@@ -61,7 +60,7 @@ const CookbookAdd = () => {
                     <button>Submit</button>
                 </form>
                 <div className={styles.grid}>
-                    {session.user.cookbooks.allRecipes.map(recipe => (
+                    {myRecipes.map(recipe => (
                         <li key={recipe.id}>{recipe.title}</li>
                     ))}
                 </div>

@@ -24,8 +24,13 @@ export default async function myRecipes(req, res) {
             const collection = await db.collection("Recipes");
 
             for (const recipe of sessionRecipes) {
-                const result = await collection.findOne({ _id: ObjectID(recipe) })
-                myRecipes.push(result);
+                const result = await collection.findOne({ _id: ObjectID(recipe) });
+                if (result === null) {
+                    console.log('null');
+                } else {
+                    myRecipes.push(result);
+                }
+
             };
 
             res.status(200).json(myRecipes);
