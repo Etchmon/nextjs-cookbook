@@ -23,22 +23,11 @@ export default async function myRecipes(req, res) {
             const db = await MongoClient.db("CBD");
             const collection = await db.collection("Recipes");
 
-            // const result = await collection.findOne({ _id: ObjectID(sessionRecipes[1]) });
-
             for (const recipe of sessionRecipes) {
                 const result = await collection.findOne({ _id: ObjectID(recipe) })
                 myRecipes.push(result);
             };
 
-            // sessionRecipes.forEach(async recipe => {
-            //     const result = await collection.findOne({ _id: ObjectID(recipe) });
-            //     console.log(result);
-            //     myRecipes.push(result);
-            //     console.log(myRecipes)
-            //     return result;
-            // });
-
-            console.log(myRecipes);
             res.status(200).json(myRecipes);
 
         } catch (e) {
