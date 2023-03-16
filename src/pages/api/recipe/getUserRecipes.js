@@ -1,6 +1,7 @@
 import clientPromise from '../../../../lib/mongodb';
 import Recipe from '../../../../models/recipeModel'
 import { getSession } from "next-auth/react";
+import { ObjectID } from 'bson';
 
 
 /**
@@ -16,17 +17,24 @@ export default async function myRecipes(req, res) {
         // Process a GET request
         const myRecipes = [];
         const sessionRecipes = session.user.cookbooks.allRecipes;
+        console.log(sessionRecipes[1])
+
         try {
-            console.log(session.user.cookbooks.allRecipes);
 
             const MongoClient = await clientPromise;
             const db = await MongoClient.db("CBD");
             const collection = await db.collection("Recipes");
 
-            sessionRecipes.forEach(recipe => {
-                console.log(recipe);
-                myRecipes.push(recipe);
-            });
+            const result = await collection.findOne({ _id: ObjectID(sessionRecipes[1]) });
+            console.log(result);
+
+            // sessionRecipes.forEach(async recipe => {
+            //     console.log(recipe);
+
+            //     myRecipes.push(result);
+            // });
+
+            res.status(200).json(myRecipes);
 
 
         } catch (e) {
