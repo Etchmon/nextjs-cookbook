@@ -1,5 +1,4 @@
 import clientPromise from '../../../../lib/mongodb';
-import Recipe from '../../../../models/recipeModel'
 import { getSession } from "next-auth/react";
 
 
@@ -8,7 +7,7 @@ import { getSession } from "next-auth/react";
  * @param {import('next').NextApiResponse} res 
  */
 
-export default async function myRecipes(req, res) {
+export default async function allRecipes(req, res) {
     const session = await getSession({ req });
 
     if (req.method === 'GET') {
