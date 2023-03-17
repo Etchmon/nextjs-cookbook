@@ -1,6 +1,6 @@
 import styles from '../styles/Home.module.css'
 import React, { useEffect, useState } from "react";
-import { useSession, signIn, signOut, getSession } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
 import { useRouter } from 'next/router';
 
 const RecipeList = ({ data, addToBook }) => {
@@ -78,7 +78,7 @@ const CookbookAdd = () => {
     } else {
 
         return (
-            <div>
+            <div className={styles.main}>
                 <form>
                     <h1>Create a Coobook</h1>
                     <label>
@@ -92,7 +92,7 @@ const CookbookAdd = () => {
 
                     <button onClick={handleSubmit}>Submit</button>
                 </form>
-                <div>
+                <div className={styles.grid}>
                     {myRecipes && <RecipeList data={myRecipes} addToBook={addToBook} />}
                 </div>
             </div>
