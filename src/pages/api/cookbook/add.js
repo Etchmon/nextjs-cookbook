@@ -1,5 +1,6 @@
 import clientPromise from '../../../../lib/mongodb';
 import Cookbook from '../../../../models/cookbookModel';
+import { getSession } from "next-auth/react";
 
 
 /**
@@ -27,7 +28,7 @@ export default async function addCookbook(req, res) {
 
             // Add cookbook to cookbook collection and cookbook id to users cookbooks
             const result = await db.collection("Cookbooks").insertOne(cookbook);
-            const userUpdate = await userData.cookbooks.myBooks.push(cookbook.id);
+            const userUpdate = await await userCollection.updateOne({ email: session.user.email }, { $push: { "cookbooks.myBooks": cookbook.id } });
 
             // Return success
             return res.json({ msg: 'cookbook created ', cookbook });

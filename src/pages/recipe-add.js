@@ -36,11 +36,11 @@ const RecipeAdd = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        const recipe = {
-            title: value.title,
-            ingredients: ingredients,
-            instructions: instructions
-        };
+        // const recipe = {
+        //     title: value.title,
+        //     ingredients: ingredients,
+        //     instructions: instructions
+        // };
 
         const res = await fetch('/api/recipe/add', {
             method: 'POST',
