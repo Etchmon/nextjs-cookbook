@@ -78,7 +78,7 @@ const CookbookAdd = () => {
     } else {
 
         return (
-            <div className={styles.main}>
+            <div>
                 <form>
                     <h1>Create a Coobook</h1>
                     <label>
