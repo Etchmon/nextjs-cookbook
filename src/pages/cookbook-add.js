@@ -62,6 +62,7 @@ const CookbookAdd = () => {
         });
         const result = await res.json();
         console.log(result);
+        router.push('/api/cookbook/getAll')
     }
 
     const addToBook = (event) => {
