@@ -41,6 +41,14 @@ const CookbookAdd = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+
+        const cookbook = {
+            title: value.title,
+            description: value.description,
+            recipes: recipes
+        }
+        console.log(cookbook);
+
         const res = await fetch('/api/cookbook/add', {
             method: 'POST',
             header: {
@@ -54,7 +62,6 @@ const CookbookAdd = () => {
         });
         const result = await res.json();
         console.log(result);
-        router.push('api/list')
     }
 
     const addToBook = (event) => {
@@ -87,7 +94,7 @@ const CookbookAdd = () => {
                     </label>
                     <label>
                         Description:
-                        <input type="textarea" name="ingredients" value={value.ingredients} onChange={handleChange} />
+                        <input type="textarea" name="description" value={value.description} onChange={handleChange} />
                     </label>
 
                     <button onClick={handleSubmit}>Submit</button>

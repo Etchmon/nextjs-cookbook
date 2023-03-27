@@ -16,19 +16,23 @@ export default async function addCookbook(req, res) {
             // Connect to database
             const MongoClient = await clientPromise;
             const db = await MongoClient.db("CBD");
-            const collection = await db.collection("Cookbooks");
+            const cookbookCollection = await db.collection("Cookbooks");
             const userCollection = await db.collection("Users");
             const userData = await userCollection.findOne({ email: session.user.email });
+            const jsonData = JSON.parse(req.body);
 
             // Create new cookbook model
             const cookbook = new Cookbook({
-                title: req.body.title,
-                description: req.body.description
+                title: jsonData.title,
+                description: jsonData.description,
+                recipes: jsonData.recipes
             });
+
+            console.log(cookbook);
 
             // Add cookbook to cookbook collection and cookbook id to users cookbooks
             const result = await db.collection("Cookbooks").insertOne(cookbook);
-            const userUpdate = await await userCollection.updateOne({ email: session.user.email }, { $push: { "cookbooks.myBooks": cookbook.id } });
+            const userUpdate = await userCollection.updateOne({ email: session.user.email }, { $push: { "cookbooks.myBooks": cookbook.id } });
 
             // Return success
             return res.json({ msg: 'cookbook created ', cookbook });

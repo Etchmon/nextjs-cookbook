@@ -1,9 +1,9 @@
 import { Schema, model, models } from "mongoose";
 
 const cookbookSchema = new Schema({
-    title: String,
+    title: { type: String },
     recipes: [Schema.Types.ObjectId],
-    description: String
+    description: { type: String }
 });
 
 const Cookbook = models.Cookbook || model('Cookbook', cookbookSchema);
