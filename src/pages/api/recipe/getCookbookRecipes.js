@@ -16,7 +16,7 @@ export default async function cookbookRecipes(req, res) {
         // Process a GET request
         const recipes = [];
         try {
-
+            // Access DB session and set collection variables
             const MongoClient = await clientPromise;
             const db = await MongoClient.db("CBD");
             const collection = await db.collection("Cookbooks");
