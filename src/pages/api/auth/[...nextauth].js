@@ -13,7 +13,6 @@ export const authOptions = {
     ],
     callbacks: {
         async signIn({ user, account, profile, email, credentials }) {
-            console.log(user.email);
 
 
             try {

@@ -11,7 +11,6 @@ export default function Home({ isConnected }) {
   const [restaurants, setRestaurants] = useState([]);
 
   const { data: session, status } = useSession();
-  console.log(session)
 
   useEffect(() => {
     (async () => {
@@ -38,12 +37,14 @@ export default function Home({ isConnected }) {
           <link ref='icon' href='/favicon.ico' />
         </Head>
 
-        <main className={styles.main}>
-          <button onClick={() => signIn()}>Sign in</button>
-          <h1 className={styles.title}>Welcome, new user.</h1>
-          <br />
-          <div className={styles.grid}>
-          </div>
+        <main className={styles.landing}>
+          <nav className={styles.nav}>
+            <span>CookBook Digital</span>
+            <div>
+              <a>Log in</a>
+              <a>Sign up</a>
+            </div>
+          </nav>
         </main>
       </div>
     )
