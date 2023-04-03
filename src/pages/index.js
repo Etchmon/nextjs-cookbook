@@ -40,11 +40,16 @@ export default function Home({ isConnected }) {
         <main className={styles.landing}>
           <nav className={styles.nav}>
             <span>CookBook Digital</span>
-            <div>
+            <div className={styles.navButtons}>
               <a>Log in</a>
               <a>Sign up</a>
             </div>
           </nav>
+          <hero className={styles.hero}>
+            <h1 className={styles.heading1}>Build your book</h1>
+            <p className={styles.paragraph2}>The only cookbook you'll ever need.</p>
+            <button className={styles.button1}>Get started</button>
+          </hero>
         </main>
       </div>
     )
