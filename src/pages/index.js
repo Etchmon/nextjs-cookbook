@@ -50,6 +50,16 @@ export default function Home({ isConnected }) {
             <p className={styles.paragraph2}>The only cookbook you'll ever need.</p>
             <button className={styles.button1}>Get started</button>
           </hero>
+          <div className={styles.landingCard}>
+            <div className={styles.landingCardSection}>
+              <h2 className={styles.heading2}>Find new recipes, share your own!</h2>
+              <p className={styles.paragraph2}>Browse the stream of user recipe's - add them to your cookbook with one click!</p>
+              <button>Sign up</button>
+            </div>
+            <div className={styles.landingCardPic}>
+              &nbsp;
+            </div>
+          </div>
         </main>
       </div>
     )

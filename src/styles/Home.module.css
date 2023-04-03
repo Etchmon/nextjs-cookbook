@@ -17,7 +17,6 @@
   box-sizing: border-box;
   /* identical to box height */
 
-
   color: #000000;
 }
 
@@ -80,11 +79,13 @@
   align-items: center;
   min-height: 100vh;
   padding: 0 1rem;
+  overflow: auto;
   
   background: linear-gradient(180deg, rgba(204, 235, 216, 0.8) 0%, rgba(34, 171, 122, 0.8) 100%);
 }
 
 .nav {
+  position: absolute;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -111,15 +112,38 @@
 
 .hero {
   width: max-content;
-  position: absolute;
-  top: 30%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
+  min-height: 100vh;
   gap: 1rem;
   
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.landingCard {
+  width: 80%;
+  display: flex;
+  margin-bottom: 20rem;
+
+  background: #22AB7A;
+  box-shadow: 8px 1px 20px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+}
+
+.landingCardSection {
+  max-width: 50%;
+  padding: 1rem 0 1rem 1rem;
+}
+
+.landingCardPic {
+  width: 50%;
+
+  background: url('../images/jason-jarrach-7hO3yb3EzcY-unsplash.jpg');
+  border-radius: 0 15px 15px 0;
+  background-size: cover;
+  background-position: center;
 }
 
 
