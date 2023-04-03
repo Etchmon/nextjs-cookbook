@@ -7,13 +7,14 @@
   min-height: 100vh;
 } */
 
+
 /* Heading 1 */
 .heading1 {
   font-family: 'Saira Condensed';
   font-style: normal;
   font-weight: 700;
   font-size: 90px;
-  line-height: 142px;
+  box-sizing: border-box;
   /* identical to box height */
 
 
@@ -115,7 +116,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  gap: 1rem;
   
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
