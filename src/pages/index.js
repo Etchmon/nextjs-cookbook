@@ -50,20 +50,23 @@ export default function Home({ isConnected }) {
             <p className={styles.paragraph2}>The only cookbook you'll ever need.</p>
             <button className={styles.button1}>Get started</button>
           </hero>
-          <div className={styles.landingCard}>
+          <section className={styles.landingCard}>
             <div className={styles.landingCardSection}>
               <h2 className={styles.heading2}>Find new recipes, share your own!</h2>
               <p className={styles.paragraph2}>Browse the stream of user recipe's - add them to your cookbook with one click.</p>
-              <button>Sign up</button>
+              <button className={styles.button2}>Sign up</button>
             </div>
             <div className={styles.landingCardPic}>
               &nbsp;
             </div>
-          </div>
-          <div className={styles.hero2}>
+          </section>
+          <section className={styles.hero2}>
             <h1 className={styles.heading1}>Level up your cooking game</h1>
             <p className={styles.paragraph2}>Organize your recipes to make personally curated cookbooks, plan your dinners, and become a powerful cook who can prepare a plethora of meals for yourself or guests.</p>
-          </div>
+          </section>
+          <footer>
+            <p className={styles.paragraph2}>CookBook Digital</p>
+          </footer>
         </main>
       </div>
     )
