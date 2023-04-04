@@ -124,6 +124,7 @@
 
 .landingCard {
   width: 80%;
+  height: 40rem;
   display: flex;
   margin-bottom: 20rem;
 
@@ -133,8 +134,12 @@
 }
 
 .landingCardSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
   max-width: 50%;
-  padding: 1rem 0 1rem 1rem;
+  padding: 3rem 0 3rem 1rem;
 }
 
 .landingCardPic {
@@ -144,6 +149,15 @@
   border-radius: 0 15px 15px 0;
   background-size: cover;
   background-position: center;
+}
+
+.hero2 {
+  width: min-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20rem;
 }
 
 

@@ -53,12 +53,16 @@ export default function Home({ isConnected }) {
           <div className={styles.landingCard}>
             <div className={styles.landingCardSection}>
               <h2 className={styles.heading2}>Find new recipes, share your own!</h2>
-              <p className={styles.paragraph2}>Browse the stream of user recipe's - add them to your cookbook with one click!</p>
+              <p className={styles.paragraph2}>Browse the stream of user recipe's - add them to your cookbook with one click.</p>
               <button>Sign up</button>
             </div>
             <div className={styles.landingCardPic}>
               &nbsp;
             </div>
+          </div>
+          <div className={styles.hero2}>
+            <h1 className={styles.heading1}>Level up your cooking game</h1>
+            <p className={styles.paragraph2}>Organize your recipes to make personally curated cookbooks, plan your dinners, and become a powerful cook who can prepare a plethora of meals for yourself or guests.</p>
           </div>
         </main>
       </div>
