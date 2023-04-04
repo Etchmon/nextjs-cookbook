@@ -70,6 +70,7 @@
   border-radius: 30px;
   border: none;
   color: #F7F7F7;
+  text-decoration: none;
 }
 
 /* Button 1 */
@@ -79,6 +80,7 @@
   align-items: flex-start;
   padding: 13px 99px;
   gap: 10px;
+  cursor: pointer;
   
   width: 282px;
   height: 71px;
@@ -159,7 +161,7 @@
 .landingCard {
   width: 80%;
   display: flex;
-  margin-bottom: 18rem;
+  margin-bottom: 20rem;
 
   background: #22AB7A;
   box-shadow: 8px 1px 20px 10px rgba(0, 0, 0, 0.25);
