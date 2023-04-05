@@ -21,21 +21,22 @@ const Login = () => {
         <main className={styles.loginContainer}>
             <section className={styles.login}>
                 <h1 className={styles.heading1}>Login to Your Account</h1>
-                <p>Login with Gmail</p>
+                <p className={styles.paragraph1}>Login with Gmail</p>
                 <span>Logo</span>
-                <div>
-                    <span>line</span>
+                <div className={styles.lineContainer}>
+                    <hr className={styles.line}/>
                     <p>OR</p>
-                    <span>line</span>
+                    <hr className={styles.line}/>
                 </div>
                 <input type="text" name="email"/>
                 <input type='password' name="password"/>
+                <button className={styles.button1}>Enter</button>
             </section>
             <section className={styles.newUser}>
                 <div className={styles.newUserImg}>&nbsp;</div>
                 <h1 className={styles.heading1}>New User?</h1>
-                <p>Sign up to start building your own digital cookbook!</p>
-                <button>Sign up</button>
+                <p className={styles.paragraph1}>Sign up to start building your own digital cookbook!</p>
+                <button className={styles.button2}>Sign up</button>
             </section>
         </main>
     )
