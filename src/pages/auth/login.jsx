@@ -21,8 +21,7 @@ const Login = () => {
         <main className={styles.loginContainer}>
             <section className={styles.login}>
                 <h1 className={styles.heading1}>Login to Your Account</h1>
-                <p className={styles.paragraph1}>Login with Gmail</p>
-                <span>Logo</span>
+                <span className={styles.googleIcon}>&nbsp;</span>
                 <div className={styles.lineContainer}>
                     <hr className={styles.line}/>
                     <p>OR</p>

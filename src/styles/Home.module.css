@@ -279,6 +279,14 @@
 .line {
   width: 10rem;
 }
+
+.googleIcon {
+  background: url("../images/google-color-svgrepo-com.svg");
+  background-size: cover;
+  background-position: center;
+  height: 50px;
+  width: 50px;
+}
 /* .description {
   display: inherit;
   justify-content: inherit;
