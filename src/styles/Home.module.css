@@ -219,6 +219,52 @@
 }
 
 
+/* Login */
+.loginContainer {
+  display: flex;
+  height: 100vh;
+}
+
+.login {
+  background-color: #F7F7F7;
+  min-width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2rem;
+  text-align: center;
+  padding-top: 10%;
+}
+
+.newUser {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  text-align: center;
+  color: #F7F7F7;
+  max-height: 100vh;
+  
+
+  min-width: 40%;
+  background-color: rgb(19, 94, 67, 66%);
+}
+
+.newUserImg {
+  background: url('../images/jason-jarrach-7hO3yb3EzcY-unsplash.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: -100;
+  position: absolute;
+  height: 100%;
+  width: fill;
+}
+
+.newUser h1{
+  color: #F7F7F7;
+}
 /* .description {
   display: inherit;
   justify-content: inherit;

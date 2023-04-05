@@ -18,9 +18,9 @@ const Login = () => {
     }
 
     return (
-        <main>
-            <section>
-                <h1>Login to Your Account</h1>
+        <main className={styles.loginContainer}>
+            <section className={styles.login}>
+                <h1 className={styles.heading1}>Login to Your Account</h1>
                 <p>Login with Gmail</p>
                 <span>Logo</span>
                 <div>
@@ -31,8 +31,9 @@ const Login = () => {
                 <input type="text" name="email"/>
                 <input type='password' name="password"/>
             </section>
-            <section>
-                <h1>New User?</h1>
+            <section className={styles.newUser}>
+                <div className={styles.newUserImg}>&nbsp;</div>
+                <h1 className={styles.heading1}>New User?</h1>
                 <p>Sign up to start building your own digital cookbook!</p>
                 <button>Sign up</button>
             </section>
