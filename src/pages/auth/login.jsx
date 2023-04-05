@@ -1,5 +1,7 @@
-import React, { useEffect } from "react"
-import { useSession, signIn, signOut, getSession } from "next-auth/react"
+import React, { useEffect } from "react";
+import styles from '../../styles/Home.module.css';
+import Link from 'next/link';
+import { useSession, signIn, signOut, getSession } from "next-auth/react";
 
 const Login = () => {
     const {data: session} = useSession();
@@ -16,10 +18,25 @@ const Login = () => {
     }
 
     return (
-        <div>
-            <p>You are not signed in</p>
-            <button onClick={()=> signIn()}>Sign in</button>
-        </div>
+        <main>
+            <section>
+                <h1>Login to Your Account</h1>
+                <p>Login with Gmail</p>
+                <span>Logo</span>
+                <div>
+                    <span>line</span>
+                    <p>OR</p>
+                    <span>line</span>
+                </div>
+                <input type="text" name="email"/>
+                <input type='password' name="password"/>
+            </section>
+            <section>
+                <h1>New User?</h1>
+                <p>Sign up to start building your own digital cookbook!</p>
+                <button>Sign up</button>
+            </section>
+        </main>
     )
 
 }
