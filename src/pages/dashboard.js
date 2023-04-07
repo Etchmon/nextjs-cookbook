@@ -8,7 +8,11 @@ export default function Dashboard() {
 
     const { data: session, status } = useSession();
 
+    return (
+        <main>
 
+        </main>
+    )
 }
 
 // Redirect to Login page if User is not signed in.
