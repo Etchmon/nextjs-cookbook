@@ -51,13 +51,13 @@ export default function Home({ isConnected }) {
         </nav>
         <hero className={styles.hero}>
           <h1 className={styles.heading1}>Build your book</h1>
-          <p className={styles.paragraph2}>The only cookbook you'll ever need.</p>
+          <p className={styles.paragraph2}>The only cookbook you&apos;ll ever need.</p>
           <Link href='/auth/signup' className={styles.button1}>Get started</Link>
         </hero>
         <section className={styles.landingCard}>
           <div className={styles.landingCardSection}>
             <h2 className={styles.heading2}>Find new recipes, share your own!</h2>
-            <p className={styles.paragraph2}>Browse the stream of user recipe's - add them to your cookbook with one click.</p>
+            <p className={styles.paragraph2}>Browse the stream of user recipe&apos;s - add them to your cookbook with one click.</p>
             <button className={styles.button2}>Sign up</button>
           </div>
           <div className={styles.landingCardPic}>
