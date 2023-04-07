@@ -129,9 +129,10 @@
   width: 100%;
   padding: 1rem;
   position: fixed;
-  background-color: #CCEBD8;
+  background-color: rgba(214, 241, 224);
   border-bottom: 1px solid #22AB7A;
   gap: 20rem;
+  z-index: 2;
 }
 
 .navButtons {
@@ -259,7 +260,7 @@
   z-index: -100;
   position: absolute;
   height: 100%;
-  width: fill;
+  width: stretch;
 }
 
 .newUser h1 {
