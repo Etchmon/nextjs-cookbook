@@ -61,7 +61,7 @@ export default function Home({ isConnected }) {
             <button className={styles.button2}>Sign up</button>
           </div>
           <div className={styles.landingCardPic}>
-            &nbsp;
+
           </div>
         </section>
         <section className={styles.hero2}>
