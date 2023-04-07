@@ -1,4 +1,4 @@
-import styles from '../styles/Home.module.css'
+import styles from '../styles/Home.module.css';
 import { useEffect, useState } from 'react';
 import clientPromise from '../../lib/mongodb';
 import { useSession, signIn, signOut, getSession } from "next-auth/react";
