@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSession, signOut, getSession } from "next-auth/react";
 import { useRouter } from 'next/router';
+import styles from '../../styles/Home.module.css';
 
 const Signup = () => {
     const { data: session, status } = useSession();
@@ -41,7 +42,7 @@ const Signup = () => {
         const result = await res.json();
         console.log(result);
         alert(`Username: ${result.user.username}`);
-        router.push('/signin')
+        router.push('/auth/signin')
     }
 
     if (status === 'loading') {
@@ -61,28 +62,27 @@ const Signup = () => {
     } else {
 
         return (
-            <div>
-                <form>
-                    <h1>Create an account</h1>
-                    <label>
-                        Email
-                        <input type="text" name="email" value={value.email} onChange={handleChange} />
-                    </label>
-                    <label>
-                        Username
-                        <input type="text" name="username" value={value.username} onChange={handleChange} />
-                    </label>
-                    <label>
-                        Password
-                        <input type="password" name="password" value={value.password} onChange={handleChange} />
-                    </label>
-                    <label>
-                        Confirm Password
-                        <input type="password" name="passwordConfirm" value={value.passwordConfirm} onChange={handleChange} />
-                    </label>
-                    <button onClick={handleSubmit}>Submit</button>
-                </form>
-            </div>
+            <main className={styles.signupContainer}>
+                <section className={styles.signup}>
+                    <form className={styles.signupForm}>
+                        <h1 className={styles.heading1}>Create an account</h1>
+                        <label>
+                            <input type="text" name="email" placeholder="Email" value={value.email} onChange={handleChange} />
+                        </label>
+                        <label>
+                            <input type="text" name="username" placeholder="Username" value={value.username} onChange={handleChange} />
+                        </label>
+                        <label>
+                            <input type="password" name="password" placeholder="password" value={value.password} onChange={handleChange} />
+                        </label>
+                        <label>
+                            <input type="password" name="passwordConfirm" placeholder="confirm password" value={value.passwordConfirm} onChange={handleChange} />
+                        </label>
+                        <button className={styles.button1} onClick={handleSubmit}>Submit</button>
+                    </form>
+                </section>
+            </main>
+
         )
     }
 }

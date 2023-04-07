@@ -295,6 +295,37 @@
   width: 10rem;
 }
 
+/* Login */
+.signupContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #22AB7A;
+}
+.signup {
+  background-color: #F7F7F7;
+  height: 100vh;
+  width: 80%;
+}
+
+.signupForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2rem;
+  max-height: 100%;
+  padding-top: 10%;
+  text-align: center;
+}
+
+.signupForm input {
+  padding: 1rem 10rem 1rem 1rem;
+  border-radius: 15px;
+  border: 1px solid rgb(19, 94, 67);
+}
+
 
 /* .description {
   display: inherit;
