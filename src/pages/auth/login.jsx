@@ -21,7 +21,7 @@ const Login = () => {
         <main className={styles.loginContainer}>
             <section className={styles.login}>
                 <h1 className={styles.heading1}>Login to Your Account</h1>
-                <span className={styles.googleIcon}>&nbsp;</span>
+                <span className={styles.googleIcon} onClick={() => signIn()}>&nbsp;</span>
                 <div className={styles.lineContainer}>
                     <hr className={styles.line}/>
                     <p>OR</p>
@@ -35,7 +35,7 @@ const Login = () => {
                 <div className={styles.newUserImg}>&nbsp;</div>
                 <h1 className={styles.heading1}>New User?</h1>
                 <p className={styles.paragraph1}>Sign up to start building your own digital cookbook!</p>
-                <button className={styles.button2}>Sign up</button>
+                <Link href='/auth/signup' className={styles.button2}>Sign up</Link>
             </section>
         </main>
     )

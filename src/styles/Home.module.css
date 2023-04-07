@@ -80,11 +80,7 @@
   align-items: flex-start;
   padding: 13px 99px;
   gap: 10px;
-  cursor: pointer;
-  
-  width: 282px;
-  height: 71px;
-  
+  cursor: pointer; 
   /* Soft Grey */
   
   background: #F7F7F7;
@@ -106,6 +102,8 @@
   /* identical to box height, or 37px */
   
   text-align: center;
+  text-decoration: none;
+  color: #000000;
 }
 
 /* Landing */
@@ -221,6 +219,15 @@
 
 
 /* Login */
+.googleIcon {
+  background: url("../images/google-color-svgrepo-com.svg");
+  background-size: cover;
+  background-position: center;
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+}
+
 .loginContainer {
   display: flex;
   height: 100vh;
@@ -281,13 +288,7 @@
   width: 10rem;
 }
 
-.googleIcon {
-  background: url("../images/google-color-svgrepo-com.svg");
-  background-size: cover;
-  background-position: center;
-  height: 50px;
-  width: 50px;
-}
+
 /* .description {
   display: inherit;
   justify-content: inherit;
