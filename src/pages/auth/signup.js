@@ -20,10 +20,9 @@ const Signup = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const username = event.target.parentElement.username.value;
-        const email = event.target.parentElement.email.value;
-        const password = event.target.parentElement.password.value;
-        const passwordConfirm = event.target.parentElement.passwordConfirm.value;
+
+        const { username, email, password, passwordConfirm } = value;
+
         if (password !== passwordConfirm) {
             alert("Password doesn't match Confirm Password");
             return;
