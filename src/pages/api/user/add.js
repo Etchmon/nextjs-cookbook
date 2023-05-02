@@ -29,6 +29,7 @@ export default async function addUser(req, res) {
 
         } catch (e) {
             console.log(e);
+            return res.status(500).json({ error: 'Failed to insert user into database' });
         }
     } else {
         return res.json('NOT A POST METHOD');
