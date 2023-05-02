@@ -14,6 +14,8 @@ const Signup = () => {
         passwordConfirm: ''
     })
 
+    const [errorMessage, setErrorMessage] = useState('');
+
     const handleChange = (event) => {
         setValue({ ...value, [event.target.name]: event.target.value })
     }
@@ -24,7 +26,7 @@ const Signup = () => {
         const { username, email, password, passwordConfirm } = value;
 
         if (password !== passwordConfirm) {
-            alert("Password doesn't match Confirm Password");
+            setErrorMessage("Password doesn't match Confirm Password");
             return;
         }
         const res = await fetch('/api/user/add', {
