@@ -1,34 +1,41 @@
 import React, { useState } from "react";
-import { useSession, signOut, getSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import { useRouter } from 'next/router';
 import styles from '../../styles/Home.module.css';
 
 const Signup = () => {
+    // Get session information using the useSession hook
     const { data: session, status } = useSession();
     const router = useRouter();
 
+    // Define state for form values and error message
     const [formValues, setFormValues] = useState({
         username: '',
         email: '',
         password: '',
         passwordConfirm: ''
     })
-
     const [errorMessage, setErrorMessage] = useState('');
 
+    // Function to update form values based on input changes
     const handleInputChange = (event) => {
         setFormValues({ ...formValues, [event.target.name]: event.target.value })
     }
 
+    // Function to handle form submission
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        // Destructure form values for easier use
         const { username, email, password, passwordConfirm } = formValues;
 
+        // If password and confirm password don't match, show an error message
         if (password !== passwordConfirm) {
             setErrorMessage("Password doesn't match Confirm Password");
             return;
         }
+
+        // Send POST request to add user using form values
         const res = await fetch('/api/user/add', {
             method: 'POST',
             headers: {
@@ -41,19 +48,21 @@ const Signup = () => {
             }),
         });
         const result = await res.json();
-        console.log(result);
+
+        // Display username in an alert and redirect to login page
         alert(`Username: ${result.user.username}`);
         router.push('/auth/login')
     }
 
+    // If session is still loading, show a loading message
     if (status === 'loading') {
         return (
             <p>loading...</p>
         )
     }
 
+    // If user is already signed in, show a message and option to sign out
     if (session) {
-        console.log(session);
         return (
             <div>
                 <p>You are already signed in to an account. Sign out of your account before creating a new one</p>
@@ -61,7 +70,7 @@ const Signup = () => {
             </div>
         )
     } else {
-
+        // Otherwise, show the sign up form
         return (
             <main className={styles.signupContainer}>
                 <section className={styles.signup}>
@@ -83,7 +92,6 @@ const Signup = () => {
                     </form>
                 </section>
             </main>
-
         )
     }
 }
