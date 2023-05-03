@@ -296,17 +296,21 @@
 }
 
 /* Login */
-.signupContainer{
+.signupContainer {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
   background-color: #22AB7A;
 }
+
 .signup {
   background-color: #F7F7F7;
   height: 100vh;
   width: 80%;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 10px;
 }
 
 .signupForm {
@@ -321,9 +325,17 @@
 }
 
 .signupForm input {
-  padding: 1rem 10rem 1rem 1rem;
+  padding: 1rem;
   border-radius: 15px;
   border: 1px solid rgb(19, 94, 67);
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+}
+
+.signupForm input:focus,
+.signupForm input:hover {
+  outline: none;
+  box-shadow: 0 0 5px rgba(19, 94, 67, 0.5);
 }
 
 

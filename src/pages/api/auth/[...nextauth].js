@@ -1,22 +1,51 @@
-import NextAuth from "next-auth"
-import GoogleProvider from "next-auth/providers/google"
-import clientPromise from "../../../../lib/mongodb"
+import NextAuth from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
+import clientPromise from "../../../../lib/mongodb";
 
-export const authOptions = {
-    // Configure one or more authentication providers
+const options = {
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         }),
-        // ...add more providers here
+        CredentialsProvider({
+            name: "Email and Password",
+            credentials: {
+                email: { label: "Email", type: "email" },
+                password: { label: "Password", type: "password" },
+            },
+            authorize: async (credentials) => {
+                try {
+                    const MongoClient = await clientPromise;
+                    const db = MongoClient.db('CBD');
+                    const collection = db.collection("Users");
+
+                    const userData = await collection.findOne({ email: credentials.email.toLowerCase() });
+                    if (userData === null) {
+                        return null;
+                    }
+
+                    if (credentials.password != userData.password) {
+                        return null;
+                    }
+
+
+                    return {
+                        id: userData._id,
+                        email: userData.email,
+                        username: userData.username,
+                    };
+                } catch (e) {
+                    console.log(e);
+                    return null;
+                }
+            },
+        }),
     ],
     callbacks: {
         async signIn({ user, account, profile, email, credentials }) {
-
-
             try {
-
                 const MongoClient = await clientPromise;
                 const db = MongoClient.db('CBD');
                 const collection = db.collection("Users");
@@ -29,7 +58,6 @@ export const authOptions = {
                 return true;
             } catch (e) {
                 console.log(e);
-
             }
         },
         session: async (session) => {
@@ -60,10 +88,10 @@ export const authOptions = {
                 }
             } catch (e) {
                 console.log(e);
-
             }
         }
     },
     secret: process.env.JWT_SECRET
 }
-export default NextAuth(authOptions)
+
+export default NextAuth(options);

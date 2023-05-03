@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from '../../styles/Home.module.css';
 import Link from 'next/link';
 import { useSession, signIn, signOut, getSession } from "next-auth/react";
@@ -7,6 +7,17 @@ const Login = () => {
     const {data: session} = useSession();
     let {status: auth} = useSession();
     console.log(auth);
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleLogin = () => {
+        signIn('credentials', {
+            email,
+            password,
+            callbackUrl: `${window.location.origin}/dashboard`
+        });
+    };
 
     if (session) {
         return (
@@ -27,9 +38,9 @@ const Login = () => {
                     <p>OR</p>
                     <hr className={styles.line}/>
                 </div>
-                <input type="text" name="email"/>
-                <input type='password' name="password"/>
-                <button className={styles.button1}>Enter</button>
+                <input type="text" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                <input type='password' name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <button className={styles.button1} onClick={handleLogin}>Enter</button>
             </section>
             <section className={styles.newUser}>
                 <div className={styles.newUserImg}>&nbsp;</div>
@@ -60,4 +71,3 @@ export const getServerSideProps = async (context) => {
         props: {...session}
     }
 }
-

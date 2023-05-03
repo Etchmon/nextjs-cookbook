@@ -7,7 +7,7 @@ const Signup = () => {
     const { data: session, status } = useSession();
     const router = useRouter();
 
-    const [value, setValue] = useState({
+    const [formValues, setFormValues] = useState({
         username: '',
         email: '',
         password: '',
@@ -16,14 +16,14 @@ const Signup = () => {
 
     const [errorMessage, setErrorMessage] = useState('');
 
-    const handleChange = (event) => {
-        setValue({ ...value, [event.target.name]: event.target.value })
+    const handleInputChange = (event) => {
+        setFormValues({ ...formValues, [event.target.name]: event.target.value })
     }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        const { username, email, password, passwordConfirm } = value;
+        const { username, email, password, passwordConfirm } = formValues;
 
         if (password !== passwordConfirm) {
             setErrorMessage("Password doesn't match Confirm Password");
@@ -68,16 +68,16 @@ const Signup = () => {
                     <form className={styles.signupForm}>
                         <h1 className={styles.heading1}>Create an account</h1>
                         <label>
-                            <input type="text" name="email" placeholder="Email" value={value.email} onChange={handleChange} />
+                            <input type="text" name="email" placeholder="Email" value={formValues.email} onChange={handleInputChange} />
                         </label>
                         <label>
-                            <input type="text" name="username" placeholder="Username" value={value.username} onChange={handleChange} />
+                            <input type="text" name="username" placeholder="Username" value={formValues.username} onChange={handleInputChange} />
                         </label>
                         <label>
-                            <input type="password" name="password" placeholder="password" value={value.password} onChange={handleChange} />
+                            <input type="password" name="password" placeholder="password" value={formValues.password} onChange={handleInputChange} />
                         </label>
                         <label>
-                            <input type="password" name="passwordConfirm" placeholder="confirm password" value={value.passwordConfirm} onChange={handleChange} />
+                            <input type="password" name="passwordConfirm" placeholder="confirm password" value={formValues.passwordConfirm} onChange={handleInputChange} />
                         </label>
                         <button className={styles.button1} onClick={handleSubmit}>Submit</button>
                     </form>
