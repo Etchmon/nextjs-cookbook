@@ -5,6 +5,7 @@ import clientPromise from '../../lib/mongodb';
 import { useSession, signIn, signOut, getSession } from "next-auth/react";
 import Link from 'next/link';
 
+
 /* eslint react/no-string-refs: 0 */
 
 export default function Home({ isConnected }) {

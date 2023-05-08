@@ -101,7 +101,7 @@ const options = {
             } catch (e) {
                 console.log(e);
             }
-        }
+        },
     },
     secret: process.env.JWT_SECRET
 }

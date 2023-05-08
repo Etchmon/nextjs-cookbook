@@ -4,13 +4,16 @@ import Link from 'next/link';
 import { useSession, signIn, signOut, getSession } from "next-auth/react";
 
 const Login = () => {
-    const {data: session} = useSession();
-    let {status: auth} = useSession();
+    // Get the current session and authentication status
+    const { data: session } = useSession();
+    let { status: auth } = useSession();
     console.log(auth);
 
+    // State for email and password inputs
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    // Function to handle user login
     const handleLogin = () => {
         signIn('credentials', {
             email,
@@ -19,20 +22,18 @@ const Login = () => {
         });
     };
 
-    if (session) {
-        return (
-            <div>
-                <p>Welcome {session.user.username}</p>
-                <button onClick={()=> signOut()}>Sign Out</button>
-            </div>
-        )
-    }
+    const handleGoogleLogin = () => {
+        signIn('google', {
+            callbackUrl: `${window.location.origin}/dashboard`
+        });
+    };
 
+    // Otherwise, display the login form
     return (
         <main className={styles.loginContainer}>
             <section className={styles.login}>
                 <h1 className={styles.heading1}>Login to Your Account</h1>
-                <span className={styles.googleIcon} onClick={() => signIn()}>&nbsp;</span>
+                <span className={styles.googleIcon} onClick={handleGoogleLogin}>&nbsp;</span>
                 <div className={styles.lineContainer}>
                     <hr className={styles.line}/>
                     <p>OR</p>
@@ -55,10 +56,11 @@ const Login = () => {
 
 export default Login;
 
+// Server-side function to get the current session
 export const getServerSideProps = async (context) => {
     const session = await getSession(context);
     
-
+    // If the user is already logged in, redirect to the homepage
     if(session) {
         return {
             redirect: {
@@ -67,6 +69,7 @@ export const getServerSideProps = async (context) => {
         }
     }
 
+    // Otherwise, return the session as props
     return {
         props: {...session}
     }
