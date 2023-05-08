@@ -194,7 +194,6 @@
 .landingCardPic {
   min-width: 50%;
 
-  background: url('../images/jason-jarrach-7hO3yb3EzcY-unsplash.jpg');
   border-radius: 0 15px 15px 0;
   background-size: cover;
   background-position: center;
@@ -268,7 +267,6 @@
 }
 
 .newUserImg {
-  background: url('../images/jason-jarrach-7hO3yb3EzcY-unsplash.jpg');
   background-size: cover;
   background-position: center;
   z-index: -100;
@@ -337,4 +335,6 @@
   outline: none;
   box-shadow: 0 0 5px rgba(19, 94, 67, 0.5);
 }
+
+
 
