@@ -19,7 +19,7 @@ const Navbar = () => {
                 </div>
             ) : (
                 <div className="flex items-center space-x-4">
-                    <a className="text-green-500 hover:text-green-200">{session.user.username}</a>
+                    <Link href="/dashboard" className="text-green-500 hover:text-green-200">{session.user.username}</Link>
                     <button className="bg-green-500 text-gray-300 py-2 px-4 rounded hover:bg-green-600" onClick={() => signOut()}>
                         Sign out
                     </button>

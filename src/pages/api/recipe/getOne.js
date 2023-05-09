@@ -10,6 +10,7 @@ import { ObjectId } from 'mongodb';
 
 export default async function oneRecipe(req, res) {
     const session = await getSession({ req });
+    console.log(req.query.recipeId)
 
     if (req.method === 'GET') {
         // Process a GET request
@@ -17,7 +18,7 @@ export default async function oneRecipe(req, res) {
             const MongoClient = await clientPromise;
             const db = await MongoClient.db("CBD");
             const collection = await db.collection("Recipes");
-            const results = await collection.find({ id: ObjectId(req.body.recipeId) });
+            const results = await collection.find({ _id: ObjectId(req.query.recipeId) }).toArray();
             res.status(200).json(results);
         } catch (e) {
             console.log(e);
