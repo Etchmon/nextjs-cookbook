@@ -35,7 +35,7 @@ const Signup = () => {
         const result = await res.json();
 
         alert(`Username: ${result.user.username}`);
-        router.push('/auth/login');
+        router.push('/login');
     };
 
     if (status === 'loading') {

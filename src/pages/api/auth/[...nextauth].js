@@ -40,6 +40,7 @@ const options = {
                         id: userData._id,
                         email: userData.email,
                         username: userData.username,
+                        cookbooks: userData.cookbooks
                     };
                 } catch (e) {
                     console.log(e);

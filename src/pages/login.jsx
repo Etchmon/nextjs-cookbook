@@ -79,7 +79,7 @@ const Login = () => {
                 <div className="bg-green-600 w-24 h-24 mx-auto mb-4 rounded-full">&nbsp;</div>
                 <h1 className="text-2xl font-bold text-green-200 mb-2">New User?</h1>
                 <p className="text-green-200 mb-6">Sign up to start building your own digital cookbook!</p>
-                <Link href='/auth/signup' className="bg-green-600 text-white font-bold py-2 px-4 rounded">
+                <Link href='/signup' className="bg-green-600 text-white font-bold py-2 px-4 rounded">
                     Sign up
                 </Link>
             </section>
