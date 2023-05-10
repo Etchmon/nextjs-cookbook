@@ -14,3 +14,8 @@
   background-color: #888;
   border-radius: 5px;
 }
+
+.max-h-half-screen {
+  max-height: calc(50vh - 4rem);
+  /* subtracting 4rem for the top and bottom margins */
+}
