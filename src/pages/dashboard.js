@@ -1,38 +1,85 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { signOut, getSession, useSession } from "next-auth/react";
+import Dash from '../components/dash';
+import RecipeList from '../components/recipes';
+import Footer from '../components/footer';
 
 const Dashboard = () => {
     const { data: session, status } = useSession();
+    const [activeComponent, setActiveComponent] = useState('dashboard');
+    const [recipesFull, setRecipesFull] = useState([]);
 
-    if (status === 'loading') {
+    useEffect(() => {
+        async function fetchFullRecipes() {
+            const results = await fetch('/api/recipe/getUserRecipes');
+            const resultsJson = await results.json();
+            setRecipesFull(resultsJson);
+            console.log(resultsJson);
+        }
+
+        fetchFullRecipes();
+    }, []);
+
+
+    if (!session) {
         return <div>Loading...</div>;
     }
+
+
 
     const user = session.user;
     const recipes = user.cookbooks.allRecipes;
     const cookbooks = user.cookbooks.myBooks;
     console.log(session)
+
+    const renderComponent = () => {
+        switch (activeComponent) {
+            case 'dashboard':
+                return;
+            case 'recipes':
+                return <RecipeList recipes={recipesFull} />;
+            case 'cookbooks':
+                return <RecipeAdd />;
+            default:
+                return null;
+        }
+    };
+
+
+
     return (
-        <div className="flex flex-col sm:flex-row min-h-screen bg-gray-800 text-gray-300">
+        <div className="flex flex-col sm:flex-row h-screen bg-gray-800 text-gray-300">
             {/* Sidebar */}
-            <div className="bg-gray-900 w-full sm:w-1/4 sm:sticky sm:top-0">
+            <div className="bg-gray-900 w-full sm:w-1/4 sm:sticky sm:top-0 flex-none">
                 <h2 className="text-lg font-semibold p-4">Menu</h2>
                 <ul className="p-4 space-y-2">
                     <li>
-                        <Link href="/dashboard" className="block py-2 px-4 hover:bg-green-600 rounded">
+                        <button
+                            className={`block py-2 px-4 hover:bg-green-600 rounded ${activeComponent === 'dashboard' ? 'bg-green-600' : ''
+                                }`}
+                            onClick={() => setActiveComponent('dashboard')}
+                        >
                             Dashboard
-                        </Link>
+                        </button>
                     </li>
                     <li>
-                        <Link href="/recipe-add" className="block py-2 px-4 hover:bg-green-600 rounded">
+                        <button
+                            className={`block py-2 px-4 hover:bg-green-600 rounded ${activeComponent === 'recipes' ? 'bg-green-600' : ''
+                                }`}
+                            onClick={() => setActiveComponent('recipes')}
+                        >
                             Recipes
-                        </Link>
+                        </button>
                     </li>
                     <li>
-                        <Link href="/cookbook-add" className="block py-2 px-4 hover:bg-green-600 rounded">
+                        <button
+                            className={`block py-2 px-4 hover:bg-green-600 rounded ${activeComponent === 'cookbookAdd' ? 'bg-green-600' : ''
+                                }`}
+                            onClick={() => setActiveComponent('cookbookAdd')}
+                        >
                             CookBooks
-                        </Link>
+                        </button>
                     </li>
                     <li>
                         <Link href="/" className="block py-2 px-4 hover:bg-green-600 rounded">
@@ -47,29 +94,13 @@ const Dashboard = () => {
                 </ul>
             </div>
             {/* Content */}
-            <div className="bg-gray-100 p-8 rounded shadow flex-1">
-                <h1 className="text-4xl font-bold mb-8">Welcome, {session.user.username}!</h1>
-                <p className="text-xl mb-8">We hope you're having a great day.</p>
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                    <div className="bg-green-200 p-4 rounded-lg shadow hover:bg-green-100">
-                        <h2 className="text-lg font-semibold mb-2">Recipes</h2>
-                        <p className="text-green-800">Total: {recipes.length}</p>
-                        <p className="text-green-800">New today: 20</p>
-                    </div>
-                    <div className="bg-green-200 p-4 rounded-lg shadow hover:bg-green-100">
-                        <h2 className="text-lg font-semibold mb-2">Cookbooks</h2>
-                        <p className="text-green-800">Total: {cookbooks.length}</p>
-                        <p className="text-green-800">New today: 10</p>
-                    </div>
-                    <div className="bg-green-200 p-4 rounded-lg shadow hover:bg-green-100">
-                        <h2 className="text-lg font-semibold mb-2">Total</h2>
-                        <p className="text-green-800">Total: {(recipes.length + cookbooks.length)}</p>
-                        <p className="text-green-800">New today: $200</p>
-                    </div>
-                    {/* Add more items as needed */}
-                </div>
+            <div className="container px-4 py-6 flex1 overflow-hidden mb-2">
+                <Dash session={session} recipes={recipes} cookbooks={cookbooks} />
+                {renderComponent()}
             </div>
         </div>
+
+
     );
 }
 

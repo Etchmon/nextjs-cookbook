@@ -1,110 +1,16 @@
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-del,
-dfn,
-em,
-font,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend {
-  vertical-align: baseline;
-  font-family: inherit;
-  font-weight: inherit;
-  font-style: inherit;
-  font-size: 100%;
-  outline: 0;
-  padding: 0;
-  margin: 0;
-  border: 0;
+/* Set the width and height of the scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
 
-/* remember to define focus styles! */
-:focus {
-  outline: 0;
+/* Set the color of the scrollbar track */
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
 }
 
-body {
-  background: white;
-  line-height: 1;
-  color: black;
-}
-
-ol,
-ul {
-  list-style: none;
-}
-
-/* tables still need cellspacing="0" in the markup */
-table {
-  border-collapse: separate;
-  border-spacing: 0;
-}
-
-caption,
-th,
-td {
-  font-weight: normal;
-  text-align: left;
-}
-
-/* remove possible quote marks (") from <q> & <blockquote> */
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-  content: "";
-}
-
-blockquote,
-q {
-  quotes: "" "";
+/* Set the color and shape of the scrollbar thumb */
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 5px;
 }

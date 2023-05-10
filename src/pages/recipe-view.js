@@ -26,13 +26,13 @@ const RecipeDetail = () => {
         <div className="bg-gray-900 min-h-screen">
             <Navbar />
             <div className="container mx-auto px-4 py-6">
-                <h1 className="text-4xl font-bold mb-4 text-green-500">{recipe.title}</h1>
+                <h1 className="text-4xl font-bold mb-4 mt-20 text-green-500">{recipe.title}</h1>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="bg-gray-800 p-4 rounded-md shadow-md">
                         <h2 className="text-2xl font-bold mb-2 text-green-500">Ingredients</h2>
                         <ul>
                             {recipe.ingredients.map((ingredient) => (
-                                <li key={ingredient} className="mb-2 text-gray-500">
+                                <li key={ingredient} className="mb-2 text-gray-300">
                                     {ingredient}
                                 </li>
                             ))}
@@ -51,6 +51,7 @@ const RecipeDetail = () => {
                 </div>
             </div>
         </div>
+
     );
 };
 
