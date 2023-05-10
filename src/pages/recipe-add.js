@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSession, signIn, signOut, getSession } from "next-auth/react";
 import { useRouter } from 'next/router';
+import Navbar from '../components/navbar';
 
 const RecipeAdd = () => {
     const { data: session, status } = useSession();
@@ -72,6 +73,7 @@ const RecipeAdd = () => {
 
         return (
             <div className="flex flex-col items-center justify-center min-h-screen bg-gray-800 text-gray-300">
+                <Navbar />
                 <form className="flex flex-col w-full max-w-md p-4 rounded-lg shadow-lg">
                     <h1 className="text-2xl font-bold mb-4">Create a Recipe</h1>
                     <label className="flex flex-col mb-4">

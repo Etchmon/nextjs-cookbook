@@ -5,7 +5,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import Link from 'next/link';
 import clientPromise from '../../lib/mongodb';
 import Navbar from '../components/navbar'
-import Image from '../images/chef.jpg'
+import Loading from '../components/loading';
 
 export default function Home() {
   // State hook to keep track of the list of restaurants
@@ -26,7 +26,7 @@ export default function Home() {
 
   // Show loading indicator while the session is being checked
   if (status === 'loading') {
-    return <p>Loading...</p>;
+    return <Loading />
   }
 
   // Render the page
