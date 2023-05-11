@@ -19,11 +19,23 @@ const RecipeList = ({ recipes }) => {
                 {recipes.map((recipe) => (
                     <div
                         key={recipe._id}
-                        className="bg-green-200 p-4 rounded-lg shadow hover:bg-green-100 cursor-pointer"
+                        className="bg-green-200 p-4 rounded-lg shadow hover:bg-green-300 cursor-pointer"
                         onClick={() => handleClick(recipe._id)}
                     >
-                        <h2 className="text-green-800 font-semibold mb-2">{recipe.title}</h2>
-                        <p className="text-green-800">{recipe.description}</p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <h2 className="text-green-800 font-semibold mb-2">{recipe.title}</h2>
+                                <p className="text-green-800">{recipe.description}</p>
+                            </div>
+                            <div>
+                                <h3 className="text-green-800 font-semibold mb-2">Ingredients:</h3>
+                                <ul className="list-disc pl-6">
+                                    {recipe.ingredients.map((ingredient, index) => (
+                                        <li key={index} className="text-green-800">{ingredient}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 ))}
             </div>
