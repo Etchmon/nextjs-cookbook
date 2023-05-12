@@ -21,7 +21,7 @@ export default async function cookbookRecipes(req, res) {
             const db = await MongoClient.db("CBD");
             const collection = await db.collection("Cookbooks");
             const recipeCollection = await db.collection("Recipes");
-            const cookbook = await collection.findOne({ _id: ObjectID(req.body.cbId) });
+            const cookbook = await collection.findOne({ _id: ObjectID(req.query.cookbookId) });
             const cookbookRecipes = cookbook.recipes;
 
             for (const recipe of cookbookRecipes) {

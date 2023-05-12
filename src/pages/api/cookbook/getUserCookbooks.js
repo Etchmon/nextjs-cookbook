@@ -8,31 +8,32 @@ import { ObjectID } from 'bson';
  * @param {import('next').NextApiResponse} res 
  */
 
-export default async function myRecipes(req, res) {
+export default async function myCookbooks(req, res) {
     const session = await getSession({ req });
 
     if (req.method === 'GET') {
         // Process a GET request
-        const myRecipes = [];
-        const sessionRecipes = session.user.cookbooks.allRecipes;
+        const myCookbooks = [];
+        const sessionCookbooks = session.user.cookbooks.myBooks;
+
 
         try {
 
             const MongoClient = await clientPromise;
             const db = await MongoClient.db("CBD");
-            const collection = await db.collection("Recipes");
+            const collection = await db.collection("Cookbooks");
 
-            for (const recipe of sessionRecipes) {
-                const result = await collection.findOne({ _id: ObjectID(recipe) });
+            for (const cookbook of sessionCookbooks) {
+                const result = await collection.findOne({ _id: ObjectID(cookbook) });
                 if (result === null) {
                     console.log('null');
                 } else {
-                    myRecipes.push(result);
+                    myCookbooks.push(result);
                 }
 
             };
 
-            res.status(200).json(myRecipes);
+            res.status(200).json(myCookbooks);
 
         } catch (e) {
             console.log(e);

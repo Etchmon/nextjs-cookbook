@@ -3,22 +3,33 @@ import Link from 'next/link';
 import { signOut, getSession, useSession } from "next-auth/react";
 import Dash from '../components/dash';
 import RecipeList from '../components/recipes';
+import CookbooksList from '../components/cookbooks';
 import Footer from '../components/footer';
 
 const Dashboard = () => {
     const { data: session, status } = useSession();
     const [activeComponent, setActiveComponent] = useState('dashboard');
     const [recipesFull, setRecipesFull] = useState([]);
+    const [cookbooksFull, setCookbooksFull] = useState([]);
 
     useEffect(() => {
         async function fetchFullRecipes() {
             const results = await fetch('/api/recipe/getUserRecipes');
             const resultsJson = await results.json();
             setRecipesFull(resultsJson);
-            console.log(resultsJson);
-        }
+        };
 
         fetchFullRecipes();
+    }, []);
+
+    useEffect(() => {
+        async function fetchFullCookbooks() {
+            const results = await fetch('/api/cookbook/getUserCookbooks');
+            const resultsJson = await results.json();
+            setCookbooksFull(resultsJson);
+        };
+
+        fetchFullCookbooks();
     }, []);
 
 
@@ -31,7 +42,6 @@ const Dashboard = () => {
     const user = session.user;
     const recipes = user.cookbooks.allRecipes;
     const cookbooks = user.cookbooks.myBooks;
-    console.log(session)
 
     const renderComponent = () => {
         switch (activeComponent) {
@@ -40,7 +50,7 @@ const Dashboard = () => {
             case 'recipes':
                 return <RecipeList recipes={recipesFull} />;
             case 'cookbooks':
-                return <RecipeAdd />;
+                return <CookbooksList cookbooks={cookbooksFull} />;
             default:
                 return null;
         }
@@ -74,9 +84,9 @@ const Dashboard = () => {
                     </li>
                     <li>
                         <button
-                            className={`block py-2 px-4 hover:bg-green-600 rounded ${activeComponent === 'cookbookAdd' ? 'bg-green-600' : ''
+                            className={`block py-2 px-4 hover:bg-green-600 rounded ${activeComponent === 'cookbooks' ? 'bg-green-600' : ''
                                 }`}
-                            onClick={() => setActiveComponent('cookbookAdd')}
+                            onClick={() => setActiveComponent('cookbooks')}
                         >
                             CookBooks
                         </button>
