@@ -15,7 +15,7 @@ const CookbookList = ({ cookbooks }) => {
 
     return (
         <div className="bg-gray-100 p-8 rounded shadow h-full">
-            <div className="grid grid-cols-1 gap-4 mb-auto flex-1 h-full overflow-y-auto pb-80">
+            <div className="grid grid-cols-4 gap-4 mb-auto flex-1 h-full overflow-y-auto pb-80">
                 {cookbooks.map((cookbook) => (
                     <div
                         key={cookbook._id}

@@ -1,43 +1,34 @@
-import clientPromise from '../../../../lib/mongodb';
+import clientPromise from "../../../../lib/mongodb";
 import { getSession } from "next-auth/react";
-import { ObjectID } from 'bson';
-
+import { ObjectID } from "bson";
 
 /**
- * @param {import('next').NextApiRequest} req 
- * @param {import('next').NextApiResponse} res 
+ * @param {import('next').NextApiRequest} req
+ * @param {import('next').NextApiResponse} res
  */
 
 export default async function myRecipes(req, res) {
     const session = await getSession({ req });
 
-    if (req.method === 'GET') {
+    if (req.method === "GET") {
         // Process a GET request
-        const myRecipes = [];
         const sessionRecipes = session.user.cookbooks.allRecipes;
 
         try {
-
             const MongoClient = await clientPromise;
             const db = await MongoClient.db("CBD");
             const collection = await db.collection("Recipes");
 
-            for (const recipe of sessionRecipes) {
-                const result = await collection.findOne({ _id: ObjectID(recipe) });
-                if (result === null) {
-                    console.log('null');
-                } else {
-                    myRecipes.push(result);
-                }
+            const promises = sessionRecipes.map((recipe) =>
+                collection.findOne({ _id: ObjectID(recipe) })
+            );
 
-            };
+            const results = await Promise.all(promises);
+            const myRecipes = results.filter((result) => result !== null);
 
             res.status(200).json(myRecipes);
-
         } catch (e) {
             console.log(e);
-        };
-
-
+        }
     }
 }

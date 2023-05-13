@@ -10,7 +10,6 @@ import { ObjectId } from 'mongodb';
 
 export default async function oneRecipe(req, res) {
     const session = await getSession({ req });
-    console.log(req.query.recipeId)
 
     if (req.method === 'GET') {
         // Process a GET request

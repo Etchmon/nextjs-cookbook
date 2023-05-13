@@ -8,7 +8,6 @@ const Login = () => {
     // Get the current session and authentication status
     const { data: session } = useSession();
     let { status: auth } = useSession();
-    console.log(auth);
     const router = useRouter();
 
     // State for email and password inputs
