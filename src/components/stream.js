@@ -1,8 +1,7 @@
 import React from 'react';
 import RecipeCard from './recipeCard';
 
-
-const RecipeList = ({ recipes }) => {
+const Stream = ({ recipes }) => {
 
     return (
         <div className="bg-gray-100 p-8 rounded shadow h-full">
@@ -15,4 +14,4 @@ const RecipeList = ({ recipes }) => {
     );
 };
 
-export default RecipeList;
+export default Stream;

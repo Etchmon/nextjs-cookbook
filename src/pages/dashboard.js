@@ -4,13 +4,14 @@ import { signOut, getSession, useSession } from "next-auth/react";
 import Dash from '../components/dash';
 import RecipeList from '../components/recipes';
 import CookbooksList from '../components/cookbooks';
-import Footer from '../components/footer';
+import Stream from '../components/stream';
 
 const Dashboard = () => {
     const { data: session, status } = useSession();
     const [activeComponent, setActiveComponent] = useState('dashboard');
     const [recipesFull, setRecipesFull] = useState([]);
     const [cookbooksFull, setCookbooksFull] = useState([]);
+    const [streamRecipes, setStreamRecipes] = useState([]);
 
     useEffect(() => {
         async function fetchFullRecipes() {
@@ -32,6 +33,16 @@ const Dashboard = () => {
         fetchFullCookbooks();
     }, []);
 
+    useEffect(() => {
+        async function fetchStreamRecipes() {
+            const results = await fetch('/api/recipe/getAll');
+            const resultsJson = await results.json();
+            setStreamRecipes(resultsJson);
+        };
+
+        fetchStreamRecipes();
+    }, []);
+
 
     if (!session) {
         return <div>Loading...</div>;
@@ -46,7 +57,7 @@ const Dashboard = () => {
     const renderComponent = () => {
         switch (activeComponent) {
             case 'dashboard':
-                return;
+                return <Stream recipes={streamRecipes} />;
             case 'recipes':
                 return <RecipeList recipes={recipesFull} />;
             case 'cookbooks':

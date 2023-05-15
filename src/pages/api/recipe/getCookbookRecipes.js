@@ -10,35 +10,29 @@ import { ObjectID } from 'bson';
  */
 
 export default async function cookbookRecipes(req, res) {
-    const session = await getSession({ req });
-
     if (req.method === 'GET') {
-        // Process a GET request
-        const recipes = [];
         try {
-            // Access DB session and set collection variables
             const MongoClient = await clientPromise;
             const db = await MongoClient.db("CBD");
             const collection = await db.collection("Cookbooks");
             const recipeCollection = await db.collection("Recipes");
-            const cookbook = await collection.findOne({ _id: ObjectID(req.query.cookbookId) });
-            const cookbookRecipes = cookbook.recipes;
 
-            for (const recipe of cookbookRecipes) {
-                const result = await recipeCollection.findOne({ _id: ObjectID(recipe) });
-                if (result === null) {
-                    console.log('null');
-                } else {
-                    recipes.push(result);
-                }
+            const cookbookId = req.query.cookbookId;
+            const cookbook = await collection.findOne({ _id: ObjectID(cookbookId) });
 
-            };
+            const uniqueRecipeIds = [...new Set(cookbook.recipes)];
+            const recipeIds = uniqueRecipeIds.map(ObjectID);
+
+            const recipeQueries = recipeIds.map((recipeId) => (
+                recipeCollection.findOne({ _id: recipeId })
+            ));
+
+            const recipes = await Promise.all(recipeQueries);
 
             res.status(200).json(recipes);
-
-        } catch (e) {
-            console.log(e);
-        };
-
+        } catch (error) {
+            console.error('Error:', error);
+            res.status(500).json({ error: 'An error occurred while retrieving recipes' });
+        }
     }
 }

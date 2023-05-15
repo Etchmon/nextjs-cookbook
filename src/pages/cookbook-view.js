@@ -47,8 +47,9 @@ const CookbookDetail = () => {
                 <h1 className="text-4xl font-bold mb-4 mt-20 text-green-500">{cookbook.title}</h1>
                 <div className="grid grid-cols-1 gap-4 mb-auto flex-1 h-full overflow-y-auto pb-80">
                     {recipes.map((recipe) => (
+                        console.log(recipe),
                         <div
-                            key={recipe._id}
+                            key={recipe.recipeId}
                             className="bg-green-200 p-4 rounded-lg shadow hover:bg-green-300 cursor-pointer"
                             onClick={() => handleClick(recipe._id)}
                         >
