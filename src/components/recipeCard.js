@@ -2,8 +2,36 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 
-const RecipeCard = ({ recipe }) => {
+const RecipeCard = ({ recipe, showAddButton }) => {
     const router = useRouter();
+
+    const handleAdd = async (recipeId) => {
+        try {
+            const response = await fetch('/api/recipe/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(recipe),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                // Handle success response if needed
+            } else {
+                // Handle error response if needed
+                console.error('Failed to add recipe:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+
+        // Navigate to recipe view page
+        router.push({
+            pathname: '/recipe-view',
+            query: { recipeId },
+        });
+    };
 
     const handleClick = (recipeId) => {
         router.push({
@@ -48,6 +76,12 @@ const RecipeCard = ({ recipe }) => {
             >
                 View Recipe
             </button>
+            {/* Add Button */}
+            {showAddButton && (
+                <button className="bg-red-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-green-600 transition-colors duration-300" onClick={() => handleAdd(recipe._id)}>
+                    Add
+                </button>
+            )}
         </div>
     );
 };
@@ -60,6 +94,10 @@ RecipeCard.propTypes = {
         description: PropTypes.string.isRequired,
         ingredients: PropTypes.arrayOf(PropTypes.string).isRequired,
     }).isRequired,
+};
+
+RecipeCard.defaultProps = {
+    showAddButton: true,
 };
 
 export default RecipeCard;

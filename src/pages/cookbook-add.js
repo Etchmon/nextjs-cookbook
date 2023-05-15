@@ -64,7 +64,7 @@ const CookbookAdd = () => {
         });
         const result = await res.json();
         console.log(result);
-        router.push('/api/cookbook/getAll')
+        router.push('/dashboard')
     }
 
     const addToBook = (event) => {

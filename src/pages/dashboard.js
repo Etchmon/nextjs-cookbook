@@ -57,9 +57,9 @@ const Dashboard = () => {
     const renderComponent = () => {
         switch (activeComponent) {
             case 'dashboard':
-                return <Stream recipes={streamRecipes} />;
+                return <Stream recipes={streamRecipes} showAddButton={true} />;
             case 'recipes':
-                return <RecipeList recipes={recipesFull} />;
+                return <RecipeList recipes={recipesFull} showAddButton={false} />;
             case 'cookbooks':
                 return <CookbooksList cookbooks={cookbooksFull} />;
             default:
