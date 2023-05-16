@@ -6,7 +6,7 @@
 
 /* Set the color of the scrollbar track */
 ::-webkit-scrollbar-track {
-  background-color: #f1f1f1;
+  background-color: transparent;
 }
 
 /* Set the color and shape of the scrollbar thumb */
@@ -19,3 +19,5 @@
   max-height: calc(50vh - 4rem);
   /* subtracting 4rem for the top and bottom margins */
 }
+
+

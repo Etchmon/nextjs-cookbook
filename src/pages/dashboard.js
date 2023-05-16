@@ -23,34 +23,19 @@ const Dashboard = () => {
 
 
     useEffect(() => {
-        async function fetchFullRecipes() {
-            const results = await fetch('/api/recipe/getUserRecipes');
-            const resultsJson = await results.json();
-            setRecipesFull(resultsJson);
+        const fetchUserData = async () => {
+            const [recipeResponse, cookbookResponse, streamResponse] = await Promise.all([
+                fetch('/api/recipe/getUserRecipes').then((res) => res.json()),
+                fetch('/api/cookbook/getUserCookbooks').then((res) => res.json()),
+                fetch('/api/recipe/getAll').then((res) => res.json()),
+            ]);
+
+            setRecipesFull(recipeResponse);
+            setCookbooksFull(cookbookResponse);
+            setStreamRecipes(shuffleArray(streamResponse));
         };
 
-        fetchFullRecipes();
-    }, []);
-
-    useEffect(() => {
-        async function fetchFullCookbooks() {
-            const results = await fetch('/api/cookbook/getUserCookbooks');
-            const resultsJson = await results.json();
-            setCookbooksFull(resultsJson);
-        };
-
-        fetchFullCookbooks();
-    }, []);
-
-    useEffect(() => {
-        async function fetchStreamRecipes() {
-            const results = await fetch('/api/recipe/getAll');
-            const resultsJson = await results.json();
-            const shuffledArray = shuffleArray(resultsJson)
-            setStreamRecipes(shuffledArray);
-        };
-
-        fetchStreamRecipes();
+        fetchUserData();
     }, []);
 
 
@@ -81,8 +66,7 @@ const Dashboard = () => {
                 <ul className="p-4 space-y-2">
                     <li>
                         <button
-                            className={`block py-2 px-4 hover:bg-green-600 rounded ${activeComponent === 'dashboard' ? 'bg-green-600' : ''
-                                }`}
+                            className={`block py-2 px-4 hover:bg-green-600 rounded ${activeComponent === 'dashboard' ? 'bg-green-600' : ''}`}
                             onClick={() => setActiveComponent('dashboard')}
                         >
                             Dashboard
@@ -90,8 +74,7 @@ const Dashboard = () => {
                     </li>
                     <li>
                         <button
-                            className={`block py-2 px-4 hover:bg-green-600 rounded ${activeComponent === 'recipes' ? 'bg-green-600' : ''
-                                }`}
+                            className={`block py-2 px-4 hover:bg-green-600 rounded ${activeComponent === 'recipes' ? 'bg-green-600' : ''}`}
                             onClick={() => setActiveComponent('recipes')}
                         >
                             Recipes
@@ -99,8 +82,7 @@ const Dashboard = () => {
                     </li>
                     <li>
                         <button
-                            className={`block py-2 px-4 hover:bg-green-600 rounded ${activeComponent === 'cookbooks' ? 'bg-green-600' : ''
-                                }`}
+                            className={`block py-2 px-4 hover:bg-green-600 rounded ${activeComponent === 'cookbooks' ? 'bg-green-600' : ''}`}
                             onClick={() => setActiveComponent('cookbooks')}
                         >
                             CookBooks
@@ -124,6 +106,7 @@ const Dashboard = () => {
                 {renderComponent()}
             </div>
         </div>
+
 
 
     );

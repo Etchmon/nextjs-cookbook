@@ -11,7 +11,6 @@ const RecipeDetail = () => {
             const recipeId = router.query.recipeId; // Replace with your actual recipe ID
             const response = await fetch(`/api/recipe/getOne?recipeId=${recipeId}`);
             const data = await response.json();
-            console.log(data[0])
             setRecipe(data[0]);
         };
 

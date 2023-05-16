@@ -11,20 +11,17 @@ const DashboardContent = ({ session, recipes, cookbooks }) => {
                     <div className="bg-green-200 p-4 rounded-lg shadow hover:bg-green-300 cursor-pointer">
                         <h2 className="text-green-800 font-semibold mb-2">Create Recipe</h2>
                         <p className="text-green-800">Total: {recipes.length}</p>
-                        <p className="text-green-800">New today: 20</p>
                     </div>
                 </Link>
                 <Link href="/cookbook-add">
                     <div className="bg-green-200 p-4 rounded-lg shadow hover:bg-green-300 cursor-pointer">
                         <h2 className="text-green-800 font-semibold mb-2">Create Cookbook</h2>
                         <p className="text-green-800">Total: {cookbooks.length}</p>
-                        <p className="text-green-800">New today: 10</p>
                     </div>
                 </Link>
                 <div className="bg-green-200 p-4 rounded-lg shadow hover:bg-green-300 cursor-pointer">
                     <h2 className="text-green-800 font-semibold mb-2">Total</h2>
                     <p className="text-green-800">Total: {(recipes.length + cookbooks.length)}</p>
-                    <p className="text-green-800">New today: $200</p>
                 </div>
                 {/* Add more items as needed */}
             </div>
