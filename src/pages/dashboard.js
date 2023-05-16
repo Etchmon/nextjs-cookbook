@@ -13,6 +13,15 @@ const Dashboard = () => {
     const [cookbooksFull, setCookbooksFull] = useState([]);
     const [streamRecipes, setStreamRecipes] = useState([]);
 
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+
     useEffect(() => {
         async function fetchFullRecipes() {
             const results = await fetch('/api/recipe/getUserRecipes');
@@ -37,7 +46,8 @@ const Dashboard = () => {
         async function fetchStreamRecipes() {
             const results = await fetch('/api/recipe/getAll');
             const resultsJson = await results.json();
-            setStreamRecipes(resultsJson);
+            const shuffledArray = shuffleArray(resultsJson)
+            setStreamRecipes(shuffledArray);
         };
 
         fetchStreamRecipes();
@@ -47,12 +57,6 @@ const Dashboard = () => {
     if (!session) {
         return <div>Loading...</div>;
     }
-
-
-
-    const user = session.user;
-    const recipes = user.cookbooks.allRecipes;
-    const cookbooks = user.cookbooks.myBooks;
 
     const renderComponent = () => {
         switch (activeComponent) {

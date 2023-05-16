@@ -41,7 +41,7 @@ const RecipeCard = ({ recipe, showAddButton }) => {
     };
 
     return (
-        <div className="flex flex-col justify-center items-center bg-green-200 shadow-md rounded-lg p-4 hover:shadow-lg transition-shadow duration-300">
+        <div className="flex flex-col justify-center items-center bg-gray-100 shadow-md rounded-lg p-4 hover:shadow-lg transition-shadow duration-300">
             {/* Image */}
             {recipe.image && (
                 <div className="aspect-w-3 aspect-h-2 mb-4">
@@ -61,27 +61,30 @@ const RecipeCard = ({ recipe, showAddButton }) => {
 
             {/* Ingredients */}
             <div className="border-t border-gray-200 pt-4">
-                <h3 className="text-green-500 text-lg font-semibold mb-2">Ingredients:</h3>
+                <h3 className="text-gray-800 text-lg font-semibold mb-2">Ingredients:</h3>
                 <ul className="list-disc pl-6">
                     {recipe.ingredients.map((ingredient, index) => (
-                        <li key={index} className="text-gray-100">{ingredient}</li>
+                        <li key={index} className="text-gray-800">{ingredient}</li>
                     ))}
                 </ul>
             </div>
 
             {/* Action Button */}
-            <button
-                className="bg-green-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-green-600 transition-colors duration-300"
-                onClick={() => handleClick(recipe._id)}
-            >
-                View Recipe
-            </button>
-            {/* Add Button */}
-            {showAddButton && (
-                <button className="bg-red-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-green-600 transition-colors duration-300" onClick={() => handleAdd(recipe._id)}>
-                    Add
+            <div className="flex gap-2">
+                <button
+                    className="bg-green-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-green-600 transition-colors duration-300"
+                    onClick={() => handleClick(recipe._id)}
+                >
+                    View Recipe
                 </button>
-            )}
+                {/* Add Button */}
+                {showAddButton && (
+                    <button className="bg-red-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-green-600 transition-colors duration-300" onClick={() => handleAdd(recipe._id)}>
+                        Add
+                    </button>
+                )}
+            </div>
+
         </div>
     );
 };

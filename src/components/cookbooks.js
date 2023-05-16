@@ -15,14 +15,14 @@ const CookbookList = ({ cookbooks }) => {
 
     return (
         <div className="p-8 rounded shadow h-full">
-            <div className="grid grid-cols-4 gap-4 mb-auto flex-1 h-full overflow-y-auto pb-80">
+            <div className="grid grid-cols-3 sm:grid-cols-2 gap-4 mb-auto flex-1 h-full overflow-y-auto pb-80">
                 {cookbooks.map((cookbook) => (
                     <div
                         key={cookbook._id}
-                        className="bg-green-200 p-4 rounded-lg shadow hover:bg-green-300 cursor-pointer"
+                        className="bg-gray-100 p-4 rounded-lg shadow hover:bg-green-300 cursor-pointer"
                         onClick={() => handleClick(cookbook._id)}
                     >
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 gap-4 text-center">
                             <div>
                                 <h2 className="text-green-800 font-semibold mb-2">{cookbook.title}</h2>
                                 <p className="text-green-800">{cookbook.description}</p>
