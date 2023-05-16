@@ -116,7 +116,7 @@ const Dashboard = () => {
             </div>
             {/* Content */}
             <div className="container px-4 py-6 flex1 overflow-hidden mb-2">
-                <Dash session={session} recipes={recipes} cookbooks={cookbooks} />
+                <Dash session={session} recipes={recipesFull} cookbooks={cookbooksFull} />
                 {renderComponent()}
             </div>
         </div>
