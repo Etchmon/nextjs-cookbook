@@ -41,7 +41,7 @@ const RecipeCard = ({ recipe, showAddButton }) => {
     };
 
     return (
-        <div className="flex flex-col justify-center items-center bg-gray-800 shadow-md rounded-lg p-4 hover:shadow-lg transition-shadow duration-300">
+        <div className="flex flex-col justify-center items-center bg-green-200 shadow-md rounded-lg p-4 hover:shadow-lg transition-shadow duration-300">
             {/* Image */}
             {recipe.image && (
                 <div className="aspect-w-3 aspect-h-2 mb-4">
@@ -54,7 +54,7 @@ const RecipeCard = ({ recipe, showAddButton }) => {
             )}
 
             {/* Title */}
-            <h2 className="text-2xl font-bold mb-2 text-green-500 text-center">{recipe.title}</h2>
+            <h2 className="text-2xl font-bold mb-2 text-green-800 text-center">{recipe.title}</h2>
 
             {/* Description */}
             <p className="text-gray-600 mb-4 text-center">{recipe.description}</p>

@@ -30,15 +30,15 @@ const RecipeDetail = () => {
                 <div className="flex-1 grid grid-cols-1 md:grid-cols-6 gap-4">
                     <div className="col-span-4 bg-gray-800 p-4 rounded-md shadow-md overflow-auto hide-scrollbar">
                         <h2 className="text-2xl font-bold mb-2 text-green-500">Instructions</h2>
-                        <ol>
+                        <ol className="list-decimal">
                             {recipe.instructions.map((instruction) => (
-                                <li key={instruction} className="mb-2 text-gray-300">
+                                <li key={instruction} className="mb-2 ml-4 text-gray-300">
                                     {instruction}
                                 </li>
                             ))}
                         </ol>
                     </div>
-                    <div className="col-span-2 bg-gray-800 p-4 rounded-md shadow-md overflow-auto hide-scrollbar">
+                    <div className="col-span-2 p-4 rounded-md shadow-md overflow-auto hide-scrollbar">
                         <h2 className="text-2xl font-bold mb-2 text-green-500">Ingredients</h2>
                         <ul>
                             {recipe.ingredients.map((ingredient) => (
