@@ -70,7 +70,7 @@ const Dashboard = () => {
 
 
     return (
-        <div className="flex flex-col sm:flex-row h-screen bg-gray-800 text-gray-300">
+        <div className="flex flex-col sm:flex-row h-screen bg-gray-900 text-gray-300">
             {/* Sidebar */}
             <div className="bg-gray-900 w-full sm:w-1/4 sm:sticky sm:top-0 flex-none">
                 <h2 className="text-lg font-semibold p-4">Menu</h2>
