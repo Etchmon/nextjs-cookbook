@@ -19,10 +19,6 @@ const DashboardContent = ({ session, recipes, cookbooks }) => {
                         <p className="text-green-800">Total: {cookbooks.length}</p>
                     </div>
                 </Link>
-                <div className="bg-green-200 p-4 rounded-lg shadow hover:bg-green-300 cursor-pointer">
-                    <h2 className="text-green-800 font-semibold mb-2">Total</h2>
-                    <p className="text-green-800">Total: {(recipes.length + cookbooks.length)}</p>
-                </div>
                 {/* Add more items as needed */}
             </div>
         </div>
