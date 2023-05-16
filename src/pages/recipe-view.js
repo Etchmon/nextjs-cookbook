@@ -27,7 +27,7 @@ const RecipeDetail = () => {
             <div className="container mx-auto px-4 py-6 h-screen flex flex-col">
                 <h1 className="text-4xl font-bold mb-4 mt-20 text-green-500">{recipe.title}</h1>
                 <div className="flex-1 grid grid-cols-1 md:grid-cols-6 gap-4">
-                    <div className="col-span-4 bg-gray-100 p-4 rounded-lg shadow-md overflow-auto hide-scrollbar">
+                    <div className="col-span-4 bg-gray-100 p-4 rounded-[35px] shadow-md overflow-auto hide-scrollbar">
                         <h2 className="text-2xl font-bold mb-2 text-gray-800">Instructions</h2>
                         <ol className="list-decimal">
                             {recipe.instructions.map((instruction) => (
