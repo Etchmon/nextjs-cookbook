@@ -54,17 +54,17 @@ const RecipeCard = ({ recipe, showAddButton }) => {
             )}
 
             {/* Title */}
-            <h2 className="text-2xl font-bold mb-2 text-green-800 text-center">{recipe.title}</h2>
+            <h2 className="text-2xl font-bold mb-2 text-green-700 text-center">{recipe.title}</h2>
 
             {/* Description */}
             <p className="text-gray-600 mb-4 text-center">{recipe.description}</p>
 
             {/* Ingredients */}
             <div className="border-t border-gray-200 pt-4">
-                <h3 className="text-gray-800 text-lg font-semibold mb-2">Ingredients:</h3>
+                <h3 className="text-gray-700 text-lg font-semibold mb-2">Ingredients:</h3>
                 <ul className="list-disc pl-6">
                     {recipe.ingredients.map((ingredient, index) => (
-                        <li key={index} className="text-gray-800">{ingredient}</li>
+                        <li key={index} className="text-gray-700">{ingredient}</li>
                     ))}
                 </ul>
             </div>
@@ -79,12 +79,14 @@ const RecipeCard = ({ recipe, showAddButton }) => {
                 </button>
                 {/* Add Button */}
                 {showAddButton && (
-                    <button className="bg-red-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-green-600 transition-colors duration-300" onClick={() => handleAdd(recipe._id)}>
+                    <button
+                        className="bg-red-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-red-600 transition-colors duration-300"
+                        onClick={() => handleAdd(recipe._id)}
+                    >
                         Add
                     </button>
                 )}
             </div>
-
         </div>
     );
 };

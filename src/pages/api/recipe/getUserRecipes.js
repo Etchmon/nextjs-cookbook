@@ -12,14 +12,17 @@ export default async function myRecipes(req, res) {
 
     if (req.method === "GET") {
         // Process a GET request
-        const sessionRecipes = session.user.cookbooks.allRecipes;
+
 
         try {
             const MongoClient = await clientPromise;
             const db = await MongoClient.db("CBD");
             const collection = await db.collection("Recipes");
+            const userData = await db.collection("Users").findOne({ email: session.user.email })
+            const userRecipes = userData.cookbooks.allRecipes;
+            console.log(userRecipes);
 
-            const promises = sessionRecipes.map((recipe) =>
+            const promises = userRecipes.map((recipe) =>
                 collection.findOne({ _id: ObjectID(recipe) })
             );
 

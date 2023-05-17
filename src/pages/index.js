@@ -32,18 +32,16 @@ export default function Home() {
 
   // Render the page
   return (
-    <div>
+    <div className="min-h-screen flex flex-col">
       <Head>
         <title>CookBook Digital</title>
         <meta name="description" content="Organize your recipes and plan your dinners with CookBook Digital." />
       </Head>
       <Navbar />
-      <main className="bg-gray-800 text-gray-300 min-h-screen">
-        <section className="h-screen">
-          <div className="relative h-full">
-            <img src={Image} alt="Organize your recipes and plan your dinners with CookBook Digital" className="h-full w-full object-cover" />
-            <div className="absolute inset-0 bg-gray-900 bg-opacity-50"></div>
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-white transition-opacity opacity-1 duration-1000 delay-500">
+      <main className="bg-gray-800 text-gray-800 flex flex-grow">
+        <section className="flex flex-col items-center justify-center">
+          <div className="max-w-4xl mx-auto px-4">
+            <div className=" flex flex-col items-center justify-center text-white">
               <h1 className="text-5xl font-bold text-center mb-8">Organize your recipes and plan your dinners</h1>
               <p className="text-xl text-center mb-16">CookBook Digital is the only cookbook you'll ever need.</p>
               <Link href="/signup" className="bg-green-500 text-gray-300 py-2 px-4 rounded hover:bg-green-600">
