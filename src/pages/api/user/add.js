@@ -14,8 +14,16 @@ export default async function addUser(req, res) {
         try {
 
             const MongoClient = await clientPromise;
-            const db = MongoClient.db('CBD');
-            const collection = db.collection("Users");
+            const db = await MongoClient.db('CBD');
+            const collection = await db.collection("Users");
+            const userExists = await collection.findOne({ email: req.body.email.toLowerCase() })
+            const usernameExists = await collection.findOne({ username: req.body.username })
+            console.log(userExists, usernameExists)
+            if (userExists && userExists != null) {
+                return res.json({ email: true })
+            } else if (usernameExists) {
+                return res.json({ username: true })
+            }
 
             const user = new User({
                 username: req.body.username,

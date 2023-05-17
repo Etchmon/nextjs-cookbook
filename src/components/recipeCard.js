@@ -57,14 +57,14 @@ const RecipeCard = ({ recipe, showAddButton }) => {
             <h2 className="text-2xl font-bold mb-2 text-green-700 text-center">{recipe.title}</h2>
 
             {/* Description */}
-            <p className="text-gray-600 mb-4 text-center">{recipe.description}</p>
+            {recipe.description && <p className="text-gray-600 mb-4 text-center">{recipe.description}</p>}
 
             {/* Ingredients */}
             <div className="border-t border-gray-200 pt-4">
                 <h3 className="text-gray-700 text-lg font-semibold mb-2">Ingredients:</h3>
                 <ul className="list-disc pl-6">
                     {recipe.ingredients.map((ingredient, index) => (
-                        <li key={index} className="text-gray-700">{ingredient}</li>
+                        <li key={`${ingredient}-${index + 1}`} className="text-gray-700">{ingredient}</li>
                     ))}
                 </ul>
             </div>
@@ -96,7 +96,7 @@ RecipeCard.propTypes = {
         _id: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
         image: PropTypes.string,
-        description: PropTypes.string.isRequired,
+        description: PropTypes.string,
         ingredients: PropTypes.arrayOf(PropTypes.string).isRequired,
     }).isRequired,
 };

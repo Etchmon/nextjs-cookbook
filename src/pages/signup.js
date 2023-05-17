@@ -33,6 +33,14 @@ const Signup = () => {
             body: JSON.stringify({ username, email, password }),
         });
         const result = await res.json();
+        if (result.email) {
+            alert('That email is already in use')
+            return;
+        }
+        if (result.username) {
+            alert('That username is already in use')
+            return;
+        }
 
         alert(`Username: ${result.user.username}`);
         router.push('/login');
