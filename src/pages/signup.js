@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from 'next/router';
+import Navbar from "../components/navbar";
 
 const Signup = () => {
     const { data: session, status } = useSession();
@@ -12,12 +13,47 @@ const Signup = () => {
         passwordConfirm: ''
     });
 
+    const [errors, setErrors] = useState({});
+
     const handleInputChange = (event) => {
         setFormData({ ...formData, [event.target.name]: event.target.value });
     };
 
+    const validateForm = () => {
+        const { email, username, password } = formData;
+        const errors = {};
+
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            errors.email = 'Please enter a valid email address';
+        }
+
+        // Username validation
+        if (username.length < 3) {
+            errors.username = 'Username must be at least 3 characters long';
+        }
+        const usernameRegex = /^[a-zA-Z0-9]+$/;
+        if (!usernameRegex.test(username)) {
+            errors.username = 'Username should only contain letters and numbers';
+        }
+
+        // Password validation
+        if (password.length < 6) {
+            errors.password = 'Password must be at least 6 characters long';
+        }
+
+        setErrors(errors);
+        return Object.keys(errors).length === 0; // Return true if there are no errors
+    };
+
+
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        if (!validateForm()) {
+            return;
+        }
 
         const { username, email, password, passwordConfirm } = formData;
         if (password !== passwordConfirm) {
@@ -62,25 +98,54 @@ const Signup = () => {
     } else {
         return (
             <div className="flex flex-col h-screen bg-gray-900">
-                <nav className="flex items-center justify-between bg-green-500 p-4">
-                    <button className="text-gray-900 font-bold" onClick={() => router.push('/')}>CookBook Digital</button>
-                    <div></div>
-                </nav>
+                <Navbar />
                 <main className="flex items-center justify-center h-screen bg-gray-900">
                     <section className="bg-green-500 p-8 rounded-lg shadow-lg">
                         <h1 className="text-3xl font-bold mb-4 text-gray-900">Create an account</h1>
                         <form className="flex flex-col space-y-4">
-                            <label>
-                                <input type="text" name="email" placeholder="Email" value={formData.email} onChange={handleInputChange} className="border border-gray-400 rounded-lg py-2 px-4 text-gray-900" />
+                            <label className="flex flex-col">
+                                <input
+                                    type="text"
+                                    name="email"
+                                    placeholder="Email"
+                                    value={formData.email}
+                                    onChange={handleInputChange}
+                                    className="border border-gray-400 rounded-lg py-2 px-4 text-gray-900"
+                                />
+                                {errors.email && <span className="text-red-500">{errors.email}</span>}
                             </label>
-                            <label>
-                                <input type="text" name="username" placeholder="Username" value={formData.username} onChange={handleInputChange} className="border border-gray-400 rounded-lg py-2 px-4 text-gray-900" />
+                            <label className="flex flex-col">
+                                <input
+                                    type="text"
+                                    name="username"
+                                    placeholder="Username"
+                                    value={formData.username}
+                                    onChange={handleInputChange}
+                                    className="border border-gray-400 rounded-lg py-2 px-4 text-gray-900"
+                                />
+                                {errors.username && <span className="text-red-500">{errors.username}</span>}
                             </label>
-                            <label>
-                                <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleInputChange} className="border border-gray-400 rounded-lg py-2 px-4 text-gray-900" />
+                            <label className="flex flex-col">
+                                <input
+                                    type="password"
+                                    name="password"
+                                    placeholder="Password"
+                                    value={formData.password}
+                                    onChange={handleInputChange}
+                                    className="border border-gray-400 rounded-lg py-2 px-4 text-gray-900"
+                                />
+                                {errors.password && <span className="text-red-500">{errors.password}</span>}
                             </label>
-                            <label>
-                                <input type="password" name="passwordConfirm" placeholder="Confirm Password" value={formData.passwordConfirm} onChange={handleInputChange} className="border border-gray-400 rounded-lg py-2 px-4 text-gray-900" />
+                            <label className="flex flex-col">
+                                <input
+                                    type="password"
+                                    name="passwordConfirm"
+                                    placeholder="Confirm Password"
+                                    value={formData.passwordConfirm}
+                                    onChange={handleInputChange}
+                                    className="border border-gray-400 rounded-lg py-2 px-4 text-gray-900"
+                                />
+                                {errors.passwordConfirm && <span className="text-red-500">{errors.passwordConfirm}</span>}
                             </label>
                             <button className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" onClick={handleSubmit}>Submit</button>
                         </form>

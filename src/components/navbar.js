@@ -7,7 +7,7 @@ const Navbar = () => {
 
     return (
         <nav className="bg-gray-900 shadow-sm py-4 px-8 flex justify-between items-center w-full z-10">
-            <span className="text-xl font-bold text-green-500">CookBook Digital</span>
+            <Link href="/" ><span className="text-xl font-bold text-green-500">CookBook Digital</span></Link>
             {!session ? (
                 <div className="flex items-center space-x-4">
                     <Link href="/login" className="text-green-500 hover:text-green-200">

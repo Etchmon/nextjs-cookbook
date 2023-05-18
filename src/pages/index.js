@@ -39,7 +39,7 @@ export default function Home() {
       </Head>
       <Navbar />
       <main className="bg-gray-800 text-gray-800 flex flex-grow">
-        <section className="flex flex-col items-center justify-center">
+        <section className="flex flex-col items-center justify-center w-full">
           <div className="max-w-4xl mx-auto px-4">
             <div className=" flex flex-col items-center justify-center text-white">
               <h1 className="text-5xl font-bold text-center mb-8">Organize your recipes and plan your dinners</h1>

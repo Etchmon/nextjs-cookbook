@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Link from 'next/link';
 import { useSession, signIn, signOut, getSession } from "next-auth/react";
 import { useRouter } from 'next/router';
+import Navbar from "../components/navbar";
 
 
 const Login = () => {
@@ -31,13 +32,9 @@ const Login = () => {
 
     // Otherwise, display the login form
     return (
-        <div>
-        <nav className="flex items-center justify-between bg-green-500 p-4">
-            <button className="text-gray-900 font-bold" onClick={() => router.push('/')}>CookBook Digital</button>
-            <div></div>
-        </nav>
-
-        <main className="flex flex-col md:flex-row items-center justify-center min-h-screen bg-gray-900">
+        <div className="min-h-screen flex flex-col">
+        <Navbar />
+        <main className="flex flex-1 flex-col md:flex-row items-center justify-center bg-gray-900">
             <section className="bg-gray-800 p-8 rounded-lg shadow-md mb-8 md:mb-0 md:mr-8 flex flex-col justify-center items-center">
                 <h1 className="text-2xl font-bold text-green-200 mb-6">Login to Your Account</h1>
                 <button
