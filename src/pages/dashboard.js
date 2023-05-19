@@ -13,6 +13,7 @@ const Dashboard = () => {
     const [cookbooksFull, setCookbooksFull] = useState([]);
     const [streamRecipes, setStreamRecipes] = useState([]);
 
+    // Function to shuffle an array
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -21,8 +22,8 @@ const Dashboard = () => {
         return array;
     }
 
-
     useEffect(() => {
+        // Fetch user data from API endpoints
         const fetchUserData = async () => {
             const [recipeResponse, cookbookResponse, streamResponse] = await Promise.all([
                 fetch('/api/recipe/getUserRecipes').then((res) => res.json()),
@@ -30,19 +31,17 @@ const Dashboard = () => {
                 fetch('/api/recipe/getAll').then((res) => res.json()),
             ]);
 
+            // Set state with the fetched data
             setRecipesFull(recipeResponse);
             setCookbooksFull(cookbookResponse);
             setStreamRecipes(shuffleArray(streamResponse));
         };
 
+        // Fetch user data on component mount
         fetchUserData();
     }, []);
 
-
-    if (!session) {
-        return <div>Loading...</div>;
-    }
-
+    // Render the appropriate component based on activeComponent state
     const renderComponent = () => {
         switch (activeComponent) {
             case 'dashboard':
@@ -56,7 +55,9 @@ const Dashboard = () => {
         }
     };
 
-
+    if (!session) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div className="flex flex-col sm:flex-row h-screen bg-gray-900 text-gray-300">
