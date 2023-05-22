@@ -69,14 +69,6 @@ const CookbookAdd = () => {
             return;
         }
 
-
-        const cookbook = {
-            title: value.title,
-            description: value.description,
-            recipes: recipes
-        }
-        console.log(cookbook);
-
         const res = await fetch('/api/cookbook/add', {
             method: 'POST',
             header: {
@@ -99,7 +91,11 @@ const CookbookAdd = () => {
         setRecipes([...recipes, recipe]);
     };
 
-
+    const removeFromBook = (event, recipe) => {
+        event.preventDefault();
+        const filteredArray = recipes.filter(item => item !== recipe)
+        setRecipes([...filteredArray]);
+    };
 
     if (status === 'loading') {
         return (
@@ -157,8 +153,10 @@ const CookbookAdd = () => {
 
                         <ul className="pl-8 inline-block max-width-content items-center">
                             {recipes.map((recipe) => (
-                                <li key={recipe._id} className="mb-2">{recipe.title}</li>
-
+                                <li key={recipe._id} className="mb-2">
+                                    <button className="p-1 mr-2 rounded-lg bg-red-800" onClick={(e) => removeFromBook(e, recipe)}>-</button>
+                                    {recipe.title}
+                                </li>
                             ))}
                         </ul>
                         {errors.recipes && <p className="text-red-500">{errors.recipes}</p>}

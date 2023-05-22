@@ -62,6 +62,18 @@ const RecipeAdd = () => {
         setValue({ ...value, instructions: '' })
     }
 
+    const removeInstruction = (event, instruction) => {
+        event.preventDefault();
+        const filteredArray = instructions.filter(item => item !== instruction);
+        setInstructions([...filteredArray])
+    }
+
+    const removeIngredient = (event, ingredient) => {
+        event.preventDefault();
+        const filteredArray = ingredients.filter(item => item !== ingredient);
+        setIngredients([...filteredArray])
+    }
+
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -212,6 +224,7 @@ const RecipeAdd = () => {
                                     className="py-2 px-3 mb-2 bg-gray-700 rounded-md text-gray-300"
                                 >
                                     {ingredient}
+                                    <button className="p-1 mr-2 rounded-lg bg-red-800" onClick={(e) => removeIngredient(e, ingredient)}>-</button>
                                 </li>
                             ))}
                         </ol>
@@ -225,6 +238,7 @@ const RecipeAdd = () => {
                                     className="py-2 px-3 mb-2 bg-gray-700 rounded-md text-gray-300"
                                 >
                                     {instruction}
+                                    <button className="p-1 mr-2 rounded-lg bg-red-800" onClick={(e) => removeInstruction(e, instruction)}>-</button>
                                 </li>
                             ))}
                         </ol>
