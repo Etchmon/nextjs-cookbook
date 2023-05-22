@@ -7,7 +7,7 @@ import { ObjectId } from 'mongodb';
 export default async function updateRecipe(req, res) {
     if (req.method !== 'PUT') {
         // Only allow PUT requests
-        res.status('405').json({ message: 'Method Not Allowed' });
+        res.status(405).json({ message: 'Method Not Allowed' });
         return;
     }
 
@@ -17,7 +17,7 @@ export default async function updateRecipe(req, res) {
         return;
     }
 
-    const { id, title, description, ingredients, instructions } = req.body
+    const { id, title, description, ingredients, instructions } = req.body;
 
     try {
         const client = await clientPromise;
