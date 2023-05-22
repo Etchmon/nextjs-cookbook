@@ -14,17 +14,6 @@ export default function Home() {
   // Hook to access the Next.js session object
   const { data: session, status } = useSession();
 
-  // Fetch the list of restaurants from the server
-  useEffect(() => {
-    async function fetchRestaurants() {
-      const results = await fetch("/api/list");
-      const resultsJson = await results.json();
-      setRestaurants(resultsJson);
-    }
-
-    fetchRestaurants();
-  }, []);
-
   // Show loading indicator while the session is being checked
   if (status === 'loading') {
     return <Loading />

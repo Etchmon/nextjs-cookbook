@@ -26,11 +26,6 @@ const RecipeCard = ({ recipe, showAddButton }) => {
             console.error('Error:', error);
         }
 
-        // Navigate to recipe view page
-        router.push({
-            pathname: '/recipe-view',
-            query: { recipeId },
-        });
     };
 
     const handleClick = (recipeId) => {
