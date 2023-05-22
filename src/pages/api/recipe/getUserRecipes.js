@@ -20,7 +20,6 @@ export default async function myRecipes(req, res) {
             const collection = await db.collection("Recipes");
             const userData = await db.collection("Users").findOne({ email: session.user.email })
             const userRecipes = userData.cookbooks.allRecipes;
-            console.log(userRecipes);
 
             const promises = userRecipes.map((recipe) =>
                 collection.findOne({ _id: ObjectID(recipe) })

@@ -1,8 +1,6 @@
 // Imports
 import clientPromise from '../../../../lib/mongodb';
-import Recipe from '../../../../models/recipeModel';
 import { getSession } from "next-auth/react";
-import { ObjectId } from 'mongodb';
 
 export default async function updateRecipe(req, res) {
     if (req.method !== 'PUT') {

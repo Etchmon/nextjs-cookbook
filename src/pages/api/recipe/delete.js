@@ -1,8 +1,7 @@
 // Imports
 import clientPromise from "../../../../lib/mongodb";
-import Recipe from "../../../../models/recipeModel";
 import { getSession } from "next-auth/react";
-import { ObjectId } from "mongodb";
+
 
 export default async function deleteRecipe(req, res) {
     if (req.method !== 'DELETE') {
@@ -35,7 +34,7 @@ export default async function deleteRecipe(req, res) {
             return;
         }
 
-        resizeTo.status(200).json({ message: 'Recipe deleted successfully' });
+        res.status(200).json({ message: 'Recipe deleted successfully' });
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: 'Something went wrong' });
