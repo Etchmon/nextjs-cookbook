@@ -33,9 +33,17 @@ export default async function updateRecipe(req, res) {
                     description,
                     ingredients,
                     instructions,
-                }
+                },
             }
-        )
+        );
+
+        if (result.modifiedCount === 0) {
+            //  If no matching recipe found, return not found status
+            res.status(404).json({ message: 'Recipe not found' });
+            return;
+        }
+
+        res.status(200).json({ message: 'Recipe updated successfully' });
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: 'Something went wrong' });
