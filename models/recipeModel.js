@@ -7,6 +7,7 @@ const recipeSchema = new Schema({
     instructions: [],
     images: [],
     source: { type: String },
+    author: { type: String },
     comments: [Schema.Types.ObjectId]
 });
 

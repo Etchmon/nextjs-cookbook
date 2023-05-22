@@ -22,30 +22,40 @@ const Dashboard = () => {
         return array;
     }
 
+    // Fetch user recipes
+    const fetchUserRecipes = async () => {
+        const response = await fetch('/api/recipe/getUserRecipes');
+        const data = await response.json();
+        setRecipesFull(data);
+    };
+
     useEffect(() => {
         // Fetch user data from API endpoints
         const fetchUserData = async () => {
-            const [recipeResponse, cookbookResponse, streamResponse] = await Promise.all([
-                fetch('/api/recipe/getUserRecipes').then((res) => res.json()),
+            const [cookbookResponse, streamResponse] = await Promise.all([
                 fetch('/api/cookbook/getUserCookbooks').then((res) => res.json()),
                 fetch('/api/recipe/getAll').then((res) => res.json()),
             ]);
 
             // Set state with the fetched data
-            setRecipesFull(recipeResponse);
             setCookbooksFull(cookbookResponse);
             setStreamRecipes(shuffleArray(streamResponse));
         };
 
         // Fetch user data on component mount
         fetchUserData();
+        fetchUserRecipes();
     }, []);
+
+
+
+    console.log(recipesFull);
 
     // Render the appropriate component based on activeComponent state
     const renderComponent = () => {
         switch (activeComponent) {
             case 'dashboard':
-                return <Stream recipes={streamRecipes} showAddButton={true} />;
+                return <Stream recipes={streamRecipes} showAddButton={true} updateData={fetchUserRecipes} />;
             case 'recipes':
                 return <RecipeList recipes={recipesFull} showAddButton={false} />;
             case 'cookbooks':

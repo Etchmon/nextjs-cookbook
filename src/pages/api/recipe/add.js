@@ -24,9 +24,13 @@ export default async function addRecipe(req, res) {
 
             const existingRecipe = await recipeCollection.findOne({ _id: ObjectId(req.body._id) });
             if (existingRecipe) {
-                console.log('Recipe already exists');
-
-                return res.json({ msg: 'Recipe Already Exists' });
+                console.log('Recipe already in Stream');
+                const id = ObjectId(req.body._id);
+                const result = await userCollection.updateOne(
+                    { email: session.user.email },
+                    { $addToSet: { "cookbooks.allRecipes": ObjectId(id) } }
+                );
+                return res.json({ msg: 'Recipe Added', recipe });
             }
 
             const result = await recipeCollection.insertOne(recipe);

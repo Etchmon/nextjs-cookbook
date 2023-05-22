@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 
-const RecipeCard = ({ recipe, showAddButton }) => {
+const RecipeCard = ({ recipe, showAddButton, updateData }) => {
     const router = useRouter();
 
     const handleAdd = async (recipeId) => {
@@ -18,6 +18,11 @@ const RecipeCard = ({ recipe, showAddButton }) => {
             if (response.ok) {
                 const data = await response.json();
                 // Handle success response if needed
+
+                // Trigger data update in Dashboard component
+                if (updateData) {
+                    updateData();
+                }
             } else {
                 // Handle error response if needed
                 console.error('Failed to add recipe:', response.statusText);
@@ -26,6 +31,9 @@ const RecipeCard = ({ recipe, showAddButton }) => {
             console.error('Error:', error);
         }
 
+
+        // Navigate to recipe view page
+        alert('Recipe Added');
     };
 
     const handleClick = (recipeId) => {
