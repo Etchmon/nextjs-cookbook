@@ -7,6 +7,7 @@ import CookbooksList from '../components/cookbooks';
 import Stream from '../components/stream';
 import RecipeForm from '../components/recipeForm';
 import CookbookForm from '../components/cookbookForm';
+import RecipeView from '../components/recipeView';
 import Image from 'next/image';
 import bgImage from '../../public/images/chef.jpg';
 
@@ -16,6 +17,7 @@ const Dashboard = () => {
     const [recipesFull, setRecipesFull] = useState([]);
     const [cookbooksFull, setCookbooksFull] = useState([]);
     const [streamRecipes, setStreamRecipes] = useState([]);
+    const [activeRecipe, setActiveRecipe] = useState(null);
 
     // Function to shuffle an array
     function shuffleArray(array) {
@@ -55,9 +57,9 @@ const Dashboard = () => {
     const renderComponent = () => {
         switch (activeComponent) {
             case 'recipeView':
-            // return recipeHeader recipeInstructions and recipeIngredients
+                return console.log(activeRecipe), <RecipeView recipeObj={activeRecipe} />
             case 'cookbookView':
-            // return cookbookHeader cbRecipeList
+            // return <RecipeView />
             case 'recipeAdd':
                 return <RecipeForm />
             case 'cookbookAdd':
@@ -65,9 +67,9 @@ const Dashboard = () => {
             case 'dashboard':
                 return <Dash session={session} recipes={recipesFull} cookbooks={cookbooksFull} onClick={setActiveComponent} />;
             case 'stream':
-                return <Stream recipes={streamRecipes} showAddButton={true} updateData={fetchUserRecipes} />;
+                return <Stream recipes={streamRecipes} showAddButton={true} updateData={fetchUserRecipes} setActiveComponent={setActiveComponent} setActiveRecipe={setActiveRecipe} />;
             case 'recipes':
-                return <RecipeList recipes={recipesFull} showAddButton={false} />;
+                return <RecipeList recipes={recipesFull} showAddButton={false} setActiveComponent={setActiveComponent} setActiveRecipe={setActiveRecipe} />;
             case 'cookbooks':
                 return <CookbooksList cookbooks={cookbooksFull} />;
             default:
@@ -80,10 +82,10 @@ const Dashboard = () => {
     }
 
     return (
-        <div className="flex flex-col sm:flex-row h-screen bg-gray-900 text-gray-300">
+        <div className="grid grid-cols-4 h-screen bg-gray-900 text-gray-300">
 
             {/* Sidebar */}
-            <div className="bg-gray-900 w-full sm:w-1/4 sm:sticky sm:top-0 flex-none">
+            <div className="bg-gray-900 cols-1 sm:top-0">
                 <h2 className="text-lg text-green-500 font-semibold p-4">Menu</h2>
                 <ul className="p-4 space-y-2">
                     <li>
@@ -131,7 +133,7 @@ const Dashboard = () => {
                 </ul>
             </div>
             {/* Content */}
-            <div className="container px-4 py-6 flex1 overflow-hidden mb-2 lg:w-1/2 md:w-3/4 sm:w-full">
+            <div className="col-span-3 container px-4 py-6 overflow-hidden mb-2">
                 {renderComponent()}
             </div>
         </div>

@@ -8,6 +8,8 @@ import Footer from '../components/footer';
 import Loading from '../components/loading';
 import Image from 'next/image';
 import bgImage from '../../public/images/chef.jpg';
+import { useRouter } from 'next/router';
+
 
 
 export default function Home() {
@@ -15,6 +17,12 @@ export default function Home() {
   const [restaurants, setRestaurants] = useState([]);
   // Hook to access the Next.js session object
   const { data: session, status } = useSession();
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
+
 
   // Show loading indicator while the session is being checked
   if (status === 'loading') {
@@ -31,9 +39,11 @@ export default function Home() {
       <Navbar />
 
       <main className="bg-gray-800 text-gray-800 flex flex-grow">
+        {!imageLoaded && <Loading />}
         <Image
           src={bgImage}
           alt="Background Image"
+          onLoadingComplete={handleImageLoad}
           quality={100} // Adjust image quality if needed
           className="absolute inset-0 filter blur-md backdrop-filter backdrop-blur-lg backdrop-opacity-10 w-full h-full object-cover z-0"
         />

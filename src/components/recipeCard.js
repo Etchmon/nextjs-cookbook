@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 
-const RecipeCard = ({ recipe, showAddButton, updateData }) => {
+const RecipeCard = ({ recipe, showAddButton, updateData, setActiveComponent, setActiveRecipe }) => {
     const router = useRouter();
     const { data: session, status } = useSession();
     const userRecipes = session.user.cookbooks.allRecipes;
@@ -43,11 +43,9 @@ const RecipeCard = ({ recipe, showAddButton, updateData }) => {
         alert('Recipe Added');
     };
 
-    const handleClick = (recipeId) => {
-        router.push({
-            pathname: '/recipe-view',
-            query: { recipeId },
-        });
+    const handleClick = (recipe) => {
+        setActiveRecipe(recipe);
+        setActiveComponent('recipeView');
     };
 
     return (
@@ -86,7 +84,7 @@ const RecipeCard = ({ recipe, showAddButton, updateData }) => {
             <div className="flex gap-2">
                 <button
                     className="bg-blue-600 text-white py-2 px-4 rounded-lg mt-4 hover:bg-blue-300 transition-colors duration-300"
-                    onClick={() => handleClick(recipe._id)}
+                    onClick={() => handleClick(recipe)}
                 >
                     View Recipe
                 </button>
