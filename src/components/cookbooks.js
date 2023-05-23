@@ -3,8 +3,9 @@ import { signOut, getSession, useSession } from "next-auth/react";
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
-const CookbookList = ({ cookbooks }) => {
+const CookbookList = (props) => {
     const router = useRouter();
+    const { cookbooks } = props;
 
     const handleClick = (cookbookId) => {
         router.push({
@@ -19,6 +20,21 @@ const CookbookList = ({ cookbooks }) => {
             query: { cookbookId: cookbookId }
         })
     };
+
+    const handleDelete = async (cookbookId) => {
+        const res = await fetch('/api/cookbook/delete', {
+            method: 'DELETE',
+            header: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id: cookbookId
+            }),
+        });
+
+        const result = res.json();
+        props.updateData();
+    }
 
     return (
         <div className="p-8 rounded shadow h-full">
@@ -45,6 +61,12 @@ const CookbookList = ({ cookbooks }) => {
                             onClick={() => handleEdit(cookbook._id)}
                         >
                             Edit
+                        </button>
+                        <button
+                            className="bg-red-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-red-600 transition-colors duration-300"
+                            onClick={() => handleDelete(cookbook._id)}
+                        >
+                            Delete
                         </button>
                     </div>
                 ))}

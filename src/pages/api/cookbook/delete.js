@@ -1,6 +1,12 @@
 // Imports
 import clientPromise from "../../../../lib/mongodb";
 import { getSession } from "next-auth/react";
+import { ObjectId } from 'mongodb';
+
+/**
+ * @param {import('next').NextApiRequest} req 
+ * @param {import('next').NextApiResponse} res 
+ */
 
 export default async function deleteCookbook(req, res) {
     if (req.method !== 'DELETE') {
@@ -15,16 +21,17 @@ export default async function deleteCookbook(req, res) {
         return;
     }
 
-    const { id } = req.body;
+    const { id } = JSON.parse(req.body);
+    console.log(id);
 
     try {
         const client = await clientPromise;
         const db = await client.db("CBD");
-        const cookbookCollection = await db.collection("Coobooks");
+        const collection = await db.collection("Cookbooks");
 
         // Delete the cookbook in the database
         const result = await collection.findOneAndDelete(
-            { _id: id }
+            { _id: ObjectId(id) }
         );
 
         if (result.modifiedCount === 0) {

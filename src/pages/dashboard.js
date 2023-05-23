@@ -35,22 +35,30 @@ const Dashboard = () => {
         setRecipesFull(data);
     };
 
+    // Fetch user recipes
+    const fetchUserCookbooks = async () => {
+        const response = await fetch('/api/cookbook/getUserCookbooks');
+        const data = await response.json();
+        console.log(data);
+        setCookbooksFull(data);
+    };
+
+
     useEffect(() => {
         // Fetch user data from API endpoints
         const fetchUserData = async () => {
-            const [cookbookResponse, streamResponse] = await Promise.all([
-                fetch('/api/cookbook/getUserCookbooks').then((res) => res.json()),
+            const [streamResponse] = await Promise.all([
                 fetch('/api/recipe/getAll').then((res) => res.json()),
             ]);
 
             // Set state with the fetched data
-            setCookbooksFull(cookbookResponse);
             setStreamRecipes(shuffleArray(streamResponse));
         };
 
         // Fetch user data on component mount
         fetchUserData();
         fetchUserRecipes();
+        fetchUserCookbooks();
     }, []);
 
     // Render the appropriate component based on activeComponent state
@@ -71,7 +79,7 @@ const Dashboard = () => {
             case 'recipes':
                 return <RecipeList recipes={recipesFull} showAddButton={false} setActiveComponent={setActiveComponent} setActiveRecipe={setActiveRecipe} />;
             case 'cookbooks':
-                return <CookbooksList cookbooks={cookbooksFull} />;
+                return <CookbooksList cookbooks={cookbooksFull} updateData={fetchUserCookbooks} />;
             default:
                 return null;
         }
