@@ -1,11 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
 
 const RecipeCard = ({ recipe, showAddButton, updateData }) => {
     const router = useRouter();
+    const { data: session, status } = useSession();
+    const userRecipes = session.user.cookbooks.allRecipes;
 
     const handleAdd = async (recipeId) => {
+        if (userRecipes.includes(recipeId)) {
+            alert('You already own this recipe');
+            return;
+        }
         try {
             const response = await fetch('/api/recipe/add', {
                 method: 'POST',
