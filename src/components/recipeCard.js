@@ -51,7 +51,7 @@ const RecipeCard = ({ recipe, showAddButton, updateData }) => {
     };
 
     return (
-        <div className="flex flex-col justify-center items-center bg-gray-100 shadow-md rounded-lg p-4 hover:shadow-lg transition-shadow duration-300">
+        <div className="flex flex-col justify-center items-center bg-gray-100 m-10 shadow-md rounded-lg p-4 hover:shadow-lg transition-shadow duration-300">
             {/* Image */}
             {recipe.image && (
                 <div className="aspect-w-3 aspect-h-2 mb-4">
@@ -64,10 +64,13 @@ const RecipeCard = ({ recipe, showAddButton, updateData }) => {
             )}
 
             {/* Title */}
-            <h2 className="text-2xl font-bold mb-2 text-green-700 text-center">{recipe.title}</h2>
+            <h2 className="text-2xl font-bold mb-2 text-green-600 text-center">{recipe.title}</h2>
 
             {/* Description */}
             {recipe.description && <p className="text-gray-600 mb-4 text-center">{recipe.description}</p>}
+
+            {/* Author */}
+            <span className='text-gray-400 text-sm'>{recipe.author}</span>
 
             {/* Ingredients */}
             <div className="border-t border-gray-200 pt-4">
@@ -82,7 +85,7 @@ const RecipeCard = ({ recipe, showAddButton, updateData }) => {
             {/* Action Button */}
             <div className="flex gap-2">
                 <button
-                    className="bg-green-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-green-600 transition-colors duration-300"
+                    className="bg-blue-600 text-white py-2 px-4 rounded-lg mt-4 hover:bg-blue-300 transition-colors duration-300"
                     onClick={() => handleClick(recipe._id)}
                 >
                     View Recipe

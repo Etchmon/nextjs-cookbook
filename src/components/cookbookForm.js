@@ -2,10 +2,10 @@ import styles from '../styles/Home.module.css'
 import React, { useEffect, useState } from "react";
 import { useSession, signIn } from "next-auth/react";
 import { useRouter } from 'next/router';
-import Nav from '../components/navbar';
-import Footer from '../components/footer';
+import Nav from './navbar';
+import Footer from './footer';
 
-const CookbookAdd = () => {
+const CookbookForm = () => {
     const { data: session, status } = useSession();
     const router = useRouter();
 
@@ -113,9 +113,7 @@ const CookbookAdd = () => {
     } else {
 
         return (
-            <div className="bg-gray-900 h-screen text-gray-300 flex flex-col">
-                <Nav />
-
+            <div className="bg-gray-900 h-full text-gray-300 flex flex-col">
                 <div className="flex-1 flex flex-col items-center justify-center px-4 sm:px-0 mt-10">
                     <form className="w-full sm:w-1/2 mx-auto">
                         <h1 className="text-3xl font-bold mb-4">Create a Cookbook</h1>
@@ -162,8 +160,6 @@ const CookbookAdd = () => {
                         {errors.recipes && <p className="text-red-500">{errors.recipes}</p>}
                     </div>
                 </div>
-
-                <Footer />
             </div>
 
 
@@ -172,4 +168,4 @@ const CookbookAdd = () => {
     }
 };
 
-export default CookbookAdd;
+export default CookbookForm;

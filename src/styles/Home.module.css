@@ -220,7 +220,7 @@
 
 /* Login */
 .googleIcon {
-  background: url("../images/google-color-svgrepo-com.svg");
+  background: url("../../public/images/google-color-svgrepo-com.svg");
   background-size: cover;
   background-position: center;
   height: 50px;

@@ -22,12 +22,13 @@ const RecipeDetail = () => {
     }
 
     return (
-        <div className="bg-gray-900 h-screen">
+        <div className="bg-green-50 h-screen">
             <Navbar />
             <div className="container mx-auto px-4 py-6 flex flex-col">
-                <h1 className="text-4xl font-bold mb-4 mt-20 text-green-500">{recipe.title}</h1>
+                <h1 className="text-4xl font-bold mb-4 mt-20 text-green-800">{recipe.title}
+                    <span className='text-gray-400 text-sm ml-5'>by: {recipe.author}</span></h1>
                 <div className="flex-1 grid grid-cols-1 md:grid-cols-6 gap-4">
-                    <div className="col-span-4 bg-gray-100 p-4 rounded-[35px] shadow-md overflow-auto hide-scrollbar">
+                    <div className="col-span-4 bg-gray-50 p-4 rounded-[35px] shadow-md overflow-auto hide-scrollbar">
                         <h2 className="text-2xl font-bold mb-2 text-gray-800">Instructions</h2>
                         <ol className="list-decimal">
                             {recipe.instructions.map((instruction) => (
@@ -37,11 +38,11 @@ const RecipeDetail = () => {
                             ))}
                         </ol>
                     </div>
-                    <div className="col-span-2 p-4 rounded-md shadow-md overflow-auto hide-scrollbar">
-                        <h2 className="text-2xl font-bold mb-2 text-green-500">Ingredients</h2>
+                    <div className="col-span-2 p-4 rounded-[35px] shadow-md overflow-auto hide-scrollbar bg-blue-100">
+                        <h2 className="text-2xl font-bold mb-2 text-blue-500">Ingredients</h2>
                         <ul>
                             {recipe.ingredients.map((ingredient) => (
-                                <li key={ingredient} className="mb-2 text-gray-300">
+                                <li key={ingredient} className="mb-2 text-blue-500">
                                     {ingredient}
                                 </li>
                             ))}

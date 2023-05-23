@@ -8,7 +8,7 @@ export default async function addRecipe(req, res) {
 
     if (req.method === 'POST') {
         try {
-            const { title, description, ingredients, instructions } = req.body;
+            const { title, description, ingredients, instructions, author } = req.body;
 
             const client = await clientPromise;
             const db = await client.db("CBD");
@@ -19,7 +19,8 @@ export default async function addRecipe(req, res) {
                 title,
                 description,
                 ingredients,
-                instructions
+                instructions,
+                author
             });
 
             const existingRecipe = await recipeCollection.findOne({ _id: ObjectId(req.body._id) });

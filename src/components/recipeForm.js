@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { useSession, signIn, signOut, getSession } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
 import { useRouter } from 'next/router';
-import Navbar from '../components/navbar';
 
-const RecipeAdd = () => {
+const RecipeForm = () => {
     const { data: session, status } = useSession();
     const router = useRouter();
 
@@ -122,7 +121,8 @@ const RecipeAdd = () => {
                 title: value.title,
                 description: value.description,
                 ingredients: ingredients,
-                instructions: instructions
+                instructions: instructions,
+                author: session.user.username
             }),
         });
         const result = await res.json();
@@ -149,9 +149,8 @@ const RecipeAdd = () => {
     } else {
 
         return (
-            <div className="min-h-screen bg-gray-800 text-gray-300 flex flex-col items-center">
-                <Navbar />
-                <form className="flex flex-col w-full max-w-md p-4 items-center justify-center">
+            <div className="h-full bg-gray-900 text-gray-300 flex flex-1 flex-col items-center">
+                <form className="flex flex-col w-full max-w-md p-4 items-start justify-center">
                     <h1 className="text-2xl font-bold mb-4">Create a Recipe</h1>
                     <label className="flex flex-col mb-4">
                         <span className="mb-2 font-medium">Recipe name:</span>
@@ -250,4 +249,4 @@ const RecipeAdd = () => {
     }
 }
 
-export default RecipeAdd;
+export default RecipeForm;
