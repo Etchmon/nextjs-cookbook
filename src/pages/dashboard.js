@@ -57,13 +57,13 @@ const Dashboard = () => {
     const renderComponent = () => {
         switch (activeComponent) {
             case 'recipeView':
-                return console.log(activeRecipe), <RecipeView recipeObj={activeRecipe} />
+                return <RecipeView recipeObj={activeRecipe} />
             case 'cookbookView':
             // return <RecipeView />
             case 'recipeAdd':
                 return <RecipeForm />
             case 'cookbookAdd':
-                return <CookbookForm />
+                return <CookbookForm setActiveComponent={setActiveComponent} />
             case 'dashboard':
                 return <Dash session={session} recipes={recipesFull} cookbooks={cookbooksFull} onClick={setActiveComponent} />;
             case 'stream':

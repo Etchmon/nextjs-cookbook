@@ -1,13 +1,11 @@
-import styles from '../styles/Home.module.css'
 import React, { useEffect, useState } from "react";
 import { useSession, signIn } from "next-auth/react";
 import { useRouter } from 'next/router';
-import Nav from './navbar';
-import Footer from './footer';
 
-const CookbookForm = () => {
+const CookbookForm = (props) => {
     const { data: session, status } = useSession();
     const router = useRouter();
+    const { setActiveComponent } = props;
 
     const [recipes, setRecipes] = useState([]);
     const [myRecipes, setMyRecipes] = useState([]);
@@ -81,13 +79,14 @@ const CookbookForm = () => {
             }),
         });
         const result = await res.json();
-        console.log(result);
-        router.push('/dashboard')
+        setActiveComponent('cookbooks');
     }
 
     const addToBook = (event, recipe) => {
-        console.log(recipe)
         event.preventDefault();
+        if (recipes.includes(recipe)) {
+            return;
+        }
         setRecipes([...recipes, recipe]);
     };
 
