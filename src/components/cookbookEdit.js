@@ -1,48 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { useSession, signIn } from "next-auth/react";
 import { useRouter } from 'next/router';
-import Nav from '../components/navbar';
-import Footer from '../components/footer';
-import Loading from '../components/loading'
+import Nav from './navbar';
+import Footer from './footer';
+import Loading from './loading'
 
-const CookbookEdit = () => {
-
+const CookbookEdit = (props) => {
     const { data: session, status } = useSession();
     const router = useRouter();
-
+    const { cookbook, myRecipes } = props;
     const [recipes, setRecipes] = useState([]);
-    const [myRecipes, setMyRecipes] = useState([]);
-    const [cookbook, setCookbook] = useState(null);
-
-    useEffect(() => {
-        (async () => {
-            const results = await fetch('/api/recipe/getUserRecipes');
-            const resultsJson = await results.json();
-            setMyRecipes(resultsJson);
-        })();
-    }, [router]);
-
-    useEffect(() => {
-        const fetchCookBook = async () => {
-            const cookbookId = router.query.cookbookId; // Replace with your actual cookbook ID
-            const response = await fetch(`/api/cookbook/getOne?cookbookId=${cookbookId}`);
-            const data = await response.json();
-            setCookbook(data[0]);
-            setValue({ title: data[0].title, description: data[0].description });
-        };
-
-        fetchCookBook();
-    }, [router]);
 
     useEffect(() => {
         const fetchCookBookRecipes = async () => {
-            const cookbookId = router.query.cookbookId; // Replace with your actual cookbook ID
+            const cookbookId = cookbook._id; // Replace with your actual cookbook ID
             const response = await fetch(`/api/recipe/getCookbookRecipes?cookbookId=${cookbookId}`);
             const data = await response.json();
             setRecipes(data);
         };
-
         fetchCookBookRecipes();
+        setValue({ title: cookbook.title, description: cookbook.description })
+
     }, [router]);
 
     const [value, setValue] = useState({
@@ -130,8 +108,6 @@ const CookbookEdit = () => {
 
     return (
         <div className="bg-gray-900 h-screen text-gray-300 flex flex-col">
-            <Nav />
-
             <div className="flex-1 flex flex-col items-center justify-center px-4 sm:px-0 mt-10">
                 <form className="w-full sm:w-1/2 mx-auto">
                     <h1 className="text-3xl font-bold mb-4">Edit Cookbook</h1>
@@ -178,8 +154,6 @@ const CookbookEdit = () => {
                     {errors.recipes && <p className="text-red-500">{errors.recipes}</p>}
                 </div>
             </div>
-
-            <Footer />
         </div>
     )
 }

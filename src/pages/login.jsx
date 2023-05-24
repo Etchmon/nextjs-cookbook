@@ -33,7 +33,6 @@ const Login = () => {
     // Otherwise, display the login form
     return (
         <div className="min-h-screen flex flex-col">
-        <Navbar />
         <main className="flex flex-1 flex-col md:flex-row items-center justify-center bg-gray-900">
             <section className="bg-gray-800 p-8 rounded-lg shadow-md mb-8 md:mb-0 md:mr-8 flex flex-col justify-center items-center">
                 <h1 className="text-2xl font-bold text-green-200 mb-6">Login to Your Account</h1>

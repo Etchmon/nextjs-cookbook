@@ -8,8 +8,8 @@ import Stream from '../components/stream';
 import RecipeForm from '../components/recipeForm';
 import CookbookForm from '../components/cookbookForm';
 import RecipeView from '../components/recipeView';
-import Image from 'next/image';
-import bgImage from '../../public/images/chef.jpg';
+import CookbookView from '../components/cookbookView'
+import CookbookEdit from '../components/cookbookEdit';
 
 const Dashboard = () => {
     const { data: session, status } = useSession();
@@ -18,6 +18,7 @@ const Dashboard = () => {
     const [cookbooksFull, setCookbooksFull] = useState([]);
     const [streamRecipes, setStreamRecipes] = useState([]);
     const [activeRecipe, setActiveRecipe] = useState(null);
+    const [activeCookbook, setActiveCookbook] = useState(null);
 
     // Function to shuffle an array
     function shuffleArray(array) {
@@ -39,7 +40,6 @@ const Dashboard = () => {
     const fetchUserCookbooks = async () => {
         const response = await fetch('/api/cookbook/getUserCookbooks');
         const data = await response.json();
-        console.log(data);
         setCookbooksFull(data);
     };
 
@@ -67,11 +67,13 @@ const Dashboard = () => {
             case 'recipeView':
                 return <RecipeView recipeObj={activeRecipe} />
             case 'cookbookView':
-            // return <RecipeView />
+                return <CookbookView cookbook={activeCookbook} setActiveComponent={setActiveComponent} setActiveRecipe={setActiveRecipe} />
+            case 'cookbookEdit':
+                return <CookbookEdit cookbook={activeCookbook} myRecipes={recipesFull} />
             case 'recipeAdd':
                 return <RecipeForm />
             case 'cookbookAdd':
-                return <CookbookForm setActiveComponent={setActiveComponent} />
+                return <CookbookForm setActiveComponent={setActiveComponent} updateData={fetchUserCookbooks} />
             case 'dashboard':
                 return <Dash session={session} recipes={recipesFull} cookbooks={cookbooksFull} onClick={setActiveComponent} />;
             case 'stream':
@@ -79,7 +81,7 @@ const Dashboard = () => {
             case 'recipes':
                 return <RecipeList recipes={recipesFull} showAddButton={false} setActiveComponent={setActiveComponent} setActiveRecipe={setActiveRecipe} />;
             case 'cookbooks':
-                return <CookbooksList cookbooks={cookbooksFull} updateData={fetchUserCookbooks} />;
+                return <CookbooksList cookbooks={cookbooksFull} updateData={fetchUserCookbooks} setActiveCookbook={setActiveCookbook} setActiveComponent={setActiveComponent} />;
             default:
                 return null;
         }

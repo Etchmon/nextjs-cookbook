@@ -5,20 +5,17 @@ import Link from 'next/link';
 
 const CookbookList = (props) => {
     const router = useRouter();
-    const { cookbooks } = props;
+    const { cookbooks, setActiveCookbook, setActiveComponent } = props;
 
-    const handleClick = (cookbookId) => {
-        router.push({
-            pathname: '/cookbook-view',
-            query: { cookbookId: cookbookId }
-        })
+    const handleView = (cookbook) => {
+        setActiveCookbook(cookbook);
+        setActiveComponent('cookbookView')
+
     };
 
-    const handleEdit = (cookbookId) => {
-        router.push({
-            pathname: '/cookbook-edit',
-            query: { cookbookId: cookbookId }
-        })
+    const handleEdit = (cookbook) => {
+        setActiveCookbook(cookbook);
+        setActiveComponent('cookbookEdit')
     };
 
     const handleDelete = async (cookbookId) => {
@@ -52,13 +49,13 @@ const CookbookList = (props) => {
                         </div>
                         <button
                             className="bg-green-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-green-600 transition-colors duration-300"
-                            onClick={() => handleClick(cookbook._id)}
+                            onClick={() => handleView(cookbook)}
                         >
                             View
                         </button>
                         <button
                             className="bg-red-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-red-600 transition-colors duration-300"
-                            onClick={() => handleEdit(cookbook._id)}
+                            onClick={() => handleEdit(cookbook)}
                         >
                             Edit
                         </button>
