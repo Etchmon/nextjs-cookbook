@@ -23,7 +23,7 @@ const CookbookView = (props) => {
         };
 
         fetchCookBookRecipes();
-    }, [router]);
+    }, []);
 
     if (!cookbook || !recipes) {
         return <div>Loading...</div>;

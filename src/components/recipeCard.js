@@ -50,16 +50,6 @@ const RecipeCard = ({ recipe, showAddButton, updateData, setActiveComponent, set
 
     return (
         <div className="flex flex-col justify-center items-center bg-gray-100 m-10 shadow-md rounded-lg p-4 hover:shadow-lg transition-shadow duration-300">
-            {/* Image */}
-            {recipe.image && (
-                <div className="aspect-w-3 aspect-h-2 mb-4">
-                    <img
-                        className="object-cover rounded-lg"
-                        src={recipe.image}
-                        alt={recipe.title}
-                    />
-                </div>
-            )}
 
             {/* Title */}
             <h2 className="text-2xl font-bold mb-2 text-green-600 text-center">{recipe.title}</h2>

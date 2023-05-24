@@ -21,7 +21,7 @@ const CookbookEdit = (props) => {
         fetchCookBookRecipes();
         setValue({ title: cookbook.title, description: cookbook.description })
 
-    }, [router]);
+    }, []);
 
     const [value, setValue] = useState({
         title: '',
