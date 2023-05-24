@@ -92,9 +92,7 @@ const options = {
                 // user found, return the user object
                 return {
                     user: {
-                        id: userData._id,
                         username: userData.username,
-                        password: userData.password,
                         email: userData.email,
                         cookbooks: userData.cookbooks
                     }
