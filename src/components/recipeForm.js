@@ -149,13 +149,13 @@ const RecipeForm = () => {
     } else {
 
         return (
-            <div className="h-full bg-gray-900 text-gray-300 flex flex-1 flex-col items-center">
+            <div className="h-full w-full bg-gray-900 text-gray-300 grid grid-cols-1 md:grid-cols-2 items-start mb-">
                 <form className="flex flex-col w-full max-w-md p-4 items-start justify-center">
-                    <h1 className="text-2xl font-bold mb-4">Create a Recipe</h1>
-                    <label className="flex flex-col mb-4">
+                    <h1 className="text-2xl font-bold w-full mb-4 text-center">Create a Recipe</h1>
+                    <label className="w-full flex flex-col mb-4">
                         <span className="mb-2 font-medium">Recipe name:</span>
                         <input
-                            className="py-2 px-3 rounded-md bg-gray-700 focus:outline-none focus:ring-2 focus:ring-green-600"
+                            className="w-full py-2 rounded-md bg-gray-700 focus:outline-none focus:ring-2 focus:ring-green-600"
                             type="text"
                             name="title"
                             value={value.title}
@@ -163,23 +163,23 @@ const RecipeForm = () => {
                         />
                         {errors.title && <span className="text-red-500">{errors.title}</span>}
                     </label>
-                    <label className="block mb-4">
+                    <label className="w-full flex flex-col mb-4">
                         <span className="mb-2 font-medium">Description:</span>
-                        <textarea name="description" className="block w-full rounded-md bg-gray-700 focus:outline-none focus:ring-2 focus:ring-green-600 px-10" value={value.description} onChange={handleChange} />
+                        <textarea name="description" className="w-full rounded-md bg-gray-700 focus:outline-none focus:ring-2 focus:ring-green-600" value={value.description} onChange={handleChange} />
                         {errors.description && <p className="text-red-500">{errors.description}</p>}
                     </label>
-                    <label className="flex flex-col mb-4">
+                    <label className="w-full flex flex-col mb-4">
                         <span className="mb-2 font-medium">Ingredients:</span>
-                        <div className="flex">
+                        <div className="flex flex-col md:flex w-full">
                             <input
-                                className="py-2 px-3 rounded-l-md bg-gray-700 focus:outline-none focus:ring-2 focus:ring-green-600"
+                                className="py-2 px-3 rounded-t-md bg-gray-700 focus:outline-none focus:ring-2 focus:ring-green-600"
                                 type="text"
                                 name="ingredients"
                                 value={value.ingredients}
                                 onChange={handleChange}
                             />
                             <button
-                                className="py-2 px-4 rounded-r-md bg-green-600 hover:bg-green-700 text-gray-300 font-medium"
+                                className="py-2 px-4 rounded-b-md bg-blue-600 hover:bg-blue-700 text-gray-300 font-medium"
                                 onClick={addIngredient}
                             >
                                 Add
@@ -187,18 +187,18 @@ const RecipeForm = () => {
                         </div>
                         {errors.ingredients && <span className="text-red-500">{errors.ingredients}</span>}
                     </label>
-                    <label className="flex flex-col mb-4">
+                    <label className="w-full flex flex-col mb-4">
                         <span className="mb-2 font-medium">Instructions:</span>
-                        <div className="flex">
+                        <div className="flex flex-col md:flex">
                             <input
-                                className="py-2 px-3 rounded-l-md bg-gray-700 focus:outline-none focus:ring-2 focus:ring-green-600"
+                                className="py-2 px-3 rounded-t-md bg-gray-700 focus:outline-none focus:ring-2 focus:ring-green-600"
                                 type="text"
                                 name="instructions"
                                 value={value.instructions}
                                 onChange={handleChange}
                             />
                             <button
-                                className="py-2 px-4 rounded-r-md bg-green-600 hover:bg-green-700 text-gray-300 font-medium"
+                                className="py-2 px-4 rounded-b-md bg-blue-600 hover:bg-blue-700 text-gray-300 font-medium"
                                 onClick={addInstruction}
                             >
                                 Add
@@ -207,20 +207,20 @@ const RecipeForm = () => {
                         {errors.instructions && <span className="text-red-500">{errors.instructions}</span>}
                     </label>
                     <button
-                        className="py-2 px-4 rounded-md bg-green-600 hover:bg-green-700 text-gray-300 font-medium"
+                        className="w-full mt-10 py-6 px-4 rounded-md bg-green-600 hover:bg-green-700 text-gray-300 font-medium"
                         onClick={handleSubmit}
                     >
                         Submit
                     </button>
                 </form>
-                <div className="grid gap-10 md:grid-cols-2 sm:grid-cols-1 p-6">
-                    <div className="max-w-md">
-                        <h2 className="text-xl font-medium mb-2">Ingredients</h2>
+                <div className="w-full max-h-screen grid gap-10 md:grid-rows-2 p-4 md:overflow-hidden">
+                    <div className="w-full max-h-screen-1/2 overflow-y-scroll">
+                        <h2 className="text-xl font-medium sticky top-0 bg-gray-900">Ingredients</h2>
                         <ol className="mt-4">
                             {ingredients.map((ingredient) => (
                                 <li
                                     key={id++}
-                                    className="py-2 px-3 mb-2 bg-gray-700 rounded-md text-gray-300"
+                                    className="py-2 px-3 mb-2 bg-gray-700 rounded-md text-gray-300 flex justify-between"
                                 >
                                     {ingredient}
                                     <button className="p-1 mr-2 rounded-lg bg-red-800" onClick={(e) => removeIngredient(e, ingredient)}>-</button>
@@ -228,16 +228,16 @@ const RecipeForm = () => {
                             ))}
                         </ol>
                     </div>
-                    <div className="max-w-md">
-                        <h2 className="text-xl font-medium mb-2">Instructions</h2>
-                        <ol className="list-decimal mt-4">
+                    <div className="w-full max-h-screen-1/2 overflow-y-scroll">
+                        <h2 className="text-xl font-medium sticky top-0 bg-gray-900">Instructions</h2>
+                        <ol className="list-decimal mt-4 flex flex-col">
                             {instructions.map((instruction) => (
                                 <li
                                     key={id++}
-                                    className="py-2 px-3 mb-2 bg-gray-700 rounded-md text-gray-300"
+                                    className="py-2 px-3 mb-2 bg-gray-700 rounded-md text-gray-300 flex flex-wrap justify-between"
                                 >
-                                    {instruction}
-                                    <button className="p-1 mr-2 rounded-lg bg-red-800" onClick={(e) => removeInstruction(e, instruction)}>-</button>
+                                    <p className="whitespace-pre-lines break-words max-w-[90%]">{instruction}</p>
+                                    <button className="p-1 max-h-8 rounded-lg bg-red-800 flex-shrink-0" onClick={(e) => removeInstruction(e, instruction)}>-</button>
                                 </li>
                             ))}
                         </ol>

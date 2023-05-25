@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Head from 'next/head'
 import Link from 'next/link';
 import { signOut, getSession, useSession } from "next-auth/react";
 import Dash from '../components/dash';
@@ -92,15 +93,18 @@ const Dashboard = () => {
     }
 
     return (
-        <div className="grid grid-cols-4 h-screen bg-gray-900 text-gray-300">
-
+        <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-4 h-screen w-full bg-gray-900 text-gray-300">
+            <Head>
+                <title>CBD</title>
+                <meta name="description" content="Organize your recipes and plan your dinners with CookBook Digital." />
+            </Head>
             {/* Sidebar */}
-            <div className="bg-gray-900 cols-1 sm:top-0">
-                <h2 className="text-lg text-green-500 font-semibold p-4">Menu</h2>
-                <ul className="p-4 space-y-2">
+            <div className="bg-gray-900 sm:top-0">
+                <h2 className="text-lg text-green-500 font-semibold pt-4 md:p-4 text-center md:text-left">Menu</h2>
+                <ul className="mt-2 md:p-4 space-y-2 flex flex-wrap justify-evenly md:flex-col lg:flex-col">
                     <li>
                         <button
-                            className={`text-green-300 block py-2 px-4 hover:bg-green-600 hover:text-gray-100 rounded w-3/4 text-left ${activeComponent === 'dashboard' ? 'bg-green-600 text-gray-100' : ''}`}
+                            className={`text-green-300 block py-2 px-4 mt-2 md:mt-0 hover:bg-green-600 hover:text-gray-100 rounded md:w-3/4 text-left ${activeComponent === 'dashboard' ? 'bg-green-600 text-gray-100' : ''}`}
                             onClick={() => setActiveComponent('dashboard')}
                         >
                             Dashboard
@@ -108,7 +112,7 @@ const Dashboard = () => {
                     </li>
                     <li>
                         <button
-                            className={`text-green-300 block py-2 px-4 hover:bg-green-600 hover:text-gray-100 rounded w-3/4 text-left ${activeComponent === 'stream' ? 'bg-green-600 text-gray-100' : ''}`}
+                            className={`text-green-300 block py-2 px-4 hover:bg-green-600 hover:text-gray-100 rounded md:w-3/4 text-left ${activeComponent === 'stream' ? 'bg-green-600 text-gray-100' : ''}`}
                             onClick={() => setActiveComponent('stream')}
                         >
                             Stream
@@ -116,7 +120,7 @@ const Dashboard = () => {
                     </li>
                     <li>
                         <button
-                            className={`text-green-300 block py-2 px-4 hover:bg-green-600 hover:text-gray-100 rounded w-3/4 text-left ${activeComponent === 'recipes' ? 'bg-green-600 text-gray-100' : ''}`}
+                            className={`text-green-300 block py-2 px-4 hover:bg-green-600 hover:text-gray-100 rounded md:w-3/4 text-left ${activeComponent === 'recipes' ? 'bg-green-600 text-gray-100' : ''}`}
                             onClick={() => setActiveComponent('recipes')}
                         >
                             Recipes
@@ -124,26 +128,21 @@ const Dashboard = () => {
                     </li>
                     <li>
                         <button
-                            className={`text-green-300 block py-2 px-4 hover:bg-green-600 hover:text-gray-100 rounded w-3/4 text-left ${activeComponent === 'cookbooks' ? 'bg-green-600 text-gray-100' : ''}`}
+                            className={`text-green-300 block py-2 px-4 hover:bg-green-600 hover:text-gray-100 rounded md:w-3/4 text-left ${activeComponent === 'cookbooks' ? 'bg-green-600 text-gray-100' : ''}`}
                             onClick={() => setActiveComponent('cookbooks')}
                         >
                             CookBooks
                         </button>
                     </li>
                     <li>
-                        <Link href="/" className="text-green-300 block py-2 px-4 hover:bg-green-600 hover:text-gray-100 rounded w-3/4">
-                            Settings
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href="/" onClick={() => signOut()} className="text-green-300 block py-2 px-4 hover:bg-green-600 hover:text-gray-100 rounded w-3/4">
+                        <Link href="/" onClick={() => signOut()} className="text-green-300 block py-2 px-4 hover:bg-green-600 hover:text-gray-100 rounded md:w-3/4">
                             Sign Out
                         </Link>
                     </li>
                 </ul>
             </div>
             {/* Content */}
-            <div className="col-span-3 container px-4 py-6 overflow-hidden mb-2">
+            <div className="h-full col-span-3 container px-4 py-6 overflow-y-scroll md:overflow-hidden mb-2">
                 {renderComponent()}
             </div>
         </div>

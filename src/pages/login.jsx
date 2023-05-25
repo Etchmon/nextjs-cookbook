@@ -37,10 +37,10 @@ const Login = () => {
             <section className="bg-gray-800 p-8 rounded-lg shadow-md mb-8 md:mb-0 md:mr-8 flex flex-col justify-center items-center">
                 <h1 className="text-2xl font-bold text-green-200 mb-6">Login to Your Account</h1>
                 <button
-                    className="flex items-center justify-center space-x-2 bg-green-600 text-white font-bold py-2 px-4 rounded mb-6"
+                    className="bg-green-600 text-white font-bold py-2 px-4 rounded w-full"
                     onClick={handleGoogleLogin}
                 >
-                    <span>Sign in with Google</span>
+                    Sign in with Google
                 </button>
                 <div className="flex items-center space-x-2 mb-6">
                     <hr className="flex-1 border-green-400" />
@@ -70,10 +70,9 @@ const Login = () => {
                     Enter
                 </button>
             </section>
-            <section className="text-center">
-                <div className="bg-green-600 w-24 h-24 mx-auto mb-4 rounded-full">&nbsp;</div>
+            <section className="bg-gray-800 p-8 rounded-lg shadow-md mb-8 md:mb-0 md:mr-8 flex flex-col justify-center items-center">
                 <h1 className="text-2xl font-bold text-green-200 mb-2">New User?</h1>
-                <p className="text-green-200 mb-6">Sign up to start building your own digital cookbook!</p>
+                <p className="text-green-200  mb-6">Sign up to start building your own digital cookbook!</p>
                 <Link href='/signup' className="bg-green-600 text-white font-bold py-2 px-4 rounded">
                     Sign up
                 </Link>
