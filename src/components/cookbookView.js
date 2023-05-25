@@ -30,10 +30,10 @@ const CookbookView = (props) => {
     }
 
     return (
-        <div className="bg-gray-900 h-full mr-10">
+        <div className="bg-gray-900 h-full mr-10 flex flex-col">
             <div className="container mx-auto px-4 py-6">
-                <h1 className="text-4xl font-bold mb-4 mt-20 text-green-500">{cookbook.title}</h1>
-                <div className="grid grid-cols-1 gap-4 mb-auto flex-1 h-full overflow-y-auto pb-80 w-1/2">
+                <h1 className="text-4xl font-bold mb-4 md:mt-20 text-green-500">{cookbook.title}</h1>
+                <div className="grid grid-cols-1 gap-4 mb-auto flex-1 h-full overflow-y-auto w-1/2">
                     {recipes.map((recipe) => (
                         console.log(recipe),
                         <div

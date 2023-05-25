@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { useSession, signIn } from "next-auth/react";
 import { useRouter } from 'next/router';
 
-const RecipeForm = () => {
+const RecipeForm = (props) => {
     const { data: session, status } = useSession();
     const router = useRouter();
+
+    const { updateData, setActiveComponent } = props;
 
     const [ingredients, setIngredients] = useState([]);
     const [instructions, setInstructions] = useState([]);
@@ -127,10 +129,8 @@ const RecipeForm = () => {
         });
         const result = await res.json();
         console.log(result);
-        router.push({
-            pathname: '/recipe-view',
-            query: { recipeId: result.recipe._id }
-        })
+        updateData();
+        setActiveComponent('recipes');
     }
 
     if (status === 'loading') {

@@ -56,16 +56,22 @@ export default function Home() {
         />
         <div className="absolute inset-0 bg-gray-900 opacity-50"></div>
         {imageLoaded &&
-          <section className="flex flex-col items-center mt-16 md:justify-center w-full z-10">
+          <section className="flex flex-col items-center mb-16 justify-center w-full z-10">
             <div className={`max-w-4xl mx-auto px-4 ${showContent ? 'opacity-100 transition-opacity duration-1000' : 'opacity-0'
               }`}>
               <div className="flex flex-col items-center justify-center text-white">
                 <h1 className={`text-3xl md:text-5xl font-bold text-center mb-8 text-green-500 ${imageLoaded ? 'opacity-100' : 'opacity-0' // Apply opacity based on image loaded state
                   } transition-opacity duration-1000 ease-in-out`}>Organize your recipes and plan your dinners</h1>
                 <p className=" text-sm md:text-xl text-center mb-8 md:mb-16">CookBook Digital is the only cookbook you&#39;ll ever need.</p>
-                <Link href="/signup" className="bg-green-500 text-gray-800 py-2 px-4 rounded hover:bg-green-600">
-                  Get started
-                </Link>
+                {!session ? (
+                  <Link href="/signup" className="bg-green-500 text-gray-800 py-2 px-4 rounded hover:bg-green-600">
+                    Get started
+                  </Link>
+                ) : (
+                  <Link href="/login" className="bg-green-500 text-gray-800 py-2 px-4 rounded hover:bg-green-600">
+                    Get started
+                  </Link>
+                )}
               </div>
             </div>
           </section>

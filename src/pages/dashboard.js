@@ -72,7 +72,7 @@ const Dashboard = () => {
             case 'cookbookEdit':
                 return <CookbookEdit cookbook={activeCookbook} myRecipes={recipesFull} />
             case 'recipeAdd':
-                return <RecipeForm />
+                return <RecipeForm setActiveComponent={setActiveComponent} updateData={fetchUserRecipes} />
             case 'cookbookAdd':
                 return <CookbookForm setActiveComponent={setActiveComponent} updateData={fetchUserCookbooks} />
             case 'dashboard':
@@ -93,7 +93,7 @@ const Dashboard = () => {
     }
 
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-4 h-screen w-full bg-gray-900 text-gray-300">
+        <div className="grid grid-cols-1 lg:grid-cols-6 md:grid-col-6 h-screen w-full bg-gray-900 text-gray-300">
             <Head>
                 <title>CBD</title>
                 <meta name="description" content="Organize your recipes and plan your dinners with CookBook Digital." />
@@ -142,7 +142,7 @@ const Dashboard = () => {
                 </ul>
             </div>
             {/* Content */}
-            <div className="h-full col-span-3 container px-4 py-6 overflow-y-scroll md:overflow-hidden mb-2">
+            <div className="h-full col-span-4 container px-4 py-6 overflow-y-scroll md:overflow-hidden mb-2">
                 {renderComponent()}
             </div>
         </div>

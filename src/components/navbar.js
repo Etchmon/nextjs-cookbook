@@ -6,8 +6,8 @@ const Navbar = () => {
     const { data: session } = useSession();
 
     return (
-        <nav className="shadow-sm py-4 px-8 flex justify-between items-center w-full z-10">
-            <Link href="/" className="text-xl font-bold text-green-500">CookBook Digital</Link>
+        <nav className="shadow-sm py-4 px-2 md:px-8 flex gap-4 justify-between items-center w-full z-10">
+            <Link href="/" className='text-white whitespace-nowrap'>CookBook Digital</Link>
             {!session ? (
                 <div className="flex items-center space-x-4">
                     <Link href="/login" className="text-green-500 hover:text-green-200 whitespace-nowrap">
@@ -18,7 +18,7 @@ const Navbar = () => {
                     </Link>
                 </div>
             ) : (
-                <div className="flex items-center space-x-4">
+                <div className="flex items-center gap-4 space-x-4">
                     <Link href="/dashboard" className="text-green-500 hover:text-green-200 whitespace-nowrap">Dashboard</Link>
                     <button className="bg-green-500 text-gray-300 py-2 px-4 rounded hover:bg-green-600 whitespace-nowrap" onClick={() => signOut()}>
                         Sign out
