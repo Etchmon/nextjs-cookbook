@@ -63,15 +63,9 @@ export default function Home() {
                 <h1 className={`text-3xl md:text-5xl font-bold text-center mb-8 text-green-500 ${imageLoaded ? 'opacity-100' : 'opacity-0' // Apply opacity based on image loaded state
                   } transition-opacity duration-1000 ease-in-out`}>Organize your recipes and plan your dinners</h1>
                 <p className=" text-sm md:text-xl text-center mb-8 md:mb-16">CookBook Digital is the only cookbook you&#39;ll ever need.</p>
-                {!session ? (
-                  <Link href="/signup" className="bg-green-500 text-gray-800 py-2 px-4 rounded hover:bg-green-600">
-                    Get started
-                  </Link>
-                ) : (
-                  <Link href="/login" className="bg-green-500 text-gray-800 py-2 px-4 rounded hover:bg-green-600">
-                    Get started
-                  </Link>
-                )}
+                <Link href="/signup" className="bg-green-500 text-gray-800 py-2 px-4 rounded hover:bg-green-600">
+                  Get started
+                </Link>
               </div>
             </div>
           </section>

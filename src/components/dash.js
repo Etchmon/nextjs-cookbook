@@ -3,7 +3,7 @@ import React from 'react'
 
 const DashboardContent = ({ session, recipes, cookbooks, onClick }) => {
     return (
-        <div className="p-8 rounded shadow flex-1 mb-2 text-green-300">
+        <div className="md:p-8 rounded shadow flex-1 md:mb-2 text-green-300">
             <h1 className="text-4xl font-bold mb-8">Welcome, {session.user.username}!</h1>
             <p className="text-xl mb-8">We hope you&#39;re having a great day.</p>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 text-gray-900">

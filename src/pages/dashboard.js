@@ -44,22 +44,25 @@ const Dashboard = () => {
         setCookbooksFull(data);
     };
 
+    const fetchStreamRecipes = async () => {
+        const response = await fetch('/api/recipe/getAll');
+        const data = await response.json();
+        setStreamRecipes(shuffleArray(data));
+    };
+
+    // Fetch user data from API endpoints
+    const fetchData = async () => {
+        await Promise.all([
+            fetchStreamRecipes(),
+            fetchUserRecipes(),
+            fetchUserCookbooks(),
+        ]);
+    };
+
 
     useEffect(() => {
-        // Fetch user data from API endpoints
-        const fetchUserData = async () => {
-            const [streamResponse] = await Promise.all([
-                fetch('/api/recipe/getAll').then((res) => res.json()),
-            ]);
-
-            // Set state with the fetched data
-            setStreamRecipes(shuffleArray(streamResponse));
-        };
-
         // Fetch user data on component mount
-        fetchUserData();
-        fetchUserRecipes();
-        fetchUserCookbooks();
+        fetchData();
     }, []);
 
     // Render the appropriate component based on activeComponent state
@@ -72,7 +75,7 @@ const Dashboard = () => {
             case 'cookbookEdit':
                 return <CookbookEdit cookbook={activeCookbook} myRecipes={recipesFull} />
             case 'recipeAdd':
-                return <RecipeForm setActiveComponent={setActiveComponent} updateData={fetchUserRecipes} />
+                return <RecipeForm setActiveComponent={setActiveComponent} updateData={fetchData} />
             case 'cookbookAdd':
                 return <CookbookForm setActiveComponent={setActiveComponent} updateData={fetchUserCookbooks} />
             case 'dashboard':
@@ -80,7 +83,7 @@ const Dashboard = () => {
             case 'stream':
                 return <Stream recipes={streamRecipes} showAddButton={true} updateData={fetchUserRecipes} setActiveComponent={setActiveComponent} setActiveRecipe={setActiveRecipe} />;
             case 'recipes':
-                return <RecipeList recipes={recipesFull} showAddButton={false} setActiveComponent={setActiveComponent} setActiveRecipe={setActiveRecipe} />;
+                return <RecipeList recipes={recipesFull} showAddButton={false} setActiveComponent={setActiveComponent} setActiveRecipe={setActiveRecipe} updateData={fetchData} />;
             case 'cookbooks':
                 return <CookbooksList cookbooks={cookbooksFull} updateData={fetchUserCookbooks} setActiveCookbook={setActiveCookbook} setActiveComponent={setActiveComponent} />;
             default:
@@ -93,18 +96,18 @@ const Dashboard = () => {
     }
 
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-6 md:grid-col-6 h-screen w-full bg-gray-900 text-gray-300">
+        <div className="grid grid-cols-1 grid-rows-6 lg:grid-cols-6 h-screen w-full bg-gray-900 text-gray-300">
             <Head>
                 <title>CBD</title>
                 <meta name="description" content="Organize your recipes and plan your dinners with CookBook Digital." />
             </Head>
             {/* Sidebar */}
-            <div className="bg-gray-900 sm:top-0">
-                <h2 className="text-lg text-green-500 font-semibold pt-4 md:p-4 text-center md:text-left">Menu</h2>
-                <ul className="mt-2 md:p-4 space-y-2 flex flex-wrap justify-evenly md:flex-col lg:flex-col">
+            <div className="bg-gray-900 sm:top-0 grid-row-1">
+                <h2 className="text-lg text-green-500 font-semibold pt-4 lg:p-4 text-center lg:text-left">Menu</h2>
+                <ul className="mt-2 lg:p-4 space-y-2 flex flex-wrap justify-evenly lg:flex-col">
                     <li>
                         <button
-                            className={`text-green-300 block py-2 px-4 mt-2 md:mt-0 hover:bg-green-600 hover:text-gray-100 rounded md:w-3/4 text-left ${activeComponent === 'dashboard' ? 'bg-green-600 text-gray-100' : ''}`}
+                            className={`text-green-300 block py-2 px-4 mt-2 lg:mt-0 hover:bg-green-600 hover:text-gray-100 rounded lg:w-3/4 text-left ${activeComponent === 'dashboard' ? 'bg-green-600 text-gray-100' : ''}`}
                             onClick={() => setActiveComponent('dashboard')}
                         >
                             Dashboard
@@ -112,7 +115,7 @@ const Dashboard = () => {
                     </li>
                     <li>
                         <button
-                            className={`text-green-300 block py-2 px-4 hover:bg-green-600 hover:text-gray-100 rounded md:w-3/4 text-left ${activeComponent === 'stream' ? 'bg-green-600 text-gray-100' : ''}`}
+                            className={`text-green-300 block py-2 px-4 hover:bg-green-600 hover:text-gray-100 rounded lg:w-3/4 text-left ${activeComponent === 'stream' ? 'bg-green-600 text-gray-100' : ''}`}
                             onClick={() => setActiveComponent('stream')}
                         >
                             Stream
@@ -120,7 +123,7 @@ const Dashboard = () => {
                     </li>
                     <li>
                         <button
-                            className={`text-green-300 block py-2 px-4 hover:bg-green-600 hover:text-gray-100 rounded md:w-3/4 text-left ${activeComponent === 'recipes' ? 'bg-green-600 text-gray-100' : ''}`}
+                            className={`text-green-300 block py-2 px-4 hover:bg-green-600 hover:text-gray-100 rounded lg:w-3/4 text-left ${activeComponent === 'recipes' ? 'bg-green-600 text-gray-100' : ''}`}
                             onClick={() => setActiveComponent('recipes')}
                         >
                             Recipes
@@ -128,21 +131,21 @@ const Dashboard = () => {
                     </li>
                     <li>
                         <button
-                            className={`text-green-300 block py-2 px-4 hover:bg-green-600 hover:text-gray-100 rounded md:w-3/4 text-left ${activeComponent === 'cookbooks' ? 'bg-green-600 text-gray-100' : ''}`}
+                            className={`text-green-300 block py-2 px-4 hover:bg-green-600 hover:text-gray-100 rounded lg:w-3/4 text-left ${activeComponent === 'cookbooks' ? 'bg-green-600 text-gray-100' : ''}`}
                             onClick={() => setActiveComponent('cookbooks')}
                         >
                             CookBooks
                         </button>
                     </li>
                     <li>
-                        <Link href="/" onClick={() => signOut()} className="text-green-300 block py-2 px-4 hover:bg-green-600 hover:text-gray-100 rounded md:w-3/4">
+                        <Link href="/" onClick={() => signOut()} className="text-green-300 block py-2 px-4 hover:bg-green-600 hover:text-gray-100 rounded lg:w-3/4">
                             Sign Out
                         </Link>
                     </li>
                 </ul>
             </div>
             {/* Content */}
-            <div className="h-full col-span-4 container px-4 py-6 overflow-y-scroll md:overflow-hidden mb-2">
+            <div className="h-full lg:col-span-4 row-start-3 row-span-6 lg:row-span-5 container px-4 lg:py-6 overflow-y-scroll lg:overflow-hidden lg:mb-2">
                 {renderComponent()}
             </div>
         </div>

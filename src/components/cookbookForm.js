@@ -114,7 +114,7 @@ const CookbookForm = (props) => {
 
         return (
             <div className="bg-gray-900 h-full text-gray-300 flex flex-col items-start">
-                <div className="flex-1 flex flex-col items-start px-4 sm:px-0 mt-10 w-full">
+                <div className="flex-1 flex flex-col items-start px-4 sm:px-0 mt-2 md:mt-10 w-full">
                     <form className="w-full sm:w-1/2 mr-auto">
                         <h1 className="text-3xl font-bold mb-4">Create a Cookbook</h1>
 
@@ -136,10 +136,10 @@ const CookbookForm = (props) => {
 
                 <div className="flex-1 flex flex-wrap grid grid-cols-2 mt-8 justify-center items-center">
                     <div className="h-full w-full overflow-y-auto pr-4 text-center">
-                        <h2 className="text-2xl font-bold mb-4">My Recipes</h2>
+                        <h2 className="text-2xl font-bold mb-4">Recipes</h2>
                         <ul className="pl-8 inline-block max-width-content items-center">
                             {myRecipes.map(recipe => (
-                                <li key={recipe} id={recipe._id} className='text-start '>
+                                <li key={recipe} id={recipe._id} className='text-start mb-2'>
                                     <button className="p-1 mr-2 rounded-lg bg-red-800" onClick={(e) => addToBook(e, recipe)}>+</button>
                                     {recipe.title}
                                 </li>
@@ -147,11 +147,10 @@ const CookbookForm = (props) => {
                         </ul>
                     </div>
                     <div className="h-full w-full overflow-y-auto pr-4 text-center">
-                        <h2 className="text-2xl font-bold mb-4">Recipes Added to Book</h2>
-
+                        <h2 className="text-2xl font-bold mb-4">Cookbook</h2>
                         <ul className="pl-8 inline-block max-width-content items-center">
                             {recipes.map((recipe) => (
-                                <li key={recipe._id} className="mb-2">
+                                <li key={recipe._id} className="text-start mb-2">
                                     <button className="p-1 mr-2 rounded-lg bg-red-800" onClick={(e) => removeFromBook(e, recipe)}>-</button>
                                     {recipe.title}
                                 </li>

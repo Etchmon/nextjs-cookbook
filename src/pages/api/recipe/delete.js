@@ -1,6 +1,7 @@
 // Imports
 import clientPromise from "../../../../lib/mongodb";
 import { getSession } from "next-auth/react";
+import { ObjectId } from 'mongodb';
 
 
 export default async function deleteRecipe(req, res) {
@@ -10,22 +11,23 @@ export default async function deleteRecipe(req, res) {
         return;
     }
 
-    const session = getSession({ req });
+    const session = await getSession({ req });
     if (!session) {
         res.status(401).json({ message: 'Not Authenticated' });
         return;
     }
+
 
     const { id } = req.body;
 
     try {
         const client = await clientPromise;
         const db = await client.db("CBD");
-        const recipeCollection = await db.collection("Recipes");
+        const collection = await db.collection("Recipes");
 
         // Delete the recipe in the database
         const result = await collection.findOneAndDelete(
-            { _id: id }
+            { _id: ObjectId(id) }
         );
 
         if (result.modifiedCount === 0) {

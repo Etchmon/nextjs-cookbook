@@ -42,6 +42,39 @@ const RecipeCard = ({ recipe, showAddButton, updateData, setActiveComponent, set
         // Navigate to recipe view page
         alert('Recipe Added');
     };
+    const handleDelete = async (recipeId) => {
+        console.log(recipeId)
+        try {
+            const response = await fetch('/api/recipe/delete', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    id: recipeId,
+                }),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                // Handle success response if needed
+
+                // Trigger data update in Dashboard component
+                if (updateData) {
+                    updateData();
+                }
+            } else {
+                // Handle error response if needed
+                console.error('Failed to delete recipe:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+
+
+        // Navigate to recipe view page
+        alert('Recipe Deleted');
+    };
 
     const handleClick = (recipe) => {
         setActiveRecipe(recipe);
@@ -49,7 +82,7 @@ const RecipeCard = ({ recipe, showAddButton, updateData, setActiveComponent, set
     };
 
     return (
-        <div className="flex flex-col justify-center items-center bg-gray-100 m-10 shadow-md rounded-lg p-4 hover:shadow-lg transition-shadow duration-300">
+        <div className="flex flex-col justify-center items-center bg-gray-100 md:m-10 shadow-md rounded-lg md:p-4 hover:shadow-lg transition-shadow duration-300">
 
             {/* Title */}
             <h2 className="text-2xl font-bold mb-2 text-green-600 text-center">{recipe.title}</h2>
@@ -78,10 +111,19 @@ const RecipeCard = ({ recipe, showAddButton, updateData, setActiveComponent, set
                 >
                     View Recipe
                 </button>
+                {/* Delete Button */}
+                {!showAddButton && (
+                    <button
+                        className="bg-red-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-red-600 transition-colors duration-300"
+                        onClick={() => handleDelete(recipe._id)}
+                    >
+                        Delete
+                    </button>
+                )}
                 {/* Add Button */}
                 {showAddButton && (
                     <button
-                        className="bg-red-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-red-600 transition-colors duration-300"
+                        className="bg-green-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-red-600 transition-colors duration-300"
                         onClick={() => handleAdd(recipe._id)}
                     >
                         Add

@@ -30,15 +30,15 @@ const CookbookView = (props) => {
     }
 
     return (
-        <div className="bg-gray-900 h-full mr-10 flex flex-col">
+        <div className="bg-gray-900 h-full md:mr-10 row-span-6">
             <div className="container mx-auto px-4 py-6">
                 <h1 className="text-4xl font-bold mb-4 md:mt-20 text-green-500">{cookbook.title}</h1>
-                <div className="grid grid-cols-1 gap-4 mb-auto flex-1 h-full overflow-y-auto w-1/2">
+                <div className="grid grid-cols-1 gap-4 mb-auto flex-1 h-full overflow-y-auto pb-40">
                     {recipes.map((recipe) => (
                         console.log(recipe),
                         <div
                             key={recipe.recipeId}
-                            className="bg-green-200 p-4 rounded-lg shadow hover:bg-green-300 cursor-pointer w-full"
+                            className="bg-gray-100 p-4 rounded-lg shadow hover:bg-green-300 cursor-pointer w-full"
                             onClick={() => handleClick(recipe)}
                         >
                             <div className="grid grid-cols-1 gap-4">
