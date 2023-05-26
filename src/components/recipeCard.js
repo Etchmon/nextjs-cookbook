@@ -1,12 +1,35 @@
-import React from 'react';
+import { React, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
+import Image from 'next/image';
+import meatImage from '../../public/images/meat.jpg';
+import nonMeatImage from '../../public/images/veg.jpg';
 
 const RecipeCard = ({ recipe, showAddButton, updateData, setActiveComponent, setActiveRecipe }) => {
     const router = useRouter();
     const { data: session, status } = useSession();
     const userRecipes = session.user.cookbooks.allRecipes;
+    const [imageLoaded, setImageLoaded] = useState(false);
+    const [showContent, setShowContent] = useState(false);
+    const meatIngredients = ['beef', 'chicken', 'pork', 'lamb']; // List of meat ingredients
+    const hasMeatIngredients = recipe.ingredients.some((ingredient) =>
+        meatIngredients.includes(ingredient.toLowerCase())
+    );
+
+    const imageSrc = hasMeatIngredients ? meatImage : nonMeatImage;
+
+    const handleImageLoad = () => {
+        setImageLoaded(true);
+    };
+
+    // useEffect(() => {
+    //     if (imageLoaded) {
+    //         setTimeout(() => {
+    //             setShowContent(true);
+    //         }, 300); // Delay showing the content to allow the fade-in effect to work
+    //     }
+    // }, [imageLoaded]);
 
     const handleAdd = async (recipeId) => {
         if (userRecipes.includes(recipeId)) {
@@ -82,31 +105,46 @@ const RecipeCard = ({ recipe, showAddButton, updateData, setActiveComponent, set
     };
 
     return (
-        <div className="flex flex-col justify-center items-center bg-gray-100 md:m-10 shadow-md rounded-lg md:p-4 hover:shadow-lg transition-shadow duration-300">
+        <div className={`relative lg:flex lg:justify-between items-center bg-gray-900 lg:m-10 shadow-md rounded-lg md:p-4 text-white ${imageLoaded ? 'opacity-100 transition-opacity duration-500 ease-in-out' : 'opacity-0'
+            } `}>
 
-            {/* Title */}
-            <h2 className="text-2xl font-bold mb-2 text-green-600 text-center">{recipe.title}</h2>
+            <div className="absolute inset-0 w-full h-full overflow-hidden rounded-md">
+                <Image
+                    src={imageSrc}
+                    alt="Background Image"
+                    onLoadingComplete={handleImageLoad}
+                    quality={100} // Adjust image quality if needed
+                    className="object-cover object-center w-full h-full filter blur-lg"
+                />
+            </div>
 
-            {/* Description */}
-            {recipe.description && <p className="text-gray-600 mb-4 text-center">{recipe.description}</p>}
+            <div className='flex flex-col text-center lg:text-start lg:bg-gray-100 lg:p-10 rounded-md'>
+                {/* Title */}
+                <h2 className="text-2xl border-b border-gray-900 font-bold mt-4 mb-2 pb-4 text-b-600 z-10 text-gray-900">{recipe.title}</h2>
 
-            {/* Author */}
-            <span className='text-gray-400 text-sm'>{recipe.author}</span>
+                {/* Description */}
+                {recipe.description && <p className="text-gray-900 mb-4 z-10">{recipe.description}</p>}
+
+                {/* Author */}
+                <span className="font-italic text-gray-900 text-sm z-10">by {recipe.author}</span>
+            </div>
+
+
 
             {/* Ingredients */}
-            <div className="border-t border-gray-200 pt-4">
-                <h3 className="text-gray-700 text-lg font-semibold mb-2">Ingredients:</h3>
-                <ul className="list-disc pl-6">
+            <div className="relative h-full w-full rounded-md pl-4 mt-4 z-10 overflow-y-scroll max-h-40 flex flex-col items-center text-center align-center justify-center">
+                <h3 className="text-gray-900 text-lg font-semibold mb-2 sticky">Ingredients:</h3>
+                <ul className="list-disc pl-6 text-gray-900 flex lg:flex-col justify-evenly items-center w-full flex-wrap">
                     {recipe.ingredients.map((ingredient, index) => (
-                        <li key={`${ingredient}-${index + 1}`} className="text-gray-700">{ingredient}</li>
+                        <li key={`${ingredient}-${index + 1}`}>{ingredient}</li>
                     ))}
                 </ul>
             </div>
 
             {/* Action Button */}
-            <div className="flex gap-2">
+            <div className="relative flex gap-2 mt-4 z-10 flex flex-col items-center text-center lg:items-start lg:text-start">
                 <button
-                    className="bg-blue-600 text-white py-2 px-4 rounded-lg mt-4 hover:bg-blue-300 transition-colors duration-300"
+                    className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-300 transition-colors duration-300"
                     onClick={() => handleClick(recipe)}
                 >
                     View Recipe
@@ -114,7 +152,7 @@ const RecipeCard = ({ recipe, showAddButton, updateData, setActiveComponent, set
                 {/* Delete Button */}
                 {!showAddButton && (
                     <button
-                        className="bg-red-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-red-600 transition-colors duration-300"
+                        className="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition-colors duration-300"
                         onClick={() => handleDelete(recipe._id)}
                     >
                         Delete
@@ -123,7 +161,7 @@ const RecipeCard = ({ recipe, showAddButton, updateData, setActiveComponent, set
                 {/* Add Button */}
                 {showAddButton && (
                     <button
-                        className="bg-green-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-red-600 transition-colors duration-300"
+                        className="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition-colors duration-300"
                         onClick={() => handleAdd(recipe._id)}
                     >
                         Add
@@ -131,6 +169,7 @@ const RecipeCard = ({ recipe, showAddButton, updateData, setActiveComponent, set
                 )}
             </div>
         </div>
+
     );
 };
 
