@@ -145,7 +145,7 @@ const Dashboard = () => {
                 </ul>
             </div>
             {/* Content */}
-            <div className="h-full w-full mx-auto lg:col-span-4 row-start2.5 row-span-6 lg:row-span-6 container px-4 lg:py-6 overflow-y-scroll lg:overflow-hidden lg:mb-2">
+            <div className="h-full w-full mx-auto lg:col-span-4 row-start-2 py-10 row-span-6 lg:row-span-6 container px-4 lg:py-6 overflow-y-scroll lg:overflow-hidden lg:mb-2">
                 {renderComponent()}
             </div>
         </div>

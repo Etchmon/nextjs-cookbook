@@ -7,11 +7,9 @@ import meatImage from '../../public/images/meat.jpg';
 import nonMeatImage from '../../public/images/veg.jpg';
 
 const RecipeCard = ({ recipe, showAddButton, updateData, setActiveComponent, setActiveRecipe }) => {
-    const router = useRouter();
     const { data: session, status } = useSession();
     const userRecipes = session.user.cookbooks.allRecipes;
     const [imageLoaded, setImageLoaded] = useState(false);
-    const [showContent, setShowContent] = useState(false);
     const meatIngredients = ['beef', 'chicken', 'pork', 'lamb']; // List of meat ingredients
     const hasMeatIngredients = recipe.ingredients.some((ingredient) =>
         meatIngredients.includes(ingredient.toLowerCase())
@@ -132,7 +130,7 @@ const RecipeCard = ({ recipe, showAddButton, updateData, setActiveComponent, set
 
 
             {/* Ingredients */}
-            <div className="relative h-full w-full rounded-md pl-4 mt-4 z-10 overflow-y-scroll max-h-40 flex flex-col items-center text-center align-center justify-center">
+            <div className="relative max-h-full w-full rounded-md pl-4 mt-4 z-10 overflow-y-scroll max-h-40 flex flex-col items-center text-center align-center justify-center">
                 <h3 className="text-gray-900 text-lg font-semibold mb-2 sticky">Ingredients:</h3>
                 <ul className="list-disc pl-6 text-gray-900 flex lg:flex-col justify-evenly items-center w-full flex-wrap">
                     {recipe.ingredients.map((ingredient, index) => (
@@ -142,7 +140,7 @@ const RecipeCard = ({ recipe, showAddButton, updateData, setActiveComponent, set
             </div>
 
             {/* Action Button */}
-            <div className="relative flex gap-2 mt-4 z-10 flex flex-col items-center text-center lg:items-start lg:text-start">
+            <div className="relative flex gap-2 mt-4 z-10 pb-4 flex lg:flex-col justify-center items-center text-center">
                 <button
                     className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-300 transition-colors duration-300"
                     onClick={() => handleClick(recipe)}

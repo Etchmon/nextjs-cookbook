@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { signOut, getSession, useSession } from "next-auth/react";
 import { useRouter } from 'next/router';
-import Link from 'next/link';
+import Image from 'next/image';
+import imgSrc from '../../public/images/book.jpg';
 
 const CookbookList = (props) => {
     const router = useRouter();
     const { cookbooks, setActiveCookbook, setActiveComponent } = props;
+    const [imageLoaded, setImageLoaded] = useState(false);
+
+    const handleImageLoad = () => {
+        setImageLoaded(true);
+    };
 
     const handleView = (cookbook) => {
         setActiveCookbook(cookbook);
@@ -34,37 +39,49 @@ const CookbookList = (props) => {
     }
 
     return (
-        <div className="p-8 rounded shadow h-full w-full overflow-y-auto">
-            <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-4 mb-auto flex-1 h-full w-full pb-80">
+        <div className={`relative lg:flex lg:justify-between items-center bg-gray-900 lg:m-10 shadow-md rounded-lg md:p-4 text-white ${imageLoaded ? 'opacity-100 transition-opacity duration-500 ease-in-out' : 'opacity-0'
+            } `}>
+            <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-4 mb-auto flex-1 h-full w-full pb-80 z-10">
                 {cookbooks.map((cookbook) => (
                     <div
                         key={cookbook._id}
-                        className="bg-gray-100 p-4 rounded-lg shadow flex flex-col"
+                        className="relative bg-gray-100 p-4 rounded-lg shadow flex flex-col justify-evenly"
                     >
-                        <div className="grid grid-cols-1 gap-4 text-center">
+                        <div className="absolute inset-0 w-full h-full overflow-hidden rounded-md">
+                            <Image
+                                src={imgSrc}
+                                alt="Background Image"
+                                onLoadingComplete={handleImageLoad}
+                                quality={100} // Adjust image quality if needed
+                                className="object-cover object-center w-full h-full filter blur-md"
+                            />
+                        </div>
+                        <div className="grid grid-cols-1 gap-4 text-center z-10">
                             <div>
-                                <h2 className="text-green-800 font-semibold mb-2">{cookbook.title}</h2>
+                                <h2 className="text-4xl text-green-800 font-semibold mb-2">{cookbook.title}</h2>
                                 <p className="text-green-800">{cookbook.description}</p>
                             </div>
                         </div>
-                        <button
-                            className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-green-600 transition-colors duration-300"
-                            onClick={() => handleView(cookbook)}
-                        >
-                            View
-                        </button>
-                        <button
-                            className="bg-green-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-red-600 transition-colors duration-300"
-                            onClick={() => handleEdit(cookbook)}
-                        >
-                            Edit
-                        </button>
-                        <button
-                            className="bg-red-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-red-600 transition-colors duration-300"
-                            onClick={() => handleDelete(cookbook._id)}
-                        >
-                            Delete
-                        </button>
+                        <div className='flex justify-evenly gap-2 z-10'>
+                            <button
+                                className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-green-600 transition-colors duration-300"
+                                onClick={() => handleView(cookbook)}
+                            >
+                                View
+                            </button>
+                            <button
+                                className="bg-green-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-red-600 transition-colors duration-300"
+                                onClick={() => handleEdit(cookbook)}
+                            >
+                                Edit
+                            </button>
+                            <button
+                                className="bg-red-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-red-600 transition-colors duration-300"
+                                onClick={() => handleDelete(cookbook._id)}
+                            >
+                                Delete
+                            </button>
+                        </div>
                     </div>
                 ))}
             </div>

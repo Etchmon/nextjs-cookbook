@@ -113,9 +113,9 @@ const CookbookForm = (props) => {
     } else {
 
         return (
-            <div className="bg-gray-900 h-full text-gray-300 flex flex-col items-start">
-                <div className="flex-1 flex flex-col items-start px-4 sm:px-0 mt-2 md:mt-10 w-full">
-                    <form className="w-full sm:w-1/2 mr-auto">
+            <div className="bg-gray-900 h-full mx-auto text-gray-300 grid grid-cols-1 lg:mt-10 lg:grid-cols-2">
+                <div className="flex-1 flex flex-col justify-center lg:justify-start items-center lg:items-start px-4 sm:px-0 mt-2 md:mt-10 w-full">
+                    <form className="w-full">
                         <h1 className="text-3xl font-bold mb-4">Create a Cookbook</h1>
 
                         <label className="block mb-4">
@@ -130,7 +130,7 @@ const CookbookForm = (props) => {
                             {errors.description && <p className="text-red-500">{errors.description}</p>}
                         </label>
 
-                        <button className="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-500 w-full sm:w-auto" onClick={handleSubmit}>Submit</button>
+                        <button className="bg-green-600 text-white p-4 rounded-lg hover:bg-green-500 w-full" onClick={handleSubmit}>Submit</button>
                     </form>
                 </div>
 
@@ -139,7 +139,7 @@ const CookbookForm = (props) => {
                         <h2 className="text-2xl font-bold mb-4">Recipes</h2>
                         <ul className="pl-8 inline-block max-width-content items-center">
                             {myRecipes.map(recipe => (
-                                <li key={recipe} id={recipe._id} className='text-start mb-2'>
+                                <li key={recipe._id} id={recipe._id} className='text-start mb-2'>
                                     <button className="p-1 mr-2 rounded-lg bg-red-800" onClick={(e) => addToBook(e, recipe)}>+</button>
                                     {recipe.title}
                                 </li>
