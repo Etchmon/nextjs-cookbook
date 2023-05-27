@@ -7,15 +7,15 @@ const RecipeView = (recipeObj) => {
 
     const recipe = recipeObj.recipeObj;
     const { data: session, status } = useSession();
-    const [load, setLoad] = useState(false)
-
-    if (!recipe) {
-        return <Loading />;
-    }
+    const [load, setLoad] = useState(false);
 
     useEffect(() => {
         setLoad(true);
-    }, [])
+    }, []);
+
+    if (!session) {
+        return <Loading />;
+    };
 
     return (
         <div className={`h-full overflow-auto scrollbar-hidden grid gap-4 lg:grid-rows-6 lg:grid-cols-4 ${load ? 'opacity-100 transition-opacity duration-500 ease-in-out' : 'opacity-0'
@@ -45,9 +45,6 @@ const RecipeView = (recipeObj) => {
                 </ul>
             </div>
         </div>
-
-
-
     );
 };
 

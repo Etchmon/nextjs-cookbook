@@ -11,10 +11,6 @@ const CookbookEdit = (props) => {
 
     const [load, setLoad] = useState(false)
 
-    if (!recipes) {
-        return <Loading />;
-    }
-
     useEffect(() => {
         const fetchCookBookRecipes = async () => {
             const cookbookId = cookbook._id; // Replace with your actual cookbook ID
@@ -102,6 +98,10 @@ const CookbookEdit = (props) => {
         const filteredArray = recipes.filter(item => item !== recipe)
         setRecipes([...filteredArray]);
     };
+
+    if (!recipes) {
+        return <Loading />;
+    }
 
     return (
         <div className={`bg-gray-900 h-screen text-gray-300 flex flex-col ${load ? 'opacity-100 transition-opacity duration-500 ease-in-out' : 'opacity-0'

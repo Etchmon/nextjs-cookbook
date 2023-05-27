@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSession, signIn } from "next-auth/react";
-import { useRouter } from 'next/router';
+import Loading from '../components/loading';
 
 const CookbookForm = (props) => {
     const { data: session, status } = useSession();
@@ -9,11 +9,7 @@ const CookbookForm = (props) => {
     const [recipes, setRecipes] = useState([]);
     const [myRecipes, setMyRecipes] = useState([]);
 
-    const [load, setLoad] = useState(false)
-
-    if (!recipes) {
-        return <Loading />;
-    }
+    const [load, setLoad] = useState(false);
 
     useEffect(() => {
         (async () => {
@@ -103,11 +99,9 @@ const CookbookForm = (props) => {
         setRecipes([...filteredArray]);
     };
 
-    if (status === 'loading') {
-        return (
-            <p>loading...</p>
-        )
-    };
+    if (!recipes) {
+        return <Loading />;
+    }
 
     if (!session) {
         return (

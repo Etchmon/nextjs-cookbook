@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import Loading from '../components/loading';
 
 const DashboardContent = ({ session, recipes, cookbooks, onClick }) => {
 
-    const [load, setLoad] = useState(false)
-
-    if (!session) {
-        return <Loading />;
-    }
+    const [load, setLoad] = useState(false);
 
     useEffect(() => {
         setLoad(true);
-    }, [])
+    }, []);
+
+    if (!session) {
+        return <Loading />;
+    };
 
     return (
         <div className={`md:p-8 rounded shadow flex-1 md:mb-2 text-green-300 ${load ? 'opacity-100 transition-opacity duration-500 ease-in-out' : 'opacity-0'
