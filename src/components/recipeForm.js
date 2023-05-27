@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSession, signIn } from "next-auth/react";
 import { useRouter } from 'next/router';
 
@@ -10,6 +10,12 @@ const RecipeForm = (props) => {
 
     const [ingredients, setIngredients] = useState([]);
     const [instructions, setInstructions] = useState([]);
+
+    const [load, setLoad] = useState(false)
+
+    useEffect(() => {
+        setLoad(true);
+    }, [])
 
     let id = 0;
 
@@ -135,7 +141,7 @@ const RecipeForm = (props) => {
 
     if (status === 'loading') {
         return (
-            <p>loading...</p>
+            <Loading />
         )
     };
 
@@ -149,7 +155,8 @@ const RecipeForm = (props) => {
     } else {
 
         return (
-            <div className="h-full w-full bg-gray-900 text-gray-300 grid grid-cols-1 md:grid-cols-2 items-start mb-">
+            <div className={`bg-gray-900 h-full mx-auto text-gray-300 grid grid-cols-1 lg:mt-10 lg:grid-cols-2 ${load ? 'opacity-100 transition-opacity duration-500 ease-in-out' : 'opacity-0'
+                }`}>
                 <form className="flex flex-col w-full max-w-md p-4 items-start justify-center">
                     <h1 className="text-2xl font-bold w-full mb-4 text-center">Create a Recipe</h1>
                     <label className="w-full flex flex-col mb-4">

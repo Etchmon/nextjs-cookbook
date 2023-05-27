@@ -11,6 +11,7 @@ import CookbookForm from '../components/cookbookForm';
 import RecipeView from '../components/recipeView';
 import CookbookView from '../components/cookbookView'
 import CookbookEdit from '../components/cookbookEdit';
+import Loading from '../components/loading';
 
 const Dashboard = () => {
     const { data: session, status } = useSession();
@@ -92,7 +93,7 @@ const Dashboard = () => {
     }
 
     if (!session) {
-        return <div>Loading...</div>;
+        return <Loading />;
     }
 
     return (
@@ -102,7 +103,7 @@ const Dashboard = () => {
                 <meta name="description" content="Organize your recipes and plan your dinners with CookBook Digital." />
             </Head>
             {/* Sidebar */}
-            <div className="bg-gray-900 lg:top-0 grid-row-1 lg:grid-col-1 lg:row-span-6">
+            <div className="bg-gray-900 lg:top-0 grid-row-1 lg:grid-col-1 lg:row-span-6 pb-4">
                 <h2 className="text-lg text-green-500 font-semibold pt-4 lg:p-4 text-center lg:text-left">Menu</h2>
                 <ul className="mt-2 lg:p-4 space-y-2 flex flex-wrap justify-evenly lg:flex-col">
                     <li>
@@ -145,7 +146,7 @@ const Dashboard = () => {
                 </ul>
             </div>
             {/* Content */}
-            <div className="h-full w-full mx-auto lg:col-span-4 row-start-2 py-10 row-span-6 lg:row-span-6 container px-4 lg:py-6 overflow-y-scroll lg:overflow-hidden lg:mb-2">
+            <div className="h-full w-full mx-auto lg:col-span-4 row-start-3 lg:py-10 row-span-6 lg:row-span-6 container px-4 lg:py-6 overflow-y-scroll lg:overflow-hidden lg:mb-2">
                 {renderComponent()}
             </div>
         </div>

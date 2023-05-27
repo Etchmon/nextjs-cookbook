@@ -4,11 +4,20 @@ import { useRouter } from 'next/router';
 
 const CookbookForm = (props) => {
     const { data: session, status } = useSession();
-    const router = useRouter();
     const { setActiveComponent, updateData } = props;
 
     const [recipes, setRecipes] = useState([]);
     const [myRecipes, setMyRecipes] = useState([]);
+
+    const [load, setLoad] = useState(false)
+
+    if (!recipes) {
+        return <Loading />;
+    }
+
+    useEffect(() => {
+        setLoad(true);
+    }, [])
 
     useEffect(() => {
         (async () => {
@@ -113,7 +122,8 @@ const CookbookForm = (props) => {
     } else {
 
         return (
-            <div className="bg-gray-900 h-full mx-auto text-gray-300 grid grid-cols-1 lg:mt-10 lg:grid-cols-2">
+            <div className={`bg-gray-900 h-full mx-auto text-gray-300 grid grid-cols-1 lg:mt-10 lg:grid-cols-2 ${load ? 'opacity-100 transition-opacity duration-500 ease-in-out' : 'opacity-0'
+                }`}>
                 <div className="flex-1 flex flex-col justify-center lg:justify-start items-center lg:items-start px-4 sm:px-0 mt-2 md:mt-10 w-full">
                     <form className="w-full">
                         <h1 className="text-3xl font-bold mb-4">Create a Cookbook</h1>

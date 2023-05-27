@@ -39,9 +39,9 @@ const CookbookList = (props) => {
     }
 
     return (
-        <div className={`relative lg:flex lg:justify-between items-center bg-gray-900 lg:m-10 shadow-md rounded-lg md:p-4 text-white ${imageLoaded ? 'opacity-100 transition-opacity duration-500 ease-in-out' : 'opacity-0'
+        <div className={`h-full relative lg:flex lg:justify-between items-center bg-gray-900 lg:m-10 shadow-md rounded-lg lg:p-4 text-white ${imageLoaded ? 'opacity-100 transition-opacity duration-500 ease-in-out' : 'opacity-0'
             } `}>
-            <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-4 mb-auto flex-1 h-full w-full pb-80 z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-3 grid-auto-rows gap-4 mb-auto flex-1 h-1/2 w-full z-10">
                 {cookbooks.map((cookbook) => (
                     <div
                         key={cookbook._id}
@@ -64,13 +64,13 @@ const CookbookList = (props) => {
                         </div>
                         <div className='flex justify-evenly gap-2 z-10'>
                             <button
-                                className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-green-600 transition-colors duration-300"
+                                className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-blue-600 transition-colors duration-300"
                                 onClick={() => handleView(cookbook)}
                             >
                                 View
                             </button>
                             <button
-                                className="bg-green-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-red-600 transition-colors duration-300"
+                                className="bg-green-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-green-600 transition-colors duration-300"
                                 onClick={() => handleEdit(cookbook)}
                             >
                                 Edit
