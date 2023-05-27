@@ -6,14 +6,22 @@ import Navbar from "../components/navbar";
 
 
 const Login = () => {
-    // Get the current session and authentication status
-    const { data: session } = useSession();
-    let { status: auth } = useSession();
-    const router = useRouter();
+    const [load, setLoad] = useState(false)
 
     // State for email and password inputs
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    useEffect(() => {
+        setLoad(true);
+    }, [])
+
+    useEffect(() => {
+        (async () => {
+            const results = await fetch('/api/recipe/getUserRecipes');
+            const resultsJson = await results.json();
+            setMyRecipes(resultsJson);
+        })();
+    }, []);
 
     // Function to handle user login
     const handleLogin = () => {
@@ -32,7 +40,8 @@ const Login = () => {
 
     // Otherwise, display the login form
     return (
-        <div className="min-h-screen flex flex-col">
+        <div className={`min-h-screen flex flex-col ${load ? 'opacity-100 transition-opacity duration-500 ease-in-out' : 'opacity-0'
+                }`}>
             <Link href='/' className="fixed top-0 left-0 py-2 px-4 text-4xl text-white">
                 &#8592;
             </Link>
