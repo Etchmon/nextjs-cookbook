@@ -16,14 +16,11 @@ const CookbookForm = (props) => {
     }
 
     useEffect(() => {
-        setLoad(true);
-    }, [])
-
-    useEffect(() => {
         (async () => {
             const results = await fetch('/api/recipe/getUserRecipes');
             const resultsJson = await results.json();
             setMyRecipes(resultsJson);
+            setLoad(true);
         })();
     }, []);
 

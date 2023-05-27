@@ -16,10 +16,6 @@ const CookbookEdit = (props) => {
     }
 
     useEffect(() => {
-        setLoad(true);
-    }, [])
-
-    useEffect(() => {
         const fetchCookBookRecipes = async () => {
             const cookbookId = cookbook._id; // Replace with your actual cookbook ID
             const response = await fetch(`/api/recipe/getCookbookRecipes?cookbookId=${cookbookId}`);
@@ -27,8 +23,8 @@ const CookbookEdit = (props) => {
             setRecipes(data);
         };
         fetchCookBookRecipes();
-        setValue({ title: cookbook.title, description: cookbook.description })
-
+        setValue({ title: cookbook.title, description: cookbook.description });
+        setLoad(true);
     }, []);
 
     const [value, setValue] = useState({
