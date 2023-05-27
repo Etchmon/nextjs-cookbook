@@ -104,7 +104,7 @@ const Dashboard = () => {
             </Head>
             {/* Sidebar */}
             <div className="bg-gray-900 lg:top-0 grid-row-1 lg:grid-col-1 lg:row-span-6 pb-4">
-                <h2 className="text-lg text-green-500 font-semibold pt-4 lg:p-4 text-center lg:text-left">Menu</h2>
+                <Link href="/" className="flex justify-center text-lg text-green-500 font-semibold pt-4 lg:p-4 lg:justify-start">Menu</Link>
                 <ul className="mt-2 lg:p-4 space-y-2 flex flex-wrap justify-evenly lg:flex-col">
                     <li>
                         <button
@@ -146,7 +146,7 @@ const Dashboard = () => {
                 </ul>
             </div>
             {/* Content */}
-            <div className="h-full w-full mx-auto lg:col-span-4 row-start-3 lg:py-10 row-span-6 lg:row-span-6 container px-4 lg:py-6 overflow-y-scroll lg:overflow-hidden lg:mb-2">
+            <div className="h-full w-full mx-auto pb-4 lg:col-span-4 row-start-3 lg:py-10 row-span-6 lg:row-span-6 container px-4 lg:py-6 overflow-y-scroll lg:overflow-hidden ">
                 {renderComponent()}
             </div>
         </div>

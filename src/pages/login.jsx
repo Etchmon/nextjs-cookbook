@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Link from 'next/link';
-import { useSession, signIn, signOut, getSession } from "next-auth/react";
-import { useRouter } from 'next/router';
-import Navbar from "../components/navbar";
-
+import { signIn, getSession } from "next-auth/react";
 
 const Login = () => {
     const [load, setLoad] = useState(false)
@@ -11,6 +8,7 @@ const Login = () => {
     // State for email and password inputs
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
     useEffect(() => {
         setLoad(true);
     }, [])
@@ -40,13 +38,13 @@ const Login = () => {
 
     // Otherwise, display the login form
     return (
-        <div className={`min-h-screen flex flex-col ${load ? 'opacity-100 transition-opacity duration-500 ease-in-out' : 'opacity-0'
+        <div className={`min-h-screen flex flex-col ${load ? 'opacity-100 transition-opacity duration-1000 ease-in-out' : 'opacity-0'
                 }`}>
             <Link href='/' className="fixed top-0 left-0 py-2 px-4 text-4xl text-white">
                 &#8592;
             </Link>
             <main className="flex flex-1 flex-col md:flex-row items-center justify-center bg-gray-900">
-             <section className="h-5/6 w-5/6 mt-20 bg-gray-800 p-8 rounded-lg shadow-md mx-auto mb-8 md:mb-0 md:mr-8 flex flex-col justify-center items-center">
+             <section className="h-5/6 w-5/6 mt-20 bg-gray-800 p-8 rounded-lg shadow-md mx-4 mb-8 mx-4 flex flex-col justify-center items-center">
                     <h1 className="text-2xl font-bold text-green-200 mb-6">Login to Your Account</h1>
                     <button
                         className="bg-green-600 text-white font-bold py-2 px-4 rounded w-full"
@@ -82,7 +80,7 @@ const Login = () => {
                         Enter
                     </button>
                 </section>
-                <section className="w-5/6 bg-gray-800 p-8 rounded-lg shadow-md mx-auto md:mb-0 md:mr-8 flex flex-col justify-center items-center">
+                <section className="w-5/6 bg-gray-800 p-8 rounded-lg shadow-md mx-4 lg:mb-0 flex flex-col justify-center items-center">
                     <h1 className="text-2xl font-bold text-green-200 mb-2">New User?</h1>
                     <p className="text-green-200 mb-6">Sign up to start building your own digital cookbook!</p>
                     <Link href='/signup' className="bg-green-600 text-white font-bold py-2 px-4 rounded w-full text-center">

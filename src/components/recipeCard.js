@@ -21,14 +21,6 @@ const RecipeCard = ({ recipe, showAddButton, updateData, setActiveComponent, set
         setImageLoaded(true);
     };
 
-    // useEffect(() => {
-    //     if (imageLoaded) {
-    //         setTimeout(() => {
-    //             setShowContent(true);
-    //         }, 300); // Delay showing the content to allow the fade-in effect to work
-    //     }
-    // }, [imageLoaded]);
-
     const handleAdd = async (recipeId) => {
         if (userRecipes.includes(recipeId)) {
             alert('You already own this recipe');
@@ -118,7 +110,7 @@ const RecipeCard = ({ recipe, showAddButton, updateData, setActiveComponent, set
 
             <div className='flex flex-col text-center lg:text-start lg:bg-gray-100 lg:p-10 rounded-md'>
                 {/* Title */}
-                <h2 className="text-2xl border-b border-gray-900 font-bold mt-4 mb-2 pb-4 text-b-600 z-10 text-gray-900">
+                <h2 className="text-2xl border-b border-gray-900 font-bold mt-4 mb-2 pb-2 text-b-600 z-10 text-gray-900">
                     {recipe.title}
                     {/* Author */}
                     <span className="font-italic text-gray-900 text-sm z-10 ml-4 whitespace-nowrap">by {recipe.author}</span>
@@ -133,7 +125,7 @@ const RecipeCard = ({ recipe, showAddButton, updateData, setActiveComponent, set
             {/* Ingredients */}
             <div className="relative max-h-full w-full rounded-md pl-4 mt-4 z-10 max-h-40 flex flex-col items-center text-center align-center justify-center">
                 <h3 className="text-gray-900 text-lg font-semibold mb-2 sticky">Ingredients:</h3>
-                <ul className="list-disc pl-6 text-gray-900 flex justify-around items-center w-full flex-wrap overflow-y-scroll">
+                <ul className="list-disc pl-6 text-gray-900 flex justify-center items-center w-full flex-wrap overflow-y-scroll">
                     {recipe.ingredients.map((ingredient, index) => (
                         <li key={`${ingredient}-${index + 1}`} className='mx-4'>{ingredient}</li>
                     ))}

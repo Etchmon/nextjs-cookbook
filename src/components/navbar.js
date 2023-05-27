@@ -6,7 +6,7 @@ const Navbar = () => {
     const { data: session } = useSession();
 
     return (
-        <nav className="shadow-sm py-4 px-2 md:px-8 flex flex-wrap gap-4 justify-around items-center w-full z-10">
+        <nav className="fixed top:0 shadow-sm py-4 px-2 md:px-8 flex flex-wrap gap-4 justify-around items-center w-full z-20">
             <Link href="/" className='text-white whitespace-nowrap'>CookBook Digital</Link>
             {!session ? (
                 <div className="flex items-center space-x-4">

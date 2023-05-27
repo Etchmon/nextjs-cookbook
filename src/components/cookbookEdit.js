@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSession, signIn } from "next-auth/react";
 import { useRouter } from 'next/router';
-import Nav from './navbar';
-import Footer from './footer';
 import Loading from './loading'
 
 const CookbookEdit = (props) => {
@@ -10,6 +8,16 @@ const CookbookEdit = (props) => {
     const router = useRouter();
     const { cookbook, myRecipes } = props;
     const [recipes, setRecipes] = useState([]);
+
+    const [load, setLoad] = useState(false)
+
+    if (!recipes) {
+        return <Loading />;
+    }
+
+    useEffect(() => {
+        setLoad(true);
+    }, [])
 
     useEffect(() => {
         const fetchCookBookRecipes = async () => {
@@ -99,15 +107,9 @@ const CookbookEdit = (props) => {
         setRecipes([...filteredArray]);
     };
 
-    if (status === 'loading') {
-        return (
-            <p>loading...</p>
-        )
-    };
-
-
     return (
-        <div className="bg-gray-900 h-screen text-gray-300 flex flex-col">
+        <div className={`bg-gray-900 h-screen text-gray-300 flex flex-col ${load ? 'opacity-100 transition-opacity duration-500 ease-in-out' : 'opacity-0'
+            }`}>
             <div className="flex-1 flex flex-col items-center justify-center px-4 sm:px-0 mt-10">
                 <form className="w-full sm:w-1/2 mx-auto">
                     <h1 className="text-3xl font-bold mb-4">Edit Cookbook</h1>
@@ -141,11 +143,10 @@ const CookbookEdit = (props) => {
                     </ul>
                 </div>
                 <div className="h-full w-full overflow-y-auto pr-4 text-center">
-                    <h2 className="text-2xl font-bold mb-4">Recipes Added to Book</h2>
-
+                    <h2 className="text-2xl font-bold mb-4">Book</h2>
                     <ul className="pl-8 inline-block max-width-content items-center">
                         {recipes.map((recipe) => (
-                            <li key={recipe._id} className="mb-2">
+                            <li key={recipe._id} className="mb-2 text-start">
                                 <button className="p-1 mr-2 rounded-lg bg-red-800" onClick={(e) => removeFromBook(e, recipe)}>-</button>
                                 {recipe.title}</li>
 

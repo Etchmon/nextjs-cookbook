@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import Image from 'next/image';
 import imgSrc from '../../public/images/book.jpg';
 import Loading from '../components/loading';
@@ -7,7 +6,6 @@ import Loading from '../components/loading';
 
 const CookbookView = (props) => {
     const [recipes, setRecipes] = useState(null);
-    const router = useRouter();
     const { cookbook, setActiveRecipe, setActiveComponent } = props;
     const [imageLoaded, setImageLoaded] = useState(false);
 
@@ -25,7 +23,8 @@ const CookbookView = (props) => {
             const cookbookId = cookbook._id; // Replace with your actual cookbook ID
             const response = await fetch(`/api/recipe/getCookbookRecipes?cookbookId=${cookbookId}`);
             const data = await response.json();
-            setRecipes(data);
+            const filterData = data.filter(item => item !== null)
+            setRecipes(filterData);
         };
 
         fetchCookBookRecipes();
@@ -49,10 +48,9 @@ const CookbookView = (props) => {
                 <div className="absolute inset-0 bg-gray-900 opacity-50"></div>
             </div>
             <div className="relative container mx-auto px-4 py-6 z-10">
-                <h1 className="text-4xl font-bold mb-4 md:mt-20 text-gray-800 text-center">{cookbook.title}</h1>
+                <h1 className="text-4xl font-bold mb-4 md:mt-20 text-green-500 text-center">{cookbook.title}</h1>
                 <div className="grid grid-cols-1 gap-4 mb-auto flex-1 h-full overflow-y-auto pb-40">
                     {recipes.map((recipe) => (
-                        console.log(recipe),
                         <div
                             key={recipe.recipeId}
                             className="bg-gray-100 p-4 rounded-lg shadow hover:bg-green-300 cursor-pointer w-full"

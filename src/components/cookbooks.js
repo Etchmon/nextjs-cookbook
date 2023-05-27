@@ -39,9 +39,9 @@ const CookbookList = (props) => {
     }
 
     return (
-        <div className={`h-full relative lg:flex lg:justify-between items-center bg-gray-900 lg:m-10 shadow-md rounded-lg lg:p-4 text-white ${imageLoaded ? 'opacity-100 transition-opacity duration-500 ease-in-out' : 'opacity-0'
+        <div className={`h-screen relative lg:flex lg:justify-between items-center bg-gray-900 lg:m-10 shadow-md rounded-lg pb-4 text-white ${imageLoaded ? 'opacity-100 transition-opacity duration-500 ease-in-out' : 'opacity-0'
             } `}>
-            <div className="grid grid-cols-1 lg:grid-cols-3 grid-auto-rows gap-4 mb-auto flex-1 h-1/2 w-full z-10">
+            <div className="grid grid-cols-1 pb-4 lg:grid-cols-3 grid-auto-rows gap-4 flex-1 h-full w-full z-10">
                 {cookbooks.map((cookbook) => (
                     <div
                         key={cookbook._id}

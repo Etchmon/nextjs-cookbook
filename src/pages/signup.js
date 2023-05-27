@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from 'next/router';
 import Navbar from "../components/navbar";
@@ -12,6 +12,12 @@ const Signup = () => {
         password: '',
         passwordConfirm: ''
     });
+
+    const [load, setLoad] = useState(false);
+
+    useEffect(() => {
+        setLoad(true);
+    }, []);
 
     const [errors, setErrors] = useState({});
 
@@ -99,7 +105,8 @@ const Signup = () => {
         return (
             <div className="flex flex-col h-screen bg-gray-900">
                 <Navbar />
-                <main className="flex items-center justify-center h-screen bg-gray-900">
+                <main className={`flex items-center justify-center h-screen bg-gray-900 ${load ? 'opacity-100 transition-opacity duration-500 ease-in-out' : 'opacity-0'
+                    }`}>
                     <section className="bg-green-500 p-8 rounded-lg shadow-lg">
                         <h1 className="text-3xl font-bold mb-4 text-gray-900">Create an account</h1>
                         <form className="flex flex-col space-y-4">
