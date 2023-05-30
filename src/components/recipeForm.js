@@ -221,7 +221,7 @@ const RecipeForm = (props) => {
                         Submit
                     </button>
                 </form>
-                <div className="w-full max-h-screen grid gap-10 md:grid-rows-2 p-4 md:overflow-hidden">
+                <div className="w-full max-h-screen grid gap-10 lg:grid-rows-2 p-4 lg:overflow-hidden">
                     <div className="w-full max-h-screen-1/2 overflow-y-scroll">
                         <h2 className="text-xl font-medium sticky top-0 bg-gray-900">Ingredients</h2>
                         <ol className="mt-4">

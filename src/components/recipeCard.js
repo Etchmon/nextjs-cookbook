@@ -11,9 +11,11 @@ const RecipeCard = ({ recipe, showAddButton, updateData, setActiveComponent, set
     const userRecipes = session.user.cookbooks.allRecipes;
     const [imageLoaded, setImageLoaded] = useState(false);
     const meatIngredients = ['beef', 'chicken', 'pork', 'lamb']; // List of meat ingredients
-    const hasMeatIngredients = recipe.ingredients.some((ingredient) =>
-        meatIngredients.includes(ingredient.toLowerCase())
-    );
+    const hasMeatIngredients = recipe.ingredients.some((ingredient) => {
+        const lowerCasedIngredient = ingredient.toLowerCase();
+        return meatIngredients.some((meat) => lowerCasedIngredient.includes(meat.toLowerCase()));
+    });
+
 
     const imageSrc = hasMeatIngredients ? meatImage : nonMeatImage;
 
